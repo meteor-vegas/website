@@ -1,0 +1,41 @@
+<template name="header">
+  <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{ pathFor 'home' }}"><i class="ion-ios7-circle-filled"></i> Meteor Vegas</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="main-nav">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="{{ isActiveRoute 'home' }}"><a href="{{ pathFor 'home' }}">Home</a></li>
+          <li class="{{ isActiveRoute 'meetups' }}"><a href="{{ pathFor 'meetups' }}">Meetups</a></li>
+          <li class="{{ isActiveRoute 'presentations' }}"><a href="{{ pathFor 'presentations' }}">Presentations</a></li>
+          <li class="{{ isActiveRoute 'topics' }}"><a href="{{ pathFor 'topics' }}">Topics</a></li>
+          <li class="{{ isActiveRoute 'members' }}"><a href="{{ pathFor 'members' }}">Members</a></li>
+          {{#if currentUser}}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hi Nick W <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ pathFor 'memberDetail' }}"><i class="ion-person"></i> Your Profile</a></li>
+                <li><a href="#" data-action="logout"><i class="ion-locked"></i> Log Out</a></li>
+              </ul>
+            </li>
+          {{else}}
+            <li>
+              <button type="button" class="btn btn-primary navbar-btn" data-login-with="meetup">
+                <i class="ion-ios7-people"></i> Sign in with Meetup
+              </button>
+            </li>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</template>

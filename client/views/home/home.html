@@ -1,0 +1,84 @@
+<template name="home">
+
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Meteor Vegas</h1>
+      <p>
+        We are a group of Meteor.js enthusiasts who meet
+        <br>
+        twice a month in Las Vegas, NV
+      </p>
+      {{#unless currentUser}}
+        <p>
+          <a href="{{ pathFor 'members'}}" class="btn btn-primary btn-lg" data-login-with="meetup"><i class="ion-ios7-people"></i> Join Us!</a>
+        </p>
+      {{/unless}}
+    </div>
+  </div>
+
+  <div class="homepage-section homepage-section-meetups">
+    <div class="container">
+      <h3>Next Meetup</h3>
+      <hr>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="panel panel-default text-center">
+            <div class="panel-heading">
+              Thursday
+            </div>
+            <div class="panel-body">
+              <h1>25th</h1>
+            </div>
+            <div class="panel-footer">
+              August
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <h2>Meteor Vegas #5</h2>
+
+          <h5 class="text-muted">
+            <i class="ion-calendar"></i> Thursday August 25th at 6:00PM
+          </h5>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+          <p>
+            <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary btn-lg">View Details</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="homepage-section homepage-section-members">
+    <div class="container">
+      <h3>Who We Are</h3>
+      <hr>
+      <p>
+        <a href="{{ pathFor 'memberDetail' }}" data-toggle="tooltip" title="Firstname Lastname"><img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg"></a>
+        <a href="{{ pathFor 'memberDetail' }}" data-toggle="tooltip" title="Firstname Lastname"><img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg"></a>
+        <a href="{{ pathFor 'memberDetail' }}" data-toggle="tooltip" title="Firstname Lastname"><img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/mijustin/128.jpg"></a>
+        <a href="{{ pathFor 'memberDetail' }}" data-toggle="tooltip" title="Firstname Lastname"><img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/tomaslau/128.jpg"></a>
+        <a href="{{ pathFor 'memberDetail' }}" data-toggle="tooltip" title="Firstname Lastname"><img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/ok/128.jpg"></a>
+        <a href="{{ pathFor 'memberDetail' }}" data-toggle="tooltip" title="Firstname Lastname"><img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/ManikRathee/128.jpg"></a>
+      </p>
+      <hr>
+      <p>
+        <a href="{{ pathFor 'members' }}" class="btn btn-default btn-lg">View All Members</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="homepage-section homepage-section-sponsors">
+    <div class="container">
+      <h3>Our Friends and Sponsors</h3>
+      <p>
+        <a href="#"><img src="http://placehold.it/350x150"></a>
+        <a href="#"><img src="http://placehold.it/350x150"></a>
+        <a href="#"><img src="http://placehold.it/350x150"></a>
+      </p>
+    </div>
+  </div>
+
+</template>

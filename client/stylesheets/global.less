@@ -1,0 +1,40 @@
+// Bootstrap
+@import "./bootstrap/bootstrap.import.less";
+
+@import './mixins.import.less';
+@import './variables.import.less';
+
+// Misc Global Styles
+::-moz-selection { background: @brand-primary; color: #fff; text-shadow: none; }
+::selection { background: @brand-primary; color: #fff; text-shadow: none; }
+
+.loading-wrapper {
+  padding: 100px 0 300px 0;
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+footer {
+  margin-top: 48px;
+  border-top: 1px solid @gray-lighter;
+  padding: 24px 0;
+  background: @navbar-default-bg;
+
+  i {
+    font-size: 24px;
+  }
+}
+
+.panel-body {
+  h1 {
+    margin: 0;
+  }
+}
+
+.jumbotron {
+  h2 {
+    margin-top: 0;
+  }
+}
