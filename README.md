@@ -1,4 +1,4 @@
-mtpmngr
+Meteor Vegas Website
 =======
 
 Meetup Manager
