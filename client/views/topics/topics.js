@@ -11,18 +11,28 @@ Template.topics.events = {
     var $titleField = $("input#title");
     var $descriptionField = $("textarea#description");
 
-    var title = $titleField.val();
-    var description = $descriptionField.val();
+    var params = {
+      _id: Random.id(),
+      title: $titleField.val(),
+      description: $descriptionField.val()
+    };
 
-    Topics.insert({
-      title: title,
-      description: description
+    Meteor.call("createTopic", params, function(error) {
+      if(error) {
+        alert(error);
+        return false;
+      }
+
+      $titleField.val("");
+      $descriptionField.val("");
+
+      $("#new-topic-modal").modal("hide");
+
+      window.setTimeout(function() {
+        Router.go('topicDetail', {_id: params._id});
+      }, 500);
     });
 
-    $titleField.val("");
-    $descriptionField.val("");
-
-    $("#new-topic-modal").modal("hide");
   }
 
 };
