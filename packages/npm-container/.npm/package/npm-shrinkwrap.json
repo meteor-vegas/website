@@ -1,0 +1,32 @@
+{
+  "dependencies": {
+    "meetup-api": {
+      "version": "0.1.3",
+      "dependencies": {
+        "superagent": {
+          "version": "0.8.2",
+          "dependencies": {
+            "qs": {
+              "version": "0.4.2"
+            },
+            "formidable": {
+              "version": "1.0.9"
+            },
+            "mime": {
+              "version": "1.2.5"
+            },
+            "emitter-component": {
+              "version": "0.0.1"
+            },
+            "methods": {
+              "version": "0.0.1"
+            },
+            "cookiejar": {
+              "version": "1.3.0"
+            }
+          }
+        }
+      }
+    }
+  }
+}
