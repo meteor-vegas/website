@@ -5,9 +5,11 @@
     <div class="row">
       <div class="col-md-10 col-md-push-1">
         <div class="page-header">
-          <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#new-topic-modal">
-            <i class="ion-plus"></i> Suggest a Topic
-          </button>
+          {{#if currentUser}}
+            <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#new-topic-modal">
+              <i class="ion-plus"></i> Suggest a Topic
+            </button>
+          {{/if}}
           <h1>Topics</h1>
         </div>
 
@@ -18,95 +20,9 @@
           </p>
         </div>
 
-        <div class="media">
-          <button type="button" class="btn btn-default btn-lg pull-left">
-            <i class="ion-arrow-up-c"></i>
-          </button>
-          <div class="media-body">
-            <h4 class="media-heading"><a href="{{ pathFor 'topicDetail' }}">Meteor on Mobile</a></h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <ul class="list-inline">
-              <li><a href="{{ pathFor 'memberDetail' }}"><img class="img-circle" width=30 height=30 src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg"> By Firstname Lastname</a></li>
-              <li>12 Points</li>
-              <li><a href="{{ pathFor 'topicDetail' }}">6 Comments</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="media">
-          <button type="button" class="btn btn-default btn-lg pull-left">
-            <i class="ion-arrow-up-c"></i>
-          </button>
-          <div class="media-body">
-            <h4 class="media-heading"><a href="{{ pathFor 'topicDetail' }}">Meteor on Mobile</a></h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <ul class="list-inline">
-              <li><a href="{{ pathFor 'memberDetail' }}"><img class="img-circle" width=30 height=30 src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg"> By Firstname Lastname</a></li>
-              <li>12 Points</li>
-              <li><a href="{{ pathFor 'topicDetail' }}">6 Comments</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="media">
-          <button type="button" class="btn btn-default btn-lg pull-left">
-            <i class="ion-arrow-up-c"></i>
-          </button>
-          <div class="media-body">
-            <h4 class="media-heading"><a href="{{ pathFor 'topicDetail' }}">Meteor on Mobile</a></h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <ul class="list-inline">
-              <li><a href="{{ pathFor 'memberDetail' }}"><img class="img-circle" width=30 height=30 src="https://s3.amazonaws.com/uifaces/faces/twitter/mijustin/128.jpg"> By Firstname Lastname</a></li>
-              <li>12 Points</li>
-              <li><a href="{{ pathFor 'topicDetail' }}">6 Comments</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="media">
-          <button type="button" class="btn btn-default btn-lg pull-left">
-            <i class="ion-arrow-up-c"></i>
-          </button>
-          <div class="media-body">
-            <h4 class="media-heading"><a href="{{ pathFor 'topicDetail' }}">Meteor on Mobile</a></h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <ul class="list-inline">
-              <li><a href="{{ pathFor 'memberDetail' }}"><img class="img-circle" width=30 height=30 src="https://s3.amazonaws.com/uifaces/faces/twitter/tomaslau/128.jpg"> By Firstname Lastname</a></li>
-              <li>12 Points</li>
-              <li><a href="{{ pathFor 'topicDetail' }}">6 Comments</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="media">
-          <button type="button" class="btn btn-default btn-lg pull-left">
-            <i class="ion-arrow-up-c"></i>
-          </button>
-          <div class="media-body">
-            <h4 class="media-heading"><a href="{{ pathFor 'topicDetail' }}">Meteor on Mobile</a></h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <ul class="list-inline">
-              <li><a href="{{ pathFor 'memberDetail' }}"><img class="img-circle" width=30 height=30 src="https://s3.amazonaws.com/uifaces/faces/twitter/ok/128.jpg"> By Firstname Lastname</a></li>
-              <li>12 Points</li>
-              <li><a href="{{ pathFor 'topicDetail' }}">6 Comments</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="media">
-          <button type="button" class="btn btn-default btn-lg pull-left">
-            <i class="ion-arrow-up-c"></i>
-          </button>
-          <div class="media-body">
-            <h4 class="media-heading"><a href="{{ pathFor 'topicDetail' }}">Meteor on Mobile</a></h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <ul class="list-inline">
-              <li><a href="{{ pathFor 'memberDetail' }}"><img class="img-circle" width=30 height=30 src="https://s3.amazonaws.com/uifaces/faces/twitter/ManikRathee/128.jpg"> By Firstname Lastname</a></li>
-              <li>12 Points</li>
-              <li><a href="{{ pathFor 'topicDetail' }}">6 Comments</a></li>
-            </ul>
-          </div>
-        </div>
+        {{#each topics}}
+          {{> _topic}}
+        {{/each}}
 
         <p class="text-center">
           <button type="button" class="btn btn-default btn-lg">
@@ -139,7 +55,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
           </div>
         </form>
       </div>
