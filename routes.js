@@ -18,10 +18,24 @@ Router.map(function() {
   });
 
   this.route('topics', {
-    path: '/topics'
+    path: '/topics',
+    waitOn: function() {
+      return this.subscribe("topics");
+    },
+    data: {
+      topics: Topics.find({})
+    }
   });
   this.route('topicDetail', {
-    path: '/topics/id-goes-here'
+    path: '/topics/:_id',
+    waitOn: function() {
+      return this.subscribe("topic", this.params._id);
+    },
+    data: function() {
+      return {
+        topic: Topics.findOne({_id: this.params._id})
+      };
+    }
   });
 
   this.route('members', {
