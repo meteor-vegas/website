@@ -19,3 +19,19 @@ Meteor.methods({
 			}
     	}
 });
+
+
+//need to setup security for these before going into production
+Meteor.users.allow({
+    'insert': function (userId,doc) {
+      /* user and doc checks ,
+      return true to allow insert */
+      return true; 
+    }
+  });
+  
+Meteor.publish("members", function () {
+	//return Meteor.users.find({})
+    return Meteor.users.find({}, {fields: {'profile': 1}});
+});
+
