@@ -48,7 +48,15 @@ Router.map(function() {
     }
   });
   this.route('memberDetail', {
-    path: '/members/id-goes-here'
+    path: '/members/:_id',
+    waitOn: function() {
+      return this.subscribe("member", this.params._id);
+    },
+    data: function() {
+      return {
+        member: Meteor.users.findOne({_id: this.params._id})
+      };
+    }
   });
 
   this.route('notFound', {

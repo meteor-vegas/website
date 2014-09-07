@@ -13,7 +13,7 @@ Meteor.startup(function() {
           var thumbnailUrl = response.results[i].photo.thumb_link;
         } else {
           console.log('has photo: ' + response.results[i].hasOwnProperty("photo"));
-          var thumbnailUrl = "default-avatar.jpg";
+          var thumbnailUrl = "default-avatar.png";
         }
 
         Meteor.users.insert({
