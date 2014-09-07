@@ -23,7 +23,7 @@ Router.map(function() {
       return this.subscribe("topics");
     },
     data: {
-      topics: Topics.find({})
+      topics: Topics.find({}, {sort: {points: -1}})
     }
   });
   this.route('topicDetail', {

@@ -5,12 +5,3 @@ Meteor.publish("topics", function() {
 Meteor.publish("topic", function(_id) {
   return Topics.find({_id: _id});
 });
-
-Topics.allow({
-  'insert': function(userId, doc) {
-    return userId;
-  },
-  'update': function(userId, doc, fields, modifier) {
-    return userId;
-  }
-});

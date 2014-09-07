@@ -3,7 +3,7 @@ Template.topics.rendered = function() {
   $('<meta>', { name: 'description', content: 'A Bi-Monthly Meteor.js Meetup in Las Vegas, NV' }).appendTo('head');
 };
 
-Template.topics.events = {
+Template.topics.events({
 
   'submit': function(event, template) {
     event.preventDefault();
@@ -35,4 +35,4 @@ Template.topics.events = {
 
   }
 
-};
+});
