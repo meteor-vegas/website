@@ -17,6 +17,11 @@ Template.topics.events({
       description: $descriptionField.val()
     };
 
+    if (params.title === "") {
+      alert("Please enter a topic title!");
+      return false;
+    }
+
     Meteor.call("createTopic", params, function(error) {
       if(error) {
         alert(error);

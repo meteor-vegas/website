@@ -26,6 +26,7 @@ Meteor.methods({
 			title: params.title,
 			description: params.description,
 			userId: Meteor.userId(),
+			points: 0,
 			createdAt: new Date()
 		});
 	}
