@@ -13,6 +13,12 @@ Topics.allow({
   }
 });
 
+Comments.allow({
+  'insert': function(userId, doc) {
+    return userId;
+  }
+});
+
 Meteor.users.allow({
   'insert': function (userId,doc) {
     /* user and doc checks ,
