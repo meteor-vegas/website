@@ -11,7 +11,7 @@ Meteor.startup(function() {
         // console.log('name: ' + node.name + ' id: ' + node.id);
 
         if(response.results[i].hasOwnProperty("photo")) {
-          var thumbnailUrl = response.results[i].photo.thumb_link;
+          var thumbnailUrl = response.results[i].photo.photo_link;
         } else {
           // console.log('has photo: ' + response.results[i].hasOwnProperty("photo"));
           var thumbnailUrl = "default-avatar.png";
