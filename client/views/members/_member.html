@@ -1,0 +1,19 @@
+<template name="_member">
+
+  <div class="media">
+    <a class="pull-left" href="{{ pathFor 'memberDetail' }}">
+      <img class="media-object img-rounded img-responsive img-thumbnail" src="{{profile.thumbnailUrl}}" height="100" width="100">
+    </a>
+    <div class="media-body">
+      <h4 class="media-heading"><a href="{{ pathFor 'memberDetail' }}">{{profile.name}}</a></h4>
+      <span class="label label-primary">+{{profile.points}}</span>
+      <p>{{profile.bio}}</p>
+      <ul class="list-inline">
+        {{#each profile.socialLinks}}
+          <li><a href="{{url}}" class="btn btn-default"><i class="ion-social-{{service}}"></i></a></li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+
+</template>

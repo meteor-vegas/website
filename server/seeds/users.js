@@ -7,6 +7,7 @@ Meteor.startup(function() {
       console.log('User Count: ' + JSON.stringify(response.meta.count));
       for (var i = 0, l = response.meta.count; i < l; i++) {
         var node = response.results[i];
+        console.log(node);
         console.log('name: ' + node.name + ' id: ' + node.id);
 
         if(response.results[i].hasOwnProperty("photo")) {
@@ -16,12 +17,24 @@ Meteor.startup(function() {
           var thumbnailUrl = "default-avatar.png";
         }
 
+        var socialLinks = [];
+        for (service in response.results[i].other_services) {
+          if(service === "twitter") {
+            var username = response.results[i].other_services['twitter']['identifier'];
+            socialLinks.push({'service': 'twitter', 'url': 'https://twitter.com/' + username});
+          } else if(service) {
+            var url = response.results[i].other_services[service]['identifier'];
+            socialLinks.push({'service': service, 'url': url});
+          }
+        }
+
         Meteor.users.insert({
           createdAt: new Date(),
           profile: {
             'name': response.results[i].name,
             'bio': response.results[i].bio,
-            'link': response.results[i].link,
+            'meetupProfileUrl': response.results[i].link,
+            'socialLinks': socialLinks,
             'thumbnailUrl': thumbnailUrl,
             'points': _.random(5, 250)
           },

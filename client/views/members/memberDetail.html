@@ -13,22 +13,9 @@
           <li class="active">{{member.profile.name}}</li>
         </ol>
 
-        <div class="media">
-          <div class="pull-left">
-            <img class="media-object img-rounded img-thumbnail" src="{{member.profile.thumbnailUrl}}" height="100" width="100">
-          </div>
-          <div class="media-body">
-            <h4 class="media-heading">{{member.profile.name}}</h4>
-            <span class="label label-primary">+{{member.profile.points}}</span>
-            <p>
-              {{member.profile.bio}}
-            </p>
-            <ul class="list-inline">
-              <li><a href="#" class="btn btn-default"><i class="ion-social-twitter"></i></a></li>
-              <li><a href="#" class="btn btn-default"><i class="ion-social-github"></i></a></li>
-            </ul>
-          </div>
-        </div>
+        {{#with member}}
+          {{> _member}}
+        {{/with}}
 
         <div class="page-header">
           <h4><i class="ion-social-rss"></i> Activity</h4>

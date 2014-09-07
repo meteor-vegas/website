@@ -4,26 +4,12 @@
 
     <div class="page-header">
       <h1>Members</h1>
-	  <button class="createMembers">Add Members</button>
     </div>
 
     <div class="row member-grid">
       {{#each members}}
         <div class="col-md-6 member-grid-item">
-          <div class="media">
-            <a class="pull-left" href="{{ pathFor 'memberDetail' }}">
-              <img class="media-object img-rounded img-responsive img-thumbnail" src="{{profile.thumbnailUrl}}" height="100" width="100">
-            </a>
-            <div class="media-body">
-              <h4 class="media-heading"><a href="{{ pathFor 'memberDetail' }}">{{profile.name}}</a></h4>
-              <span class="label label-primary">+{{profile.points}}</span>
-              <p>{{profile.bio}}</p>
-              <ul class="list-inline">
-                <li><a href="#" class="btn btn-default"><i class="ion-social-twitter"></i></a></li>
-                <li><a href="#" class="btn btn-default"><i class="ion-social-github"></i></a></li>
-              </ul>
-            </div>
-          </div>
+          {{> _member}}
         </div>
       {{/each}}
     </div>
