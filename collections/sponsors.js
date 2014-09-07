@@ -1,0 +1,1 @@
+Sponsors = new Meteor.Collection('sponsors');
