@@ -19,7 +19,7 @@ Template.members.events({
 						var thumb_link = response.results[i].photo.thumb_link;
 					} else {
 						console.log('has photo: ' + response.results[i].hasOwnProperty("photo"));
-						var thumb_link = "no-image.gif";
+						var thumb_link = "no_image.jpg";
 						
 					}
 								
