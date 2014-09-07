@@ -7,6 +7,7 @@ Meteor.startup(function() {
       console.log('User Count: ' + JSON.stringify(response.meta.count));
       for (var i = 0, l = response.meta.count; i < l; i++) {
         var node = response.results[i];
+        console.log(node);
         console.log('name: ' + node.name + ' id: ' + node.id);
 
         if(response.results[i].hasOwnProperty("photo")) {
@@ -21,7 +22,8 @@ Meteor.startup(function() {
           profile: {
             'name': response.results[i].name,
             'bio': response.results[i].bio,
-            'link': response.results[i].link,
+            'meetupProfileUrl': response.results[i].link,
+            'socialLinks': response.results[i].other_services,
             'thumbnailUrl': thumbnailUrl,
             'points': _.random(5, 250)
           },
