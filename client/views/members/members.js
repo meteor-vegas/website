@@ -45,31 +45,6 @@ Template.members.events({
     }
 });
 
-Template.members.odd = function () {
-
-var results = Meteor.users.find({});
-var rCount = results.count();
- newResultsOdd = [];
- newResultsEven = [];
-newResults = [];
-
-for (var i=0; i < rCount; i++) {
-	var tempResult = results.fetch()[i];
-        
-		if (!(i % 2 === 0)){
-        	newResultsOdd.push(results.fetch()[i]);
-        } else {
-        	newResultsEven.push(results.fetch()[i]);
-        }
-		
-  }
-//newResults.push(newResultsOdd);
-//newResults.push(newResultsEven);
-
-  return newResultsOdd;
-	
-};
-
 Template.members.members = function () {
 
 results = Meteor.users.find({});
@@ -78,21 +53,4 @@ results = Meteor.users.find({});
 	
 };
 
-Template.members.helpers = {
-  post: function() {
-    posts = [];
-    var _i = 0;
-    Meteor.users.find().forEach(function(p) {
-      p.position = _i;
-      _i++;
-      posts.push(p);
-    });
-    return posts;
-  },
-  odd: function() {
-    return Meteor.users.find();
-  },
-  even: function() {
-    return (this.position % 2 === 0);
-  }
-}
+
