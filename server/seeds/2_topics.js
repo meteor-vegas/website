@@ -3,8 +3,6 @@ Meteor.startup(function() {
   if (Topics.find({}).count() === 0) {
 
     var userIds = _(Meteor.users.find({}).fetch()).pluck('_id');
-    console.log('userIds', userIds);
-    console.log('_(userIds).sample()', _(userIds).sample());
 
     var topics = [
       {
@@ -35,15 +33,29 @@ Meteor.startup(function() {
 
     for (var i = 0; i < topics.length; i++) {
       var topic = topics[i];
+      var numberOfComments = _.random(0, 10);
+
       var topicId = Topics.insert({
         title: topic.title,
         description: topic.description,
         tags: topic.tags,
         eventId: null,
-        createdAt: new Date(topic.date),
+        createdAt: moment(topic.date).toDate(),
         points: topic.points,
-        userId: _(userIds).sample()
+        userId: _(userIds).sample(),
+        numberOfComments: numberOfComments
       });
+
+
+      for (var j = 0; j < numberOfComments; j++) {
+        Comments.insert({
+          parentType: 'topic',
+          parentId: topicId,
+          userId: _(userIds).sample(),
+          body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+          createdAt: moment(topic.date).subtract(j, 'days').toDate()
+        });
+      }
     }
   }
 

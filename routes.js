@@ -33,7 +33,8 @@ Router.map(function() {
     },
     data: function() {
       return {
-        topic: Topics.findOne({_id: this.params._id})
+        topic: Topics.findOne({_id: this.params._id}),
+        comments: Comments.find({parentType: 'topic', parentId: this.params._id}, {sort: { createdAt: -1 }})
       };
     }
   });

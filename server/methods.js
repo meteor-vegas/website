@@ -29,5 +29,15 @@ Meteor.methods({
 			points: 0,
 			createdAt: new Date()
 		});
+	},
+
+	createComment: function(params) {
+		Comments.insert({
+			body: params.body,
+			parentType: params.parentType,
+			parentId: params.parentId,
+			userId: Meteor.userId(),
+			createdAt: new Date()
+		});
 	}
 });

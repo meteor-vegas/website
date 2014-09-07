@@ -3,10 +3,12 @@ Meteor.publish("topics", function() {
     handle: this,
     collection: Topics,
     filter: {},
-    mappings: [{
-      key: 'userId',
-      collection: Meteor.users
-    }]
+    mappings: [
+      {
+        key: 'userId',
+        collection: Meteor.users
+      }
+    ]
   });
 });
 
@@ -15,10 +17,24 @@ Meteor.publish("topic", function(_id) {
     handle: this,
     collection: Topics,
     filter: _id,
-    mappings: [{
-      key: 'userId',
-      collection: Meteor.users
-    }]
+    mappings: [
+      {
+        key: 'userId',
+        collection: Meteor.users
+      },
+      {
+        reverse: true,
+        key: 'parentId',
+        collection: Comments,
+        filter: { parentType: 'topic' },
+        mappings: [
+          {
+            key: 'userId',
+            collection: Meteor.users
+          }
+        ]
+      }
+    ]
   });
 });
 

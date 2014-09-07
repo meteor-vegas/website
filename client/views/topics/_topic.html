@@ -17,7 +17,7 @@
           <li><a href="{{ pathFor 'memberDetail' }}"><img class="img-circle" width=30 height=30 src="{{profile.thumbnailUrl}}"> By {{profile.name}}</a></li>
         {{/with}}
         <li>{{ points }} Points</li>
-        <li><a href="{{ pathFor 'topicDetail' }}">6 Comments</a></li>
+        <li><a href="{{ pathFor 'topicDetail' }}">{{numberOfComments}} Comments</a></li>
       </ul>
     </div>
   </div>
