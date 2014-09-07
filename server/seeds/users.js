@@ -17,13 +17,24 @@ Meteor.startup(function() {
           var thumbnailUrl = "default-avatar.png";
         }
 
+        var socialLinks = [];
+        for (service in response.results[i].other_services) {
+          if(service === "twitter") {
+            var username = response.results[i].other_services['twitter']['identifier'];
+            socialLinks.push({'service': 'twitter', 'url': 'https://twitter.com/' + username});
+          } else if(service) {
+            var url = response.results[i].other_services[service]['identifier'];
+            socialLinks.push({'service': service, 'url': url});
+          }
+        }
+
         Meteor.users.insert({
           createdAt: new Date(),
           profile: {
             'name': response.results[i].name,
             'bio': response.results[i].bio,
             'meetupProfileUrl': response.results[i].link,
-            'socialLinks': response.results[i].other_services,
+            'socialLinks': socialLinks,
             'thumbnailUrl': thumbnailUrl,
             'points': _.random(5, 250)
           },
