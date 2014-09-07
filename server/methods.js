@@ -39,5 +39,9 @@ Meteor.methods({
 			userId: Meteor.userId(),
 			createdAt: new Date()
 		});
+
+		if (params.parentType === 'topic') {
+			Topics.update({_id: params.parentId}, {$inc: {numberOfComments: 1}});
+		}
 	}
 });
