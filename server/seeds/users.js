@@ -23,6 +23,7 @@ Meteor.startup(function() {
             'bio': response.results[i].bio,
             'link': response.results[i].link,
             'thumbnailUrl': thumbnailUrl,
+            'points': _.random(5, 250)
           },
           services: {
             meetup: {
