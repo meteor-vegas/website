@@ -1,8 +1,8 @@
 Template._profilePhotoCircular.thumbUrl = function(userId) {
   if(this) {
     var user = Meteor.users.findOne({_id:userId});
-    if(user && user.profile.thumb_link !="no_image.jpg") {
-      return user.profile.thumb_link;
+    if(user && user.profile.thumbnailUrl !="default-avatar.png") {
+      return user.profile.thumbnailUrl;
     } else {
       return "http://placehold.it/128x128";
     }
