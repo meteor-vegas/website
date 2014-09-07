@@ -2,24 +2,34 @@ Meteor.startup(function() {
 
   if (Topics.find({}).count() === 0) {
 
+    var userIds = _(Meteor.users.find({}).fetch()).pluck('_id');
+    console.log('userIds', userIds);
+    console.log('_(userIds).sample()', _(userIds).sample());
+
     var topics = [
       {
-        title: "Meteor on Mobile",
+        title: "Meteor on Mobile with Cordova",
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
         date: "2014-09-01",
         points: 10
       },
       {
-        title: "Meteor UI Components",
+        title: "Building Meteor UI Components",
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
         date: "2014-08-01",
         points: 8
       },
       {
-        title: "Custom Packages",
+        title: "Creating Custom Packages",
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
         date: "2014-07-01",
         points: 6
+      },
+      {
+        title: "Testing Meteor Apps with Velocity",
+        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+        date: "2014-06-01",
+        points: 4
       }
     ];
 
@@ -31,7 +41,8 @@ Meteor.startup(function() {
         tags: topic.tags,
         eventId: null,
         createdAt: new Date(topic.date),
-        points: topic.points
+        points: topic.points,
+        userId: _(userIds).sample()
       });
     }
   }

@@ -1,6 +1,10 @@
 Template._topic.helpers({
   alreadyVoted: function() {
     return Meteor.user() && _(Meteor.user().profile.votedTopicIds).contains(this._id)
+  },
+
+  author: function() {
+    return Meteor.users.findOne({_id: this.userId});
   }
 });
 

@@ -16,4 +16,5 @@ meteorhacks:npm
 
 npm-container
 service-configuration
+mrt:publish-with-relations
 

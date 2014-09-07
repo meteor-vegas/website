@@ -1,9 +1,25 @@
 Meteor.publish("topics", function() {
-  return Topics.find({});
+  Meteor.publishWithRelations({
+    handle: this,
+    collection: Topics,
+    filter: {},
+    mappings: [{
+      key: 'userId',
+      collection: Meteor.users
+    }]
+  });
 });
 
 Meteor.publish("topic", function(_id) {
-  return Topics.find({_id: _id});
+  Meteor.publishWithRelations({
+    handle: this,
+    collection: Topics,
+    filter: _id,
+    mappings: [{
+      key: 'userId',
+      collection: Meteor.users
+    }]
+  });
 });
 
 //need to setup security for these before going into production
