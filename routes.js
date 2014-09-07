@@ -23,7 +23,7 @@ Router.map(function() {
       return this.subscribe("topics");
     },
     data: {
-      topics: Topics.find({})
+      topics: Topics.find({}, {sort: {points: -1}})
     }
   });
   this.route('topicDetail', {
@@ -39,7 +39,13 @@ Router.map(function() {
   });
 
   this.route('members', {
-    path: '/members'
+    path: '/members',
+    waitOn: function() {
+      return this.subscribe("members");
+    },
+    data: {
+      members: Meteor.users.find({}, {sort: {'profile.points': -1}})
+    }
   });
   this.route('memberDetail', {
     path: '/members/id-goes-here'
