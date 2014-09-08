@@ -18,6 +18,9 @@
         {{/with}}
         <li>{{ points }} Points</li>
         <li><a href="{{ pathFor 'topicDetail' }}">{{numberOfComments}} Comments</a></li>
+        {{#if isInRole 'admin'}}
+          <li><button type="button" class="btn btn-default btn-xs" data-remove>Remove</button></li>
+        {{/if}}
       </ul>
     </div>
   </div>

@@ -63,7 +63,7 @@ Router.map(function() {
   this.route('admin', {
     path: '/admin',
     onBeforeAction: function() {
-      if (!Meteor.user() || !Roles.userIsInRole(Meteor.user(), ['admin'])) {
+      if (!Meteor.user() || !Roles.userIsInRole(Meteor.userId(), ['admin'])) {
         Router.go('home');
       }
     }

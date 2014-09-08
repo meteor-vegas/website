@@ -23,5 +23,15 @@ Template._topic.events({
       Topics.update({_id: this._id}, {$set: {points: points}});
       Meteor.users.update({_id: Meteor.userId()}, {$push: {'profile.votedTopicIds': this._id}});
     }
+  },
+
+  'click [data-remove]': function(event, template) {
+    event.preventDefault();
+
+    if(Roles.userIsInRole(Meteor.userId(), ['admin'])) {
+      if (confirm('Are you sure you want to remove this topic?')) {
+        Topics.remove({_id: this._id});
+      }
+    }
   }
 });
