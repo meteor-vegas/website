@@ -18,4 +18,5 @@ npm-container
 service-configuration
 mrt:publish-with-relations
 mrt:moment
+alanning:roles
 

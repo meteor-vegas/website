@@ -60,6 +60,15 @@ Router.map(function() {
     }
   });
 
+  this.route('admin', {
+    path: '/admin',
+    onBeforeAction: function() {
+      if (!Meteor.user() || !Roles.userIsInRole(Meteor.user(), ['admin'])) {
+        Router.go('home');
+      }
+    }
+  });
+
   this.route('notFound', {
     path: '*',
     where: 'server',

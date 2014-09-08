@@ -2,6 +2,8 @@ Meteor.startup(function() {
 
   if (Meteor.users.find({}).count() === 0) {
 
+    var adminIds = [54118672, 57771272, 32213572, 28932772, 87620262, 11527138, 8187187];
+
     Meteor.call('MeetupAPI', 'getMembers', {"group_urlname": "Meteor-Las-Vegas"}, function(err, response) {
 
       // console.log('User Count: ' + JSON.stringify(response.meta.count));
@@ -28,7 +30,7 @@ Meteor.startup(function() {
           }
         }
 
-        Meteor.users.insert({
+        var userId = Meteor.users.insert({
           createdAt: new Date(),
           profile: {
             'name': response.results[i].name,
@@ -44,6 +46,10 @@ Meteor.startup(function() {
             }
           }
         });
+
+        if (_(adminIds).contains(response.results[i].id)) {
+          Roles.addUsersToRoles(userId, ['admin'])
+        }
 
       }
     });
