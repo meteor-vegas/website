@@ -11,9 +11,10 @@ Package.on_use(function (api) {
   api.use('iron:router', both);
 
   api.add_files('collections/presentations.js', both);
+  api.add_files('routes/routes_presentations.js', both);
   api.add_files('server/seeds/presentations.js', 'server');
   api.add_files('server/publications_presentations.js', 'server');
-  api.add_files('client/routes/routes_presentations.js', 'client');
+
 
   //Export Presentations Collection to the world
   api.export('Presentations', both);

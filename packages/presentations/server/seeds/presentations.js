@@ -54,6 +54,8 @@ Meteor.startup(function() {
       }
     ];
 
+    console.log ("Populating dummy presentations data");
+
     for (var i = 0; i < presentations.length; i++) {
       var presentation = presentations[i];
       var presentationId = Presentations.insert(presentation);

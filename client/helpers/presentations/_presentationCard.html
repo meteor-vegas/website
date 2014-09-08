@@ -1,0 +1,13 @@
+<template name="_presentationCard">
+  <div class="thumbnail">
+    <a href="{{ pathFor 'presentationDetail' }}"><img src="http://placehold.it/350x150"></a>
+    <div class="caption">
+      <h3><a href="{{ pathFor 'presentationDetail' }}">{{this.title}}</a></h3>
+      <h5 class="text-muted">
+        {{> _profilePhotoCircular this.presenter._id}} By {{this.presenter.name}}
+      </h5>
+      <p>{{this.description}}</p>
+      <p><a href="{{ pathFor 'presentationDetail' }}" class="btn btn-primary" role="button">View</a></p>
+    </div>
+  </div>
+</template>
