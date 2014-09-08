@@ -4,8 +4,31 @@ Meteor.publish("presentations", function() {
 });
 
 Meteor.publish("presentation", function(_id) {
-  return Presentations.find({_id: _id});
+  Meteor.publishWithRelations({
+    handle: this,
+    collection: Presentations,
+    filter: _id,
+    mappings: [
+      {
+        key: 'userId',
+        collection: Meteor.users
+      },
+      {
+        reverse: true,
+        key: 'parentId',
+        collection: Comments,
+        filter: { parentType: 'presentation' },
+        mappings: [
+          {
+            key: 'userId',
+            collection: Meteor.users
+          }
+        ]
+      }
+    ]
+  });
 });
+
 
 Presentations.allow({
   'insert': function(userId, doc) {

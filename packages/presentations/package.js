@@ -9,6 +9,7 @@ Package.on_use(function (api) {
   var both = ['client', 'server'];
 
   api.use('iron:router', both);
+  api.use('mrt:publish-with-relations','server');
 
   api.add_files('collections/presentations.js', both);
   api.add_files('routes/routes_presentations.js', both);

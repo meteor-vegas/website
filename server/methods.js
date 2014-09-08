@@ -43,5 +43,8 @@ Meteor.methods({
 		if (params.parentType === 'topic') {
 			Topics.update({_id: params.parentId}, {$inc: {numberOfComments: 1}});
 		}
+		if (params.parentType === 'presentation') {
+			Presentations.update({_id: params.parentId}, {$inc: {numberOfComments: 1}});
+		}
 	}
 });

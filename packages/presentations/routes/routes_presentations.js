@@ -14,11 +14,12 @@ Router.map(function() {
     path: '/presentations/:_id',
     waitOn: function() {
       console.log(this.params._id);
-      return [this.subscribe("presentation", this.params._id), this.subscribe("members")];
+      return [this.subscribe("presentation", this.params._id), this.subscribe("members"), this.subscribe("comments")];
     },
     data: function() {
       return {
-        presentation: Presentations.findOne({_id: this.params._id})
+        presentation: Presentations.findOne({_id: this.params._id}),
+        comments: Comments.find({parentType: 'presentation', parentId: this.params._id}, {sort: { createdAt: -1 }})
       };
     }
   });

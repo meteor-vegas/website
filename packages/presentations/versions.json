@@ -25,6 +25,10 @@
       "1.0.0"
     ],
     [
+      "coffeescript",
+      "1.0.2"
+    ],
+    [
       "ddp",
       "1.0.8"
     ],
@@ -99,6 +103,10 @@
     [
       "mongo",
       "1.0.4"
+    ],
+    [
+      "mrt:publish-with-relations",
+      "0.1.5"
     ],
     [
       "observe-sequence",
