@@ -1,7 +1,5 @@
 Meteor.startup(function() {
-  console.log('process.env.METEOR_ENV', process.env.METEOR_ENV);
-  var environment = process.env.METEOR_ENV || "development";
-  console.log('environment', environment);
+  var environment = process.env.NODE_ENV || "development";
 
   if (environment === 'development') {
     if (ServiceConfiguration.configurations.find({service: 'meetup'}).count() === 0) {
