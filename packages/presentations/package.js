@@ -13,7 +13,6 @@ Package.on_use(function (api) {
 
   api.add_files('collections/presentations.js', both);
   api.add_files('routes/routes_presentations.js', both);
-  api.add_files('server/seeds/presentations.js', 'server');
   api.add_files('server/publications_presentations.js', 'server');
 
 
