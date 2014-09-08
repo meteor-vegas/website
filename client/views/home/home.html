@@ -1,6 +1,6 @@
 <template name="home">
 
-  <div class="jumbotron">
+  <div class="jumbotron jumbotron-home">
     <div class="container">
       <h1>Meteor Vegas</h1>
       <p>
@@ -10,7 +10,7 @@
       </p>
       {{#unless currentUser}}
         <p>
-          <a href="{{ pathFor 'members'}}" class="btn btn-primary btn-lg" data-login-with="meetup"><i class="ion-ios7-people"></i> Join Us!</a>
+          <a href="{{ pathFor 'members'}}" class="btn btn-primary btn-lg" data-login-with="meetup"><img src="meetup.png" width=26 height=26> Join Us!</a>
         </p>
       {{/unless}}
     </div>
@@ -56,12 +56,7 @@
       <h3>Who We Are</h3>
       <hr>
       <p>
-        <a href="{{ pathFor 'memberDetail' }}" data-toggle="tooltip" title="Firstname Lastname"><img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg"></a>
-        <a href="{{ pathFor 'memberDetail' }}" data-toggle="tooltip" title="Firstname Lastname"><img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg"></a>
-        <a href="{{ pathFor 'memberDetail' }}" data-toggle="tooltip" title="Firstname Lastname"><img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/mijustin/128.jpg"></a>
-        <a href="{{ pathFor 'memberDetail' }}" data-toggle="tooltip" title="Firstname Lastname"><img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/tomaslau/128.jpg"></a>
-        <a href="{{ pathFor 'memberDetail' }}" data-toggle="tooltip" title="Firstname Lastname"><img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/ok/128.jpg"></a>
-        <a href="{{ pathFor 'memberDetail' }}" data-toggle="tooltip" title="Firstname Lastname"><img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/ManikRathee/128.jpg"></a>
+		  {{> _topMembers}}
       </p>
       <hr>
       <p>

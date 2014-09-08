@@ -26,7 +26,22 @@ Meteor.methods({
 			title: params.title,
 			description: params.description,
 			userId: Meteor.userId(),
+			points: 0,
 			createdAt: new Date()
 		});
+	},
+
+	createComment: function(params) {
+		Comments.insert({
+			body: params.body,
+			parentType: params.parentType,
+			parentId: params.parentId,
+			userId: Meteor.userId(),
+			createdAt: new Date()
+		});
+
+		if (params.parentType === 'topic') {
+			Topics.update({_id: params.parentId}, {$inc: {numberOfComments: 1}});
+		}
 	}
 });

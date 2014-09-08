@@ -4,6 +4,10 @@
 @import './mixins.import.less';
 @import './variables.import.less';
 
+// Bootstrap extensions
+@import './bootstrap_ext/buttons.import.less';
+@import './bootstrap_ext/type.import.less';
+
 // Misc Global Styles
 ::-moz-selection { background: @brand-primary; color: #fff; text-shadow: none; }
 ::selection { background: @brand-primary; color: #fff; text-shadow: none; }
@@ -14,17 +18,49 @@
 
 .navbar {
   margin-bottom: 0;
+
+  .navbar-brand {
+    img {
+      margin-top: -6px;
+      margin-right: 6px;
+    }
+  }
 }
 
 footer {
   margin-top: 48px;
   border-top: 1px solid @gray-lighter;
-  padding: 24px 0;
-  background: @navbar-default-bg;
+  padding: 120px 0;
+  background: @brand-primary url("/moon.png") center center no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #fff;
 
-  i {
-    font-size: 24px;
+  a {
+    color: #fff;
+
+    &:hover {
+      color: lighten(@brand-primary, 50%);
+    }
   }
+
+  .footer-meteor-link {
+    img {
+      margin-top: -6px;
+      margin-right: 6px;
+    }
+  }
+
+  .footer-social-link {
+    img {
+      margin-top: -10px;
+    }
+
+    i {
+      font-size: 24px;
+    }
+  }
+
 }
 
 .panel-body {

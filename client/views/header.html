@@ -9,16 +9,19 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{{ pathFor 'home' }}"><i class="ion-ios7-circle-filled"></i> Meteor Vegas</a>
+        <a class="navbar-brand" href="{{ pathFor 'home' }}"><img src="/meteor-white.png" width=30 height=30> Meteor Vegas</a>
       </div>
 
       <div class="collapse navbar-collapse" id="main-nav">
         <ul class="nav navbar-nav navbar-right">
           <li class="{{ isActiveRoute 'home' }}"><a href="{{ pathFor 'home' }}">Home</a></li>
-          <li class="{{ isActiveRoute 'meetups' }}"><a href="{{ pathFor 'meetups' }}">Meetups</a></li>
-          <li class="{{ isActiveRoute 'presentations' }}"><a href="{{ pathFor 'presentations' }}">Presentations</a></li>
-          <li class="{{ isActiveRoute 'topics' }}"><a href="{{ pathFor 'topics' }}">Topics</a></li>
-          <li class="{{ isActiveRoute 'members' }}"><a href="{{ pathFor 'members' }}">Members</a></li>
+          <li class="{{ isActivePath 'meetups' }}"><a href="{{ pathFor 'meetups' }}">Meetups</a></li>
+          <li class="{{ isActivePath 'presentations' }}"><a href="{{ pathFor 'presentations' }}">Presentations</a></li>
+          <li class="{{ isActivePath 'topics' }}"><a href="{{ pathFor 'topics' }}">Topics</a></li>
+          <li class="{{ isActivePath 'members' }}"><a href="{{ pathFor 'members' }}">Members</a></li>
+          {{#if isInRole 'admin'}}
+            <li class="{{ isActiveRoute 'admin' }}"><a href="{{ pathFor 'admin' }}">Admin</a></li>
+          {{/if}}
           {{#if currentUser}}
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -35,7 +38,7 @@
           {{else}}
             <li>
               <button type="button" class="btn btn-primary navbar-btn" data-login-with="meetup">
-                <i class="ion-ios7-people"></i> Sign in with Meetup
+                <img src="meetup.png" width=22 height=22> Sign In
               </button>
             </li>
           {{/if}}

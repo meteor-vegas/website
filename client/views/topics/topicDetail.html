@@ -18,68 +18,18 @@
         {{/with}}
 
         <div class="page-header">
-          <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#new-comment-modal">
-            <i class="ion-plus"></i> Add a Comment
-          </button>
+          {{#if currentUser}}
+            <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#new-comment-modal">
+              <i class="ion-plus"></i> Add a Comment
+            </button>
+          {{/if}}
           <h3>Comments</h3>
         </div>
 
         <ul class="media-list">
-          <li class="media">
-            <a class="pull-left" href="{{ pathFor 'memberDetail' }}">
-              <img class="media-object img-circle" width=40 height=40 src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg">
-            </a>
-            <div class="media-body">
-              <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-              <p class="text-muted">
-                <small>Posted by <a href="{{ pathFor 'memberDetail' }}">Firstname Lastname</a></small>
-              </p>
-            </div>
-          </li>
-          <li class="media">
-            <a class="pull-left" href="{{ pathFor 'memberDetail' }}">
-              <img class="media-object img-circle" width=40 height=40 src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg">
-            </a>
-            <div class="media-body">
-              <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-              <p class="text-muted">
-                <small>Posted by <a href="{{ pathFor 'memberDetail' }}">Firstname Lastname</a></small>
-              </p>
-            </div>
-          </li>
-          <li class="media">
-            <a class="pull-left" href="{{ pathFor 'memberDetail' }}">
-              <img class="media-object img-circle" width=40 height=40 src="https://s3.amazonaws.com/uifaces/faces/twitter/mijustin/128.jpg">
-            </a>
-            <div class="media-body">
-              <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-              <p class="text-muted">
-                <small>Posted by <a href="{{ pathFor 'memberDetail' }}">Firstname Lastname</a></small>
-              </p>
-            </div>
-          </li>
-          <li class="media">
-            <a class="pull-left" href="{{ pathFor 'memberDetail' }}">
-              <img class="media-object img-circle" width=40 height=40 src="https://s3.amazonaws.com/uifaces/faces/twitter/tomaslau/128.jpg">
-            </a>
-            <div class="media-body">
-              <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-              <p class="text-muted">
-                <small>Posted by <a href="{{ pathFor 'memberDetail' }}">Firstname Lastname</a></small>
-              </p>
-            </div>
-          </li>
-          <li class="media">
-            <a class="pull-left" href="{{ pathFor 'memberDetail' }}">
-              <img class="media-object img-circle" width=40 height=40 src="https://s3.amazonaws.com/uifaces/faces/twitter/ok/128.jpg">
-            </a>
-            <div class="media-body">
-              <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-              <p class="text-muted">
-                <small>Posted by <a href="{{ pathFor 'memberDetail' }}">Firstname Lastname</a></small>
-              </p>
-            </div>
-          </li>
+          {{#each comments}}
+            {{> _comment}}
+          {{/each}}
         </ul>
 
       </div>
@@ -90,21 +40,7 @@
   <div class="modal fade" id="new-comment-modal">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form>
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Add a Comment</h4>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <textarea rows="3" class="form-control" id="description" placeholder="Enter your comment…"></textarea>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Submit</button>
-          </div>
-        </form>
+        {{> _commentForm parentType="topic" parentId=topic._id}}
       </div>
     </div>
   </div>

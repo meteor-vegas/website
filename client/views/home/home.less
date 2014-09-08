@@ -1,6 +1,25 @@
 @import '../../stylesheets/mixins.import.less';
 @import '../../stylesheets/variables.import.less';
 
+.jumbotron.jumbotron-home {
+  background: @brand-primary url("/vegas.png") center center no-repeat;
+  background-size: cover;
+  color: #fff;
+  padding: 86px 0;
+
+  h1 {
+    text-transform: none;
+  }
+
+  p {
+    color: lighten(@brand-primary, 30%);
+  }
+
+  .btn-primary {
+    background: #1c1c1c;
+  }
+}
+
 .homepage-section {
   text-align: center;
   padding: 48px 0;
@@ -18,4 +37,10 @@
 
 .homepage-section-members {
   background: @gray-lighter;
+
+  .top-members a {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+  }
 }

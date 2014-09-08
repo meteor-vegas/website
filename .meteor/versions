@@ -3,6 +3,7 @@ accounts-meetup@1.0.0
 accounts-oauth@1.0.0
 accounts-ui-unstyled@1.0.1
 accounts-ui@1.0.0
+alanning:roles@1.2.13
 application-configuration@1.0.1
 autoupdate@1.0.6
 binary-heap@1.0.0
@@ -11,6 +12,7 @@ blaze@2.0.0
 callback-hook@1.0.0
 check@1.0.0
 cmather:handlebars-server@0.2.0
+coffeescript@1.0.2
 ctl-helper@1.0.3
 ctl@1.0.1
 ddp@1.0.8
@@ -41,6 +43,8 @@ minimongo@1.0.2
 mongo@1.0.4
 mrt:ionicons@1.4.1
 mtpmngr:presentations@1.0.0
+mrt:moment@2.8.1
+mrt:publish-with-relations@0.1.5
 npm-container@1.0.0
 oauth2@1.0.0
 oauth@1.0.1

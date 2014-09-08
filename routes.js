@@ -26,7 +26,8 @@ Router.map(function() {
     },
     data: function() {
       return {
-        topic: Topics.findOne({_id: this.params._id})
+        topic: Topics.findOne({_id: this.params._id}),
+        comments: Comments.find({parentType: 'topic', parentId: this.params._id}, {sort: { createdAt: -1 }})
       };
     }
   });
@@ -49,6 +50,15 @@ Router.map(function() {
       return {
         member: Meteor.users.findOne({_id: this.params._id})
       };
+    }
+  });
+
+  this.route('admin', {
+    path: '/admin',
+    onBeforeAction: function() {
+      if (!Meteor.user() || !Roles.userIsInRole(Meteor.userId(), ['admin'])) {
+        Router.go('home');
+      }
     }
   });
 
