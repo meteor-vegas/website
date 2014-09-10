@@ -6,25 +6,25 @@
         <div class="col-md-3">
           <div class="panel panel-default text-center">
             <div class="panel-heading">
-              Thursday
+              {{ calendarDay dateTime}}
             </div>
             <div class="panel-body">
-              <h1>25th</h1>
+              <h1>{{ calendarDate dateTime}}</h1>
             </div>
             <div class="panel-footer">
-              August
+              {{ calendarMonth dateTime}}
             </div>
           </div>
         </div>
         <div class="col-md-9">
-          <h2>Meteor Vegas #5</h2>
+          <h2>{{ meetup.title }}</h2>
 
           <h5 class="text-muted">
-            <i class="ion-calendar"></i> Thursday August 25th at 6:00PM
+            <i class="ion-calendar"></i> {{ longDate dateTime}}
           </h5>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
+          <div class="meetup-description-html">
+            {{{ meetup.description }}}
+          </div>
           <p>
             <a href="#" class="btn btn-primary btn-lg"><i class="ion-plus"></i> RSVP</a>
             <a href="{{ pathFor 'memberDetail' }}" title="Firstname Lastname" data-toggle="tooltip"><img class="img-circle" width=30 height=30 src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg"></a>
@@ -42,7 +42,7 @@
   <div class="container">
     <ol class="breadcrumb">
       <li><a href="{{ pathFor 'meetups' }}">All Meetups</a></li>
-      <li class="active">Meteor Vegas #5</li>
+      <li class="active">{{ meetup.title }}</li>
     </ol>
   </div>
 
@@ -89,13 +89,13 @@
       <div class="row">
         <div class="col-md-6">
           <div class="embed-responsive embed-responsive-16by9">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3221.0403385994946!2d-115.14097899999999!3d36.165572999999995!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c8c37606d67cf9%3A0x3f059bba6deecbf3!2sWork+In+Progress+-+6th+Street+Workspace!5e0!3m2!1sen!2sus!4v1409430627934"></iframe>
+            <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCGdAs2xESY5hbra99lodGRyypT0yWV7Kk&q={{ urlEncode meetup.location.address}}"></iframe>
           </div>
         </div>
         <div class="col-md-6">
-          <h4>Work in Progress</h4>
+          <h4>{{ meetup.location.name }}</h4>
           <h5 class="text-muted">
-            <a href="https://goo.gl/maps/MGWTx"><i class="ion-ios7-location"></i> 317 S 6th St Las Vegas, NV 89101</a>
+            <a href="https://www.google.com/maps/place/{{ urlEncode meetup.location.address}}"><i class="ion-ios7-location"></i> {{ meetup.location.address }}</a>
           </h5>
           <p>
             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

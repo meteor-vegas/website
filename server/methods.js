@@ -6,8 +6,8 @@ var	list=["getCategories","getCheckins","postCheckin","getCities","getOpenEvents
 Meteor.methods({
 	MeetupAPI: function(endpoint, param) {
 		switch(endpoint){
-		case "getOpenEvents":
-			return AsyncMeetup.getOpenEvents(param);
+		case "getEvents":
+			return AsyncMeetup.getEvents(param);
 			break
 		case "getMembers":
 			return AsyncMeetup.getMembers(param);

@@ -44,6 +44,7 @@ mongo@1.0.4
 mrt:ionicons@1.4.1
 mrt:moment@2.8.1
 mrt:publish-with-relations@0.1.5
+mrt:underscore-string-latest@2.3.3
 mtpmngr:presentations@1.0.0
 npm-container@1.0.0
 oauth2@1.0.0

@@ -19,3 +19,5 @@ mtpmngr:presentations
 mrt:publish-with-relations
 mrt:moment
 alanning:roles
+mrt:underscore-string-latest
+

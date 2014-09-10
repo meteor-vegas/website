@@ -4,10 +4,25 @@ Router.map(function() {
   });
 
   this.route('meetups', {
-    path: '/meetups'
+    path: '/meetups',
+    waitOn: function() {
+      return this.subscribe("meetups");
+    },
+    data: {
+      upcomingMeetup: Meetups.find({}, {sort: {dateTime: -1}, limit: 1}),
+      previousMeetups: Meetups.find({}, {sort: {dateTime: -1}})
+    }
   });
   this.route('meetupDetail', {
-    path: '/meetups/id-goes-here'
+    path: '/meetups/:_id',
+    waitOn: function() {
+      return this.subscribe("meetup", this.params._id);
+    },
+    data: function() {
+      return {
+        meetup: Meetups.findOne({_id: this.params._id}),
+      };
+    }
   });
 
   this.route('topics', {

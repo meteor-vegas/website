@@ -1,3 +1,19 @@
+Meteor.publish("meetups", function() {
+  Meteor.publishWithRelations({
+    handle: this,
+    collection: Meetups,
+    filter: {}
+  });
+});
+
+Meteor.publish("meetup", function(_id) {
+  Meteor.publishWithRelations({
+    handle: this,
+    collection: Meetups,
+    filter: _id
+  });
+});
+
 Meteor.publish("topics", function() {
   Meteor.publishWithRelations({
     handle: this,
