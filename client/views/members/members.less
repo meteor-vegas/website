@@ -2,5 +2,9 @@
 @import '../../stylesheets/variables.import.less';
 
 .member-grid-item {
-  height: 200px;
+  height: 180px;
+
+  @media (max-width: @screen-xs-max) {
+    height: 220px;
+  }
 }

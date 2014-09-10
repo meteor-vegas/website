@@ -16,40 +16,44 @@
     </div>
   </div>
 
-  <div class="homepage-section homepage-section-meetups">
-    <div class="container">
-      <h3>Next Meetup</h3>
-      <hr>
-      <div class="row">
-        <div class="col-md-3">
-          <div class="panel panel-default text-center">
-            <div class="panel-heading">
-              Thursday
+  {{#if upcomingMeetup.count}}
+    {{#each upcomingMeetup}}
+      <div class="homepage-section homepage-section-meetups">
+        <div class="container">
+          <h3>Next Meetup</h3>
+          <hr>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                  {{ calendarDay dateTime}}
+                </div>
+                <div class="panel-body">
+                  <h1>{{ calendarDate dateTime}}</h1>
+                </div>
+                <div class="panel-footer">
+                  {{ calendarMonth dateTime}}
+                </div>
+              </div>
             </div>
-            <div class="panel-body">
-              <h1>25th</h1>
-            </div>
-            <div class="panel-footer">
-              August
+            <div class="col-md-9">
+              <h2><a href="{{ pathFor 'meetupDetail' }}">{{ title }}</a></h2>
+
+              <h5 class="text-muted">
+                <i class="ion-calendar"></i> {{ longDate dateTime}}
+              </h5>
+              <p>
+                {{ summarize description }}
+              </p>
+              <p>
+                <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary btn-lg">View Details</a>
+              </p>
             </div>
           </div>
         </div>
-        <div class="col-md-9">
-          <h2>Meteor Vegas #5</h2>
-
-          <h5 class="text-muted">
-            <i class="ion-calendar"></i> Thursday August 25th at 6:00PM
-          </h5>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
-          <p>
-            <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary btn-lg">View Details</a>
-          </p>
-        </div>
       </div>
-    </div>
-  </div>
+    {{/each}}
+  {{/if}}
 
   <div class="homepage-section homepage-section-members">
     <div class="container">

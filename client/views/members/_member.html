@@ -7,7 +7,7 @@
     <div class="media-body">
       <h4 class="media-heading"><a href="{{ pathFor 'memberDetail' }}">{{profile.name}}</a></h4>
       <span class="label label-primary">+{{profile.points}}</span>
-      <p>{{profile.bio}}</p>
+      <p>{{ summarize profile.bio}}</p>
       <ul class="list-inline">
         {{#each profile.socialLinks}}
           <li><a href="{{url}}" class="btn btn-default btn-social-link"><i class="ion-social-{{service}}"></i></a></li>

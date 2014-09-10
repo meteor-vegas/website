@@ -1,6 +1,12 @@
 Router.map(function() {
   this.route('home', {
-    path: '/'
+    path: '/',
+    waitOn: function() {
+      return this.subscribe("meetups");
+    },
+    data: {
+      upcomingMeetup: Meetups.find({}, {sort: {dateTime: -1}, limit: 1})
+    }
   });
 
   this.route('meetups', {
