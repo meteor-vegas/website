@@ -14,7 +14,7 @@ Router.map(function() {
     path: '/presentations/:_id',
     waitOn: function() {
       console.log(this.params._id);
-      return [this.subscribe("presentation", this.params._id), this.subscribe("members"), this.subscribe("comments")];
+      return this.subscribe("presentation", this.params._id);
     },
     data: function() {
       return {
