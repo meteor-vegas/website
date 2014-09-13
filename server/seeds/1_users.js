@@ -35,7 +35,7 @@ Meteor.startup(function() {
             'meetupProfileUrl': response.results[i].link,
             'socialLinks': socialLinks,
             'thumbnailUrl': thumbnailUrl,
-            'points': _.random(5, 250)
+            'points': _.random(5, 25)
           },
           services: {
             meetup: {
@@ -45,7 +45,8 @@ Meteor.startup(function() {
         });
 
         if (_(adminIds).contains(response.results[i].id)) {
-          Roles.addUsersToRoles(userId, ['admin'])
+          Roles.addUsersToRoles(userId, ['admin']);
+          Meteor.users.update({_id: userId}, {$set: {'profile.points': _.random(100, 500)}});
         }
 
       }
