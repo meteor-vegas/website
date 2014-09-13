@@ -4,3 +4,11 @@ Template.meetups.rendered = function() {
 
   $('[data-toggle=tooltip]').tooltip();
 };
+
+Template.meetups.helpers({
+  displayOverflowAttendees: function() {
+    if (this.numberOfOverflowAttendees) {
+      return this.numberOfOverflowAttendees() > 0;
+    }
+  }
+});
