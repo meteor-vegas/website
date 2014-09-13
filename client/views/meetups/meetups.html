@@ -30,12 +30,14 @@
               </p>
               <p>
                 <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary btn-lg">View Details</a>
-                {{#each truncatedAttendees}}
-                  <a href="{{ pathFor 'memberDetail' }}" title="{{ profile.name }}" data-toggle="tooltip"><img class="img-circle" width=30 height=30 src="{{profile.thumbnailUrl}}"></a>
-                {{/each}}
-                {{#if displayOverflowAttendees}}
-                  <small>and {{ numberOfOverflowAttendees }} more are going</small>
-                {{/if}}
+                {{#unless meetup.isPast}}
+                  {{#each truncatedAttendees}}
+                    <a href="{{ pathFor 'memberDetail' }}" title="{{ profile.name }}" data-toggle="tooltip"><img class="img-circle" width=30 height=30 src="{{profile.thumbnailUrl}}"></a>
+                  {{/each}}
+                  {{#if displayOverflowAttendees}}
+                    <small>and {{ numberOfOverflowAttendees }} more are going</small>
+                  {{/if}}
+                {{/unless}}
               </p>
             </div>
           {{/each}}

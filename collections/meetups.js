@@ -11,5 +11,9 @@ Meetups.helpers({
 
   numberOfOverflowAttendees: function() {
     return this.attendeeIds.length - 5;
+  },
+
+  isPast: function() {
+    return moment(this.dateTime).isBefore(moment());
   }
 });

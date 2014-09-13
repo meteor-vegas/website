@@ -3,7 +3,7 @@ Meteor.subscribe("members");
 Template._topMembers.rendered = function() {
   window.setTimeout(function() {
     $('[data-toggle=tooltip]').tooltip();
-  }, 500);
+  }, 800);
 };
 
 Template._topMembers.topMembers = function (){

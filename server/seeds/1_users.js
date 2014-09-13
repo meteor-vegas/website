@@ -9,7 +9,7 @@ Meteor.startup(function() {
       for (var i = 0, l = response.meta.count; i < l; i++) {
         var node = response.results[i];
 
-        if(response.results[i].hasOwnProperty("photo")) {
+        if(response.results[i].hasOwnProperty("photo") && response.results[i].photo.photo_link !== "") {
           var thumbnailUrl = response.results[i].photo.photo_link;
         } else {
           var thumbnailUrl = "default-avatar.png";

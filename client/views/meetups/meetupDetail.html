@@ -25,15 +25,21 @@
           <div class="meetup-description-html">
             {{{ meetup.description }}}
           </div>
-          <p>
-            <a href="#" class="btn btn-primary btn-lg"><i class="ion-plus"></i> RSVP</a>
-            {{#each meetup.truncatedAttendees}}
-              <a href="{{ pathFor 'memberDetail' }}" title="{{ profile.name }}" data-toggle="tooltip"><img class="img-circle" width=30 height=30 src="{{profile.thumbnailUrl}}"></a>
-            {{/each}}
-            {{#if displayOverflowAttendees}}
-              <small>and {{ meetup.numberOfOverflowAttendees }} more are going</small>
-            {{/if}}
-          </p>
+          {{#unless meetup.isPast}}
+            <p>
+              {{#if currentUserIsAttendee}}
+                <button type="button" class="btn btn-primary btn-lg" disabled><i class="ion-checkmark"></i> Going</button>
+              {{else}}
+                <button type="button" class="btn btn-primary btn-lg" data-action="rsvp"><i class="ion-plus"></i> RSVP</button>
+              {{/if}}
+              {{#each meetup.truncatedAttendees}}
+                <a href="{{ pathFor 'memberDetail' }}" title="{{ profile.name }}" data-toggle="tooltip"><img class="img-circle" width=30 height=30 src="{{profile.thumbnailUrl}}"></a>
+              {{/each}}
+              {{#if displayOverflowAttendees}}
+                <small>and {{ meetup.numberOfOverflowAttendees }} more are going</small>
+              {{/if}}
+            </p>
+          {{/unless}}
         </div>
       </div>
     </div>
@@ -95,7 +101,7 @@
         <div class="col-md-6">
           <h4>{{ meetup.location.name }}</h4>
           <h5 class="text-muted">
-            <a href="https://www.google.com/maps/place/{{ urlEncode meetup.location.address}}"><i class="ion-ios7-location"></i> {{ meetup.location.address }}</a>
+            <a href="https://www.google.com/maps/place/{{ urlEncode meetup.location.address}}" target="_blank"><i class="ion-ios7-location"></i> {{ meetup.location.address }}</a>
           </h5>
           <p>
             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -105,8 +111,8 @@
     </div>
   </div>
 
-  <div class="container text-center">
-    <h3>Who's Going</h3>
+  <div class="container text-center meetup-attendees">
+    <h3>{{ attendeesHeading }}</h3>
     <hr>
     <p>
       {{#each meetup.attendees}}
@@ -115,7 +121,13 @@
     </p>
     <hr>
     <p>
-      <a href="#" class="btn btn-primary btn-lg"><i class="ion-plus"></i> RSVP</a>
+      {{#unless meetup.isPast}}
+        {{#if currentUserIsAttendee}}
+          <button type="button" class="btn btn-primary btn-lg" disabled><i class="ion-checkmark"></i> Going</button>
+        {{else}}
+          <button type="button" class="btn btn-primary btn-lg" data-action="rsvp"><i class="ion-plus"></i> RSVP</button>
+        {{/if}}
+      {{/unless}}
     </p>
   </div>
 
