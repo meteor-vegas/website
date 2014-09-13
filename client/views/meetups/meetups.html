@@ -30,11 +30,9 @@
               </p>
               <p>
                 <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary btn-lg">View Details</a>
-                <a href="{{ pathFor 'memberDetail' }}" title="Firstname Lastname" data-toggle="tooltip"><img class="img-circle" width=30 height=30 src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg"></a>
-                <a href="{{ pathFor 'memberDetail' }}" title="Firstname Lastname" data-toggle="tooltip"><img class="img-circle" width=30 height=30 src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg"></a>
-                <a href="{{ pathFor 'memberDetail' }}" title="Firstname Lastname" data-toggle="tooltip"><img class="img-circle" width=30 height=30 src="https://s3.amazonaws.com/uifaces/faces/twitter/mijustin/128.jpg"></a>
-                <a href="{{ pathFor 'memberDetail' }}" title="Firstname Lastname" data-toggle="tooltip"><img class="img-circle" width=30 height=30 src="https://s3.amazonaws.com/uifaces/faces/twitter/tomaslau/128.jpg"></a>
-                <a href="{{ pathFor 'memberDetail' }}" title="Firstname Lastname" data-toggle="tooltip"><img class="img-circle" width=30 height=30 src="https://s3.amazonaws.com/uifaces/faces/twitter/ok/128.jpg"></a>
+                {{#each attendees}}
+                  <a href="{{ pathFor 'memberDetail' }}" title="{{ profile.name }}" data-toggle="tooltip"><img class="img-circle" width=30 height=30 src="{{profile.thumbnailUrl}}"></a>
+                {{/each}}
                 <small>and 5 more are going</small>
               </p>
             </div>

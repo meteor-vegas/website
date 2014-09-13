@@ -26,7 +26,7 @@ Router.map(function() {
     },
     data: function() {
       return {
-        meetup: Meetups.findOne({_id: this.params._id}),
+        meetup: Meetups.findOne({_id: this.params._id})
       };
     }
   });

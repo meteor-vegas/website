@@ -12,8 +12,8 @@ Meteor.methods({
 		case "getMembers":
 			return AsyncMeetup.getMembers(param);
 			break
-		case "getGroups":
-			return AsyncMeetup.getGroups(param);
+		case "getRSVPs":
+			return AsyncMeetup.getRSVPs(param);
 			break
 		default:
 
