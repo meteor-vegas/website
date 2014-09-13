@@ -12,7 +12,7 @@ Meteor.startup(function() {
         if(response.results[i].hasOwnProperty("photo") && response.results[i].photo.photo_link !== "") {
           var thumbnailUrl = response.results[i].photo.photo_link;
         } else {
-          var thumbnailUrl = "default-avatar.png";
+          var thumbnailUrl = "/default-avatar.png";
         }
 
         var socialLinks = [];
