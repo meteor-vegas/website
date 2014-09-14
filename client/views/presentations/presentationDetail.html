@@ -5,13 +5,23 @@
       <div class="row">
         <div class="col-md-6">
           <div class="embed-responsive embed-responsive-16by9">
-            <iframe src="//www.slideshare.net/slideshow/embed_code/26578798" allowfullscreen></iframe>
+            {{#if presentation.oembed}}
+              {{{presentation.oembed.code}}}
+            {{/if}}
           </div>
         </div>
         <div class="col-md-6">
           <h2>{{presentation.title}}</h2>
           <h5 class="text-muted">
-            <a href="{{ pathFor 'memberDetail' _id=presentation.presenter._id }}">{{> _profilePhotoCircular presentation.presenter._id}} By {{presentation.presenter.name}}</a>
+            {{#if presentation.oembed}}
+              {{#with presentation.oembed}}
+                {{#if author_name}}
+                  <a href="{{author_url}}">{{> _profilePhotoCircular "default"}} Author: {{author_name}}</a>
+                  <br/><br/>
+                {{/if}}
+              {{/with}}
+            {{/if}}
+            <a href="{{ pathFor 'memberDetail' _id=presentation.presenter._id }}">{{> _profilePhotoCircular presentation.presenter._id}} Added By: {{presentation.presenter.name}}</a>
           </h5>
           <p>{{presentation.description}}</p>
           <p>

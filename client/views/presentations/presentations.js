@@ -14,7 +14,7 @@ Template.presentations.presentationURL = function() {
 }
 
 Template.presentations.events({
-    
+
   'show.bs.modal': function() {
     console.log("modal loaded");
     $("#url-wrapper").show();
@@ -22,13 +22,13 @@ Template.presentations.events({
     $("input#url").val("");
     $("#btn-add-presentation").text("Next");
     step = 1;
-  },  
+  },
 
   'submit': function(event, template) {
     event.preventDefault();
     if(step===1) {
         Session.set("presentationURL", $("input#url").val());
-        
+
         console.log("submitting");
         $("#url-wrapper").slideUp();
         $("#presentation-wrapper").slideDown();
@@ -45,23 +45,38 @@ Template.presentations.events({
                         presObj.title = data.title;
                     }
                     if(data.thumbnail_url) {
-                        presObj.thumbnail_url = data.thumbnail_url;
+                        presObj.thumbnail = data.thumbnail_url;
+                    }
+                    if(data.thumbnail) {
+                        presObj.thumbnail = data.thumbnail;
                     }
                     presObj.oembed = data;
+                    presObj.url = $("input#url").val();
+                    presObj.userId = Meteor.userId();
+                    var presenter = {};
+                    presenter._id = Meteor.userId();
+                    presenter.name = Meteor.user().profile.name;
+                    presObj.presenter = presenter;
                 }
             }
-        }) 
+        })
         }, 500);
     } else {
+        console.log("Adding presentation to database");
+        $('#add-presentation-modal').modal('hide');
         var newPresentationID = Presentations.insert(presObj);
-        if (newPresentationID) {
-            Router.go("presentations",{_id: newPresentationID});
-        }
+        Meteor.setTimeout(function(){
+          console.log("Routing to new Presentation: ", newPresentationID);
+          if (newPresentationID) {
+              Router.go("presentationDetail",{_id: newPresentationID});
+          }
+        }, 500)
+
     }
   },
   'click [data-upload-presentation]': function(event, template) {
       event.preventDefault();
       alert("This feature is not implemented yet..");
   }
-  
+
 })
