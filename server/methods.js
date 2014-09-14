@@ -12,8 +12,8 @@ Meteor.methods({
 		case "getMembers":
 			return AsyncMeetup.getMembers(param);
 			break
-		case "getGroups":
-			return AsyncMeetup.getGroups(param);
+		case "getRSVPs":
+			return AsyncMeetup.getRSVPs(param);
 			break
 		default:
 
@@ -45,6 +45,12 @@ Meteor.methods({
 		}
 		if (params.parentType === 'presentation') {
 			Presentations.update({_id: params.parentId}, {$inc: {numberOfComments: 1}});
+		}
+	},
+
+	rsvp: function(params) {
+		if (Meteor.userId()) {
+			Meetups.update({_id: params.meetupId}, {$push: {'attendeeIds': Meteor.userId()}})
 		}
 	}
 });

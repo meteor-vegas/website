@@ -17,6 +17,11 @@ Router.map(function() {
     data: {
       upcomingMeetup: Meetups.find({}, {sort: {dateTime: -1}, limit: 1}),
       previousMeetups: Meetups.find({}, {sort: {dateTime: -1}})
+    },
+    onAfterAction: function() {
+      SEO.set({
+        title: 'Meetups | ' + SEO.settings.title
+      });
     }
   });
   this.route('meetupDetail', {
@@ -26,8 +31,15 @@ Router.map(function() {
     },
     data: function() {
       return {
-        meetup: Meetups.findOne({_id: this.params._id}),
+        meetup: Meetups.findOne({_id: this.params._id})
       };
+    },
+    onAfterAction: function() {
+      if(this.ready()) {
+        SEO.set({
+          title: this.data().meetup.title + ' | Meetups | ' + SEO.settings.title
+        });
+      }
     }
   });
 
@@ -38,6 +50,11 @@ Router.map(function() {
     },
     data: {
       topics: Topics.find({}, {sort: {points: -1}})
+    },
+    onAfterAction: function() {
+      SEO.set({
+        title: 'Topics | ' + SEO.settings.title
+      });
     }
   });
   this.route('topicDetail', {
@@ -50,6 +67,13 @@ Router.map(function() {
         topic: Topics.findOne({_id: this.params._id}),
         comments: Comments.find({parentType: 'topic', parentId: this.params._id}, {sort: { createdAt: -1 }})
       };
+    },
+    onAfterAction: function() {
+      if(this.ready()) {
+        SEO.set({
+          title: this.data().topic.title + ' | Topics | ' + SEO.settings.title
+        });
+      }
     }
   });
 
@@ -60,6 +84,11 @@ Router.map(function() {
     },
     data: {
       members: Meteor.users.find({}, {sort: {'profile.points': -1}})
+    },
+    onAfterAction: function() {
+      SEO.set({
+        title: 'Members | ' + SEO.settings.title
+      });
     }
   });
   this.route('memberDetail', {
@@ -71,6 +100,13 @@ Router.map(function() {
       return {
         member: Meteor.users.findOne({_id: this.params._id})
       };
+    },
+    onAfterAction: function() {
+      if(this.ready()) {
+        SEO.set({
+          title: this.data().member.profile.name + ' | Members | ' + SEO.settings.title
+        });
+      }
     }
   });
 

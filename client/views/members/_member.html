@@ -2,7 +2,7 @@
 
   <div class="media">
     <a class="pull-left" href="{{ pathFor 'memberDetail' }}">
-      <img class="media-object img-circle img-responsive" src="{{profile.thumbnailUrl}}" width="100">
+      <img class="media-object img-circle" src="{{profile.thumbnailUrl}}" width="100" height="100">
     </a>
     <div class="media-body">
       <h4 class="media-heading"><a href="{{ pathFor 'memberDetail' }}">{{profile.name}}</a></h4>
@@ -10,7 +10,7 @@
       <p>{{ summarize profile.bio}}</p>
       <ul class="list-inline">
         {{#each profile.socialLinks}}
-          <li><a href="{{url}}" class="btn btn-default btn-social-link"><i class="ion-social-{{service}}"></i></a></li>
+          <li><a href="{{url}}" class="btn btn-default btn-social-link" target="_blank"><i class="ion-social-{{service}}"></i></a></li>
         {{/each}}
       </ul>
     </div>

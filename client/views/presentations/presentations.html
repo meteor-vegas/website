@@ -3,6 +3,11 @@
   <div class="container">
 
     <div class="page-header">
+      <!--{{#if currentUser}}-->
+        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#add-presentation-modal">
+          <i class="ion-plus"></i> Add a Presentation
+        </button>
+      <!--{{/if}}-->
       <h1>Presentations</h1>
     </div>
 
@@ -18,6 +23,40 @@
 
     </div>
 
+  </div>
+  
+  <div class="modal fade" id="add-presentation-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form>
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Add a Presentation</h4>
+          </div>
+          <div class="modal-body">
+            <div id="presentation-wrapper">
+            <a id="presentation-embed" href="{{presentationURL}}"></a>
+            </div>
+            
+            <div id="url-wrapper">
+              <div class="form-group">
+              <input type="text" class="form-control" id="url" placeholder="Paste URL to the presentation">
+              <small>Slideshare, Prezi, Youtube etc</small>
+            </div>
+            </div>
+            
+            <h4>or</h4>
+            <div class="form-group">
+              <button type="button" class="btn btn-primary btn-outline" data-upload-presentation>Upload Presentation File</button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="btn-add-presentation">Next</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 
 </template>

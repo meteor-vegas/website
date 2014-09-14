@@ -6,17 +6,13 @@ Meteor.startup(function() {
 
     Meteor.call('MeetupAPI', 'getMembers', {"group_urlname": "Meteor-Las-Vegas"}, function(err, response) {
 
-      // console.log('User Count: ' + JSON.stringify(response.meta.count));
       for (var i = 0, l = response.meta.count; i < l; i++) {
         var node = response.results[i];
-        // console.log(node);
-        // console.log('name: ' + node.name + ' id: ' + node.id);
 
-        if(response.results[i].hasOwnProperty("photo")) {
+        if(response.results[i].hasOwnProperty("photo") && response.results[i].photo.photo_link !== "") {
           var thumbnailUrl = response.results[i].photo.photo_link;
         } else {
-          // console.log('has photo: ' + response.results[i].hasOwnProperty("photo"));
-          var thumbnailUrl = "default-avatar.png";
+          var thumbnailUrl = "/default-avatar.png";
         }
 
         var socialLinks = [];
@@ -33,12 +29,13 @@ Meteor.startup(function() {
         var userId = Meteor.users.insert({
           createdAt: new Date(),
           profile: {
+            'meetupId': response.results[i].id,
             'name': response.results[i].name,
             'bio': response.results[i].bio,
             'meetupProfileUrl': response.results[i].link,
             'socialLinks': socialLinks,
             'thumbnailUrl': thumbnailUrl,
-            'points': _.random(5, 250)
+            'points': _.random(5, 25)
           },
           services: {
             meetup: {
@@ -48,7 +45,8 @@ Meteor.startup(function() {
         });
 
         if (_(adminIds).contains(response.results[i].id)) {
-          Roles.addUsersToRoles(userId, ['admin'])
+          Roles.addUsersToRoles(userId, ['admin']);
+          Meteor.users.update({_id: userId}, {$set: {'profile.points': _.random(100, 500)}});
         }
 
       }

@@ -10,7 +10,13 @@ Meteor.publish("meetup", function(_id) {
   Meteor.publishWithRelations({
     handle: this,
     collection: Meetups,
-    filter: _id
+    filter: _id,
+    mappings: [
+      {
+        key: "attendeeIds",
+        collection: Meteor.users
+      }
+    ]
   });
 });
 
