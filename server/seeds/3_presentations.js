@@ -30,7 +30,6 @@ Meteor.startup(function() {
     var presentations = [
       {
         title: "Meteor on Mobile",
-        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
         presenter: { _id:randomUser1._id, name: randomUser1.profile.name},
         presentationDate: getRandomDate(),
         tags: ["mobile"],
@@ -38,7 +37,6 @@ Meteor.startup(function() {
       },
       {
         title: "Meteor UI Components",
-        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
         presenter: { _id:randomUser2._id, name: randomUser2.profile.name},
         presentationDate: getRandomDate(),
         tags:["ui"],
@@ -46,7 +44,6 @@ Meteor.startup(function() {
       },
       {
         title: "Custom Packages",
-        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
         presenter: { _id:randomUser3._id, name: randomUser3.profile.name},
         presentationDate: getRandomDate(),
         tags:["packages"],
