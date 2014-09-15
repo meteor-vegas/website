@@ -4,9 +4,9 @@ Template._profilePhotoCircular.thumbUrl = function(userId) {
     if(user && user.profile.thumbnailUrl !="default-avatar.png") {
       return user.profile.thumbnailUrl;
     } else {
-      return "http://placehold.it/128x128";
+      return "/default-avatar.png";
     }
   } else {
-    return "http://placehold.it/128x128";
+    return "/default-avatar.png";
   }
 }

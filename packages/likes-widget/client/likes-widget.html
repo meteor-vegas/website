@@ -1,0 +1,13 @@
+<template name="likesWidget">
+
+    {{#if likedByMe}}
+      <button type="button" class="btn btn-primary" data-unlike><i class="ion-heart"></i> Liked </button>
+    {{else}}
+      <button type="button" class="btn btn-primary btn-outline" data-like><i class="ion-heart"></i> Like </button>
+    {{/if}}
+
+    {{#each likedBy}}
+      <a href="{{ pathFor 'memberDetail' }}" title="{{this.profile.name}}" data-toggle="tooltip">{{> _profilePhotoCircular this._id}}</a>
+    {{/each}}
+
+</template>
