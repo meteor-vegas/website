@@ -4,6 +4,9 @@ Meteor.startup(function() {
       title: 'Meteor Vegas',
       meta: {
         'description': 'A Bi-Monthly Meteor.js Meetup in Las Vegas, NV'
+      },
+      og: {
+        'image': Meteor.absoluteUrl('share-image.png')
       }
     });
   }
