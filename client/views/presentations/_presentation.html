@@ -1,10 +1,10 @@
 <template name="_presentation">
-  <div class="thumbnail">
-    <a href="{{ pathFor 'presentationDetail' }}">
+  <div class="thumbnail presentation-item">
+    <a href="{{ pathFor 'presentationDetail' }}" class="presentation-thumbnail">
       {{#if this.thumbnail}}
-        <img src="{{this.thumbnail}}">
+        <img src="{{this.thumbnail}}" class="img-responsive">
       {{else}}
-        <img src="http://placehold.it/350x150">
+        <img src="/meteor-black.png">
       {{/if}}
     </a>
     <div class="caption">
@@ -12,8 +12,7 @@
       <h5 class="text-muted">
         {{> _profilePhotoCircular this.presenter._id}} By {{this.presenter.name}}
       </h5>
-      <p>{{this.description}}</p>
-      <p><a href="{{ pathFor 'presentationDetail' }}" class="btn btn-primary" role="button">View</a></p>
+      <a href="{{ pathFor 'presentationDetail' }}" class="btn btn-default btn-block" role="button">View</a>
     </div>
   </div>
 </template>

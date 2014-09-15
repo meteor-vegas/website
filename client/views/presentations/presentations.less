@@ -2,5 +2,29 @@
 @import '../../stylesheets/variables.import.less';
 
 #presentation-wrapper {
-    display:none;
+  display: none;
+}
+
+.presentation-item {
+  height: 440px;
+  position: relative;
+
+  a.btn-block {
+    position: absolute;
+    bottom: 12px;
+    width: 120px;
+  }
+}
+
+.presentation-thumbnail {
+  display: block;
+  background: @gray-lighter;
+  text-align: center;
+  height: 200px;
+  line-height: 200px;
+  overflow: hidden;
+
+  img {
+    display: inline-block !important;
+  }
 }
