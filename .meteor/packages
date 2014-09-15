@@ -22,4 +22,5 @@ alanning:roles
 mrt:underscore-string-latest
 dburles:collection-helpers
 manuelschoebel:ms-seo
+mrt:iron-router-progress
 
