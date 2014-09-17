@@ -10,10 +10,6 @@ Router.configure({
     }
   },
 
-  onBeforeAction: function() {
-    $('meta[name^="description"]').remove();
-  },
-
   onAfterAction: function() {
     $(document).scrollTop(0);
   }
