@@ -12,12 +12,12 @@ This is the website for the [Meteor Vegas](http://vegas.meteor.com) Meetup group
 1. Create a new branch
 
   ```
-  git co -b name-of-feature
+  git checkout -b name-of-feature
   ```
 
 2. Develop and test your feature
 
-![](http://www.millsworks.net/blog/wp-content/uploads/2009/04/writing_process.gif)
+  ![](http://www.millsworks.net/blog/wp-content/uploads/2009/04/writing_process.gif)
 
 3. Make sure you have the latest `master` branch
 
@@ -29,7 +29,7 @@ This is the website for the [Meteor Vegas](http://vegas.meteor.com) Meetup group
 4. Merge your feature branch into the `master` branch
 
   ```
-  git co master
+  git checkout master
   git merge name-of-feature
   ```
 
