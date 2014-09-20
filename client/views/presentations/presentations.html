@@ -3,9 +3,11 @@
   <div class="container">
 
     <div class="page-header">
+      {{#if currentUser}}
         <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#add-presentation-modal">
           <i class="ion-plus"></i> Add a Presentation
         </button>
+      {{/if}}  
       <h1>Presentations</h1>
     </div>
 
@@ -32,7 +34,7 @@
             <h4 class="modal-title" id="myModalLabel">Add a Presentation</h4>
           </div>
           <div class="modal-body">
-            <div id="presentation-wrapper">
+            <div id="presentation-wrapper" class="embed-responsive embed-responsive-16by9">
             <a id="presentation-embed" href="{{presentationURL}}"></a>
             </div>
 
