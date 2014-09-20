@@ -7,6 +7,14 @@
           <div class="embed-responsive embed-responsive-16by9">
             {{#if presentation.oembed}}
               {{{presentation.oembed.code}}}
+            {{else}}
+              {{#if presentation.thumbnail}}
+                <img src="{{presentation.thumbnail}}" class="img-responsive">
+              {{else}}
+                <div class="presentation-item well">
+                  <img src="/meteor-black.png">
+                </div>
+              {{/if}}
             {{/if}}
           </div>
         </div>
