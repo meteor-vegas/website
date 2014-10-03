@@ -230,7 +230,7 @@
             //Added by Abdul to capture json data
             var jsonData = data.query.results.json;
             result = embedProvider.yql.datareturn ? embedProvider.yql.datareturn(data.query.results) : data.query.results.result;
-          
+
           }
           if (result === false) return;
           var oembedData = $.extend({}, result);

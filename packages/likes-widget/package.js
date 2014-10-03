@@ -1,7 +1,7 @@
 Package.describe({
   summary: "Widget to implement like feature on an item",
   version: "1.0.0",
-  name: "mtpmngr:likes-widget"
+  name: "meteor-vegas:likes-widget"
 });
 
 Package.on_use(function (api) {

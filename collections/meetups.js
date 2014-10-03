@@ -1,4 +1,4 @@
-Meetups = new Meteor.Collection('meetups');
+Meetups = new Mongo.Collection('meetups');
 
 Meetups.helpers({
   attendees: function() {
