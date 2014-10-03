@@ -70,15 +70,6 @@ Meteor.publish("member", function(_id) {
   return Meteor.users.find({_id: _id});
 });
 
-
-Meteor.users.allow({
-    'insert': function (userId,doc) {
-      /* user and doc checks ,
-      return true to allow insert */
-      return true;
-    }
-});
-
 //Presentations
 Meteor.publish("presentations", function() {
   return Presentations.find({});
