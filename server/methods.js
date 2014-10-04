@@ -95,21 +95,22 @@ Meteor.methods({
 				var meetupId;
 
 				if (existingMeetup) {
-					meetupId = Meetups.update({meetupId: meetupData['id']}, {
-						title: meetupData['name'],
-						description: meetupData['description'],
-						meetupId: meetupData['id'],
-						meetupUrl: meetupData['event_url'],
-						dateTime: moment(meetupData['time']).toDate(),
-						location: {
-							name: meetupData['venue']['name'],
-							address: meetupData['venue']['address_1'],
-							lat: meetupData['venue']['lat'],
-							lon: meetupData['venue']['lon']
+					meetupId = Meetups.update({_id: existingMeetup._id}, {
+						$set: {
+							title: meetupData['name'],
+							description: meetupData['description'],
+							meetupId: meetupData['id'],
+							meetupUrl: meetupData['event_url'],
+							dateTime: moment(meetupData['time']).toDate(),
+							location: {
+								name: meetupData['venue']['name'],
+								address: meetupData['venue']['address_1'],
+								lat: meetupData['venue']['lat'],
+								lon: meetupData['venue']['lon']
+							}
 						}
 					});
 				} else {
-					console.log('Meetups.insert');
 					meetupId = Meetups.insert({
 						title: meetupData['name'],
 						description: meetupData['description'],
@@ -126,7 +127,6 @@ Meteor.methods({
 				}
 
 				Meteor.call('MeetupAPI', 'getRSVPs', {"event_id": meetupData['id'], "rsvp": "yes"}, function(err, response) {
-					console.log('getRSVPs');
 					for (var j = 0, l = response.meta.count; j < l; j++) {
 						var rsvpData = response.results[j];
 						var meetupUserId = rsvpData['member']['member_id'];
