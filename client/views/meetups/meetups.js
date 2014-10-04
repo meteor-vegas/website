@@ -11,3 +11,17 @@ Template.meetups.helpers({
     }
   }
 });
+
+Template.meetups.events({
+  "click [data-action=fetchMeetups]": function(event, template) {
+    event.preventDefault();
+
+    Meteor.call("fetchEvents", "upcoming", function(error) {
+      if (error) {
+        alert(error);
+      } else {
+        alert("Done!");
+      }
+    });
+  }
+});
