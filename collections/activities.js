@@ -75,12 +75,15 @@ Activities.helpers({
   }
 });
 
-Activities.after.insert(function(userId, doc) {
-  var points = ACTIVITY_POINTS[doc.type];
-  if (points) {
-    Meteor.users.update({_id: doc.userId}, {$inc: {'profile.points': points}});
-  }
-});
+// Only update points once, on the server
+if(Meteor.isServer) {
+  Activities.after.insert(function(userId, doc) {
+    var points = ACTIVITY_POINTS[doc.type];
+    if (points) {
+      Meteor.users.update({_id: doc.userId}, {$inc: {'profile.points': points}});
+    }
+  });
+}
 
 Activities.before.insert(function (userId, doc) {
   doc.createdAt = moment().toDate();
