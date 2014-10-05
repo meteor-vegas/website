@@ -10,11 +10,7 @@ Meteor.users.allow({
 
 Meteor.users.deny({
   update: function (userId, doc, fields, modifier) {
-    console.log('fields', fields);
-    console.log('fields.profile', fields.profile);
-    console.log('doc', doc);
-    console.log('modifier', modifier);
-    return _.contains(fields, 'profile.points');
+    return _.contains(_.keys(modifier.$set), 'profile.points');
   }
 });
 
