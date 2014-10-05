@@ -9,7 +9,6 @@ accounts-ui
 accounts-meetup
 iron:router
 cmather:handlebars-server@0.2.0
-mrt:ionicons
 zimme:iron-router-active
 meteorhacks:npm
 npm-container
@@ -25,4 +24,3 @@ manuelschoebel:ms-seo
 mrt:iron-router-progress
 spiderable
 chfritz:easycron
-
