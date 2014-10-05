@@ -7,7 +7,8 @@ Template._commentForm.events({
     var params = {
       body: $bodyField.val(),
       parentType: this.parentType,
-      parentId: this.parentId
+      parentId: this.parentId,
+      parentTitle: this.parentTitle
     };
 
     if (params.body === "") {

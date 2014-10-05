@@ -170,6 +170,15 @@ Meteor.methods({
 		if (params.parentType === 'presentation') {
 			Presentations.update({_id: params.parentId}, {$inc: {numberOfComments: 1}});
 		}
+
+		var activityType = 'commented_on_' + params.parentType;
+		Activities.insert({
+			userId: Meteor.userId(),
+			subjectId: params.parentId,
+			subjectType: params.parentType,
+			subjectTitle: params.parentTitle,
+			type: activityType
+		});
 	},
 
 	voteOnTopic: function(topic) {
