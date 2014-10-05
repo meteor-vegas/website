@@ -18,7 +18,7 @@ Template.meetupDetail.helpers({
   },
 
   attendeesHeading: function() {
-    if (this.meetup.isPast()) {
+    if (this.meetup && this.meetup.isPast()) {
       return 'Who Went';
     } else {
       return "Who's Going";

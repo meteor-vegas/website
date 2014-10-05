@@ -90,7 +90,6 @@ Router.map(function() {
   this.route('presentationDetail', {
     path: '/presentations/:_id',
     waitOn: function() {
-      console.log(this.params._id);
       return this.subscribe("presentation", this.params._id);
     },
     data: function() {

@@ -41,6 +41,7 @@ livedata@1.0.10
 localstorage@1.0.0
 logging@1.0.3
 manuelschoebel:ms-seo@0.3.0
+matb33:collection-hooks@0.7.6
 meetup@1.1.0
 meteor-platform@1.1.1
 meteor-vegas:likes-widget@1.0.0

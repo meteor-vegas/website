@@ -62,12 +62,22 @@ Meteor.publish("topic", function(_id) {
 
 //need to setup security for these before going into production
 Meteor.publish("members", function () {
-	//return Meteor.users.find({})
   return Meteor.users.find({}, {fields: {'profile': 1}});
 });
 
 Meteor.publish("member", function(_id) {
-  return Meteor.users.find({_id: _id});
+  Meteor.publishWithRelations({
+    handle: this,
+    collection: Meteor.users,
+    filter: _id,
+    mappings: [
+      {
+        reverse: true,
+        key: 'userId',
+        collection: Activities
+      }
+    ]
+  });
 });
 
 //Presentations
@@ -103,14 +113,4 @@ Meteor.publish("presentation", function(_id) {
       }
     ]
   });
-});
-
-
-Presentations.allow({
-  'insert': function(userId, doc) {
-    return userId;
-  },
-  'update': function(userId, doc, fields, modifier) {
-    return userId;
-  }
 });

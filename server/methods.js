@@ -59,15 +59,13 @@ Meteor.methods({
 					});
 				} else {
 					var userId = Meteor.users.insert({
-						createdAt: new Date(),
 						profile: {
 							'meetupId': response.results[i].id,
 							'name': response.results[i].name,
 							'bio': response.results[i].bio,
 							'meetupProfileUrl': response.results[i].link,
 							'socialLinks': socialLinks,
-							'thumbnailUrl': thumbnailUrl,
-							'points': _.random(5, 25)
+							'thumbnailUrl': thumbnailUrl
 						},
 						services: {
 							meetup: {
@@ -79,7 +77,6 @@ Meteor.methods({
 
 				if (_(adminIds).contains(response.results[i].id)) {
 					Roles.addUsersToRoles(userId, ['admin']);
-					Meteor.users.update({_id: userId}, {$set: {'profile.points': _.random(100, 500)}});
 				}
 
 			}
@@ -106,7 +103,8 @@ Meteor.methods({
 								name: meetupData['venue']['name'],
 								address: meetupData['venue']['address_1'],
 								lat: meetupData['venue']['lat'],
-								lon: meetupData['venue']['lon']
+								lon: meetupData['venue']['lon'],
+								description: meetupData['how_to_find_us']
 							}
 						}
 					});
@@ -121,7 +119,8 @@ Meteor.methods({
 							name: meetupData['venue']['name'],
 							address: meetupData['venue']['address_1'],
 							lat: meetupData['venue']['lat'],
-							lon: meetupData['venue']['lon']
+							lon: meetupData['venue']['lon'],
+							description: meetupData['how_to_find_us']
 						}
 					});
 				}
@@ -133,6 +132,13 @@ Meteor.methods({
 						var user = Meteor.users.findOne({'profile.meetupId': meetupUserId});
 						if (user) {
 							Meetups.update({_id: meetupId}, {$push: {'attendeeIds': user._id}});
+							Activities.insert({
+								userId: user._id,
+								subjectId: meetupData['id'],
+								subjectTitle: meetupData['name'],
+								subjectType: 'meetup',
+								type: 'rsvp'
+							});
 						}
 					}
 				});
@@ -146,8 +152,7 @@ Meteor.methods({
 			title: params.title,
 			description: params.description,
 			userId: Meteor.userId(),
-			points: 0,
-			createdAt: new Date()
+			points: 0
 		});
 	},
 
@@ -156,8 +161,7 @@ Meteor.methods({
 			body: params.body,
 			parentType: params.parentType,
 			parentId: params.parentId,
-			userId: Meteor.userId(),
-			createdAt: new Date()
+			userId: Meteor.userId()
 		});
 
 		if (params.parentType === 'topic') {
@@ -171,6 +175,15 @@ Meteor.methods({
 	rsvp: function(params) {
 		if (Meteor.userId()) {
 			Meetups.update({_id: params.meetupId}, {$push: {'attendeeIds': Meteor.userId()}})
+
+			var meetup = Meetups.findOne(params.meetupId);
+			Activities.insert({
+				userId: Meteor.userId(),
+				subjectId: meetup._id,
+				subjectTitle: meetup.title,
+				subjectType: 'meetup',
+				type: 'rsvp'
+			});
 		}
 	}
 });

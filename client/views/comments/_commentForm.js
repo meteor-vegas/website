@@ -2,9 +2,6 @@ Template._commentForm.events({
   'submit': function(event, template) {
     event.preventDefault();
 
-    // console.log(this);
-    // return false;
-
     var $bodyField = $("textarea#body");
 
     var params = {

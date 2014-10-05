@@ -16,7 +16,6 @@ Template.presentations.presentationURL = function() {
 Template.presentations.events({
 
   'show.bs.modal': function() {
-    console.log("modal loaded");
     $("#url-wrapper").show();
     $("#presentation-wrapper").hide();
     $("input#url").val("");
@@ -29,7 +28,6 @@ Template.presentations.events({
     if(step===1) {
         Session.set("presentationURL", $("input#url").val());
 
-        console.log("submitting");
         $("#url-wrapper").slideUp();
         $("#presentation-wrapper").slideDown();
         step=2;
@@ -37,7 +35,6 @@ Template.presentations.events({
            $("a#presentation-embed").oembed(null, {
               embedMethod:"fill",
               afterEmbed: function(data) {
-                console.log(data);
                 $("#btn-add-presentation").text("Add");
                 if (Meteor.user()) {
                     presObj={};
@@ -62,11 +59,9 @@ Template.presentations.events({
         })
         }, 500);
     } else {
-        console.log("Adding presentation to database");
         $('#add-presentation-modal').modal('hide');
         var newPresentationID = Presentations.insert(presObj);
         Meteor.setTimeout(function(){
-          console.log("Routing to new Presentation: ", newPresentationID);
           if (newPresentationID) {
               Router.go("presentationDetail",{_id: newPresentationID});
           }

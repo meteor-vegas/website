@@ -23,3 +23,7 @@ Meetups.helpers({
     return moment(this.dateTime).isBefore(moment());
   }
 });
+
+Meetups.before.insert(function (userId, doc) {
+  doc.createdAt = moment().toDate();
+});

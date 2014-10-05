@@ -17,15 +17,11 @@
           {{> _member}}
         {{/with}}
 
-        <div class="page-header">
-          <h4><i class="ion-social-rss"></i> Activity</h4>
-          <div class="list-group">
-            <a href="{{ pathFor 'meetupDetail' }}" class="list-group-item"><i class="ion-checkmark"></i> RSVP'd to a meetup: <strong>Meteor Vegas #5</strong> <span class="label label-primary">+5</span></a>
-            <a href="{{ pathFor 'topicDetail' }}" class="list-group-item"><i class="ion-plus"></i> Suggested a topic: <strong>Deploying Meteor Apps to Heroku <span class="label label-primary">+10</span></strong></a>
-            <a href="{{ pathFor 'presentationDetail' }}" class="list-group-item"><i class="ion-heart"></i> Liked a presentation: <strong>Meteor on Mobile</strong> <span class="label label-primary">+5</span></a>
-            <a href="{{ pathFor 'topicDetail' }}" class="list-group-item"><i class="ion-ios7-chatbubble"></i> Commented on a topic: <strong>Upgrading packages to 0.9</strong> <span class="label label-primary">+5</span></a>
-            <a href="{{ pathFor 'presentationDetail' }}" class="list-group-item"><i class="ion-mic-a"></i> Presented a topic: <strong>Building Meteor UI Components</strong> <span class="label label-primary">+50</span></a>
-          </div>
+        <h4><i class="ion-social-rss"></i> Activity</h4>
+        <div class="list-group">
+          {{#each member.activities}}
+            <a href="{{ subjectURL }}" class="list-group-item"><i class="{{ icon }}"></i> {{ actionDescription }} <strong>{{ subjectTitle }}</strong> <span class="label label-primary">+{{pointsAwarded}}</span></a>
+          {{/each}}
         </div>
 
       </div>
