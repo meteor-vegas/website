@@ -13,19 +13,21 @@
           <h1>Topics</h1>
         </div>
 
-        <div class="well">
-          Suggest a topic for an upcoming meetup and vote on your favorites
-        </div>
-
-        {{#each topics}}
-          {{> _topic}}
-        {{/each}}
-
-        <!-- <p class="text-center">
-          <button type="button" class="btn btn-default btn-lg">
-            <i class="ion-more"></i> Load More
-          </button>
-        </p> -->
+        {{#if topics.count}}
+          <div class="well">
+            Suggest a topic for an upcoming meetup and vote on your favorites
+          </div>
+          {{#each topics}}
+            {{> _topic}}
+          {{/each}}
+        {{else}}
+          <div class="well">
+            There aren't any topics yet.
+            {{#if currentUser}}
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-topic-modal">Suggest one?</button>
+            {{/if}}
+          </div>
+        {{/if}}
 
       </div>
 

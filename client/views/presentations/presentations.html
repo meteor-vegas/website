@@ -7,19 +7,26 @@
         <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#add-presentation-modal">
           <i class="ion-plus"></i> Add a Presentation
         </button>
-      {{/if}}  
+      {{/if}}
       <h1>Presentations</h1>
     </div>
 
     <div class="row">
 
-      {{#each presentations}}
-
-        <div class="col-sm-6 col-md-4">
-          {{> _presentation}}
+      {{#if presentations.count}}
+        {{#each presentations}}
+          <div class="col-sm-6 col-md-4">
+            {{> _presentation}}
+          </div>
+        {{/each}}
+      {{else}}
+        <div class="well">
+          There aren't any presentations yet.
+          {{#if currentUser}}
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-presentation-modal">Add one?</button>
+          {{/if}}
         </div>
-
-      {{/each}}
+      {{/if}}
 
     </div>
 
@@ -41,11 +48,7 @@
             <div id="url-wrapper">
               <div class="form-group">
                 <input type="text" class="form-control" id="url" placeholder="Paste URL to the presentation">
-                <small>Slideshare, Prezi, Youtube etc</small>
-              </div>
-              <h4>or</h4>
-              <div class="form-group">
-                <button type="button" class="btn btn-default" data-upload-presentation>Upload Presentation File</button>
+                <small>Slideshare, Prezi, Youtube, etc</small>
               </div>
             </div>
 
