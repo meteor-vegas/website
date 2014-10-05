@@ -172,6 +172,32 @@ Meteor.methods({
 		}
 	},
 
+	voteOnTopic: function(topic) {
+		var points = topic.points + 1;
+		Topics.update({_id: topic._id}, {$set: {points: points}});
+		Meteor.users.update({_id: Meteor.userId()}, {$push: {'profile.votedTopicIds': topic._id}});
+
+		Activities.insert({
+			userId: Meteor.userId(),
+			subjectId: topic._id,
+			subjectTitle: topic.title,
+			subjectType: 'topic',
+			type: 'voted_on_topic'
+		});
+	},
+
+	likePresentation: function(presentation) {
+		Meteor.users.update({_id: Meteor.userId()}, { $addToSet: {'profile.likedItemIds' : presentation._id} } );
+
+		Activities.insert({
+			userId: Meteor.userId(),
+			subjectId: presentation._id,
+			subjectTitle: presentation.title,
+			subjectType: 'presentation',
+			type: 'liked_presentation'
+		});
+	},
+
 	rsvp: function(params) {
 		if (Meteor.userId()) {
 			Meetups.update({_id: params.meetupId}, {$push: {'attendeeIds': Meteor.userId()}})

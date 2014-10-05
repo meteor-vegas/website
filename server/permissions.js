@@ -1,13 +1,10 @@
 Meteor.users.allow({
   'insert': function (userId,doc) {
-    /* user and doc checks ,
-    return true to allow insert */
     return true;
   },
 
   'update': function(userId, doc, fields, modifier) {
-    // return userId && userId === doc._id;
-    return true;
+    return userId && userId === doc._id;
   }
 });
 
@@ -40,6 +37,6 @@ Comments.allow({
 
 Activities.allow({
   'insert': function(userId, doc) {
-    return userId && userId === doc.userId;
+    return false;
   }
 });

@@ -11,17 +11,8 @@ Template.likesWidget.events( {
 
   'click [data-like]': function(event, template) {
     event.preventDefault();
-    var me = Meteor.user();
-    if ( me ) {
-      Meteor.users.update({_id: me._id}, { $addToSet: {'profile.likedItemIds' : this._id} } );
-
-      Activities.insert({
-        userId: me._id,
-        subjectId: this._id,
-        subjectTitle: this.title,
-        subjectType: 'presentation',
-        type: 'liked_presentation'
-      });
+    if (Meteor.user()) {
+      Meteor.call('likePresentation', this);
     } else {
       alert("Log in with Meetup to vote!");
       return false;
@@ -30,9 +21,8 @@ Template.likesWidget.events( {
 
   'click [data-unlike]': function(event, template) {
     event.preventDefault();
-    var me = Meteor.user();
-    if ( me ) {
-      Meteor.users.update({_id: me._id}, { $pull: {'profile.likedItemIds' : this._id} } );
+    if (Meteor.userId()) {
+      Meteor.users.update({_id: Meteor.userId()}, { $pull: {'profile.likedItemIds' : this._id} } );
     } else {
       alert("Log in with Meetup to vote!");
       return false;

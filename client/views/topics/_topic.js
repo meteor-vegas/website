@@ -19,17 +19,7 @@ Template._topic.events({
 
     var alreadyVoted = _(Meteor.user().profile.votedTopicIds).contains(this._id);
     if (!alreadyVoted) {
-      var points = this.points + 1;
-      Topics.update({_id: this._id}, {$set: {points: points}});
-      Meteor.users.update({_id: Meteor.userId()}, {$push: {'profile.votedTopicIds': this._id}});
-
-      Activities.insert({
-        userId: Meteor.userId(),
-        subjectId: this._id,
-        subjectTitle: this.title,
-        subjectType: 'topic',
-        type: 'voted_on_topic'
-      });
+      Meteor.call('voteOnTopic', this);
     }
   },
 
