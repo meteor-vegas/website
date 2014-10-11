@@ -1,6 +1,14 @@
 Template.topics.rendered = function() {
 };
 
+Template.topics.helpers({
+  'activeTabClass': function(tab) {
+    if (tab === Router.current().params.tab) {
+      return 'active';
+    }
+  }
+});
+
 Template.topics.events({
 
   'submit': function(event, template) {

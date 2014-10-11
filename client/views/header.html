@@ -19,9 +19,6 @@
           <li class="{{ isActivePath 'presentations' }}"><a href="{{ pathFor 'presentations' }}">Presentations</a></li>
           <li class="{{ isActivePath 'topics' }}"><a href="{{ pathFor 'topics' }}">Topics</a></li>
           <li class="{{ isActivePath 'members' }}"><a href="{{ pathFor 'members' }}">Members</a></li>
-          {{#if isInRole 'admin'}}
-            <li class="{{ isActiveRoute 'admin' }}"><a href="{{ pathFor 'admin' }}">Admin</a></li>
-          {{/if}}
           {{#if currentUser}}
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">

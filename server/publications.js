@@ -1,114 +1,153 @@
 Meteor.publish("meetups", function() {
-  Meteor.publishWithRelations({
-    handle: this,
-    collection: Meetups,
-    filter: {}
-  });
+  return Meetups.find({});
 });
 
-Meteor.publish("meetup", function(_id) {
-  Meteor.publishWithRelations({
-    handle: this,
-    collection: Meetups,
-    filter: _id,
-    mappings: [
+Meteor.publishComposite("meetup", function(_id) {
+  return {
+    find: function() {
+      return Meetups.find({_id: _id});
+    },
+    children: [
+     {
+       find: function(meetup) {
+         if (meetup.attendeeIds) {
+           return Meteor.users.find({_id: {$in: meetup.attendeeIds}});
+         }
+       }
+     },
+     {
+       find: function(meetup) {
+         return Topics.find({meetupId: meetup._id});
+       },
+       children: [
+        {
+          find: function(topic) {
+            return Meteor.users.find({_id: topic.presenterId});
+          }
+        }
+       ]
+     }
+    ]
+  };
+});
+
+Meteor.publishComposite("suggestedTopics", function() {
+  return {
+    find: function() {
+      return Topics.find({presented: {$ne: true}});
+    },
+    children: [
       {
-        key: "attendeeIds",
-        collection: Meteor.users
+        find: function(topic) {
+          return Meteor.users.find({_id: topic.userId});
+        }
       }
     ]
-  });
+  };
 });
 
-Meteor.publish("topics", function() {
-  Meteor.publishWithRelations({
-    handle: this,
-    collection: Topics,
-    filter: {},
-    mappings: [
+Meteor.publishComposite("presentedTopics", function() {
+  return {
+    find: function() {
+      return Topics.find({presented: true});
+    },
+    children: [
       {
-        key: 'userId',
-        collection: Meteor.users
-      }
-    ]
-  });
-});
-
-Meteor.publish("topic", function(_id) {
-  Meteor.publishWithRelations({
-    handle: this,
-    collection: Topics,
-    filter: _id,
-    mappings: [
-      {
-        key: 'userId',
-        collection: Meteor.users
+        find: function(topic) {
+          return Meteor.users.find({_id: topic.userId});
+        }
       },
       {
-        reverse: true,
-        key: 'parentId',
-        collection: Comments,
-        filter: { parentType: 'topic' },
-        mappings: [
+        find: function(topic) {
+          if (topic.presented && topic.meetupId) {
+            return Meetups.find({_id: topic.meetupId});
+          }
+        }
+      }
+    ]
+  };
+});
+
+Meteor.publishComposite("topic", function(_id) {
+  return {
+    find: function() {
+      return Topics.find({_id: _id});
+    },
+    children: [
+      {
+        find: function(topic) {
+          return Meteor.users.find({_id: topic.userId});
+        }
+      },
+      {
+        find: function(topic) {
+          if (topic.presented && topic.meetupId) {
+            return Meetups.find({_id: topic.meetupId});
+          }
+        }
+      },
+      {
+        find: function(topic) {
+          return Comments.find({parentId: topic._id, parentType: 'topic'});
+        },
+        children: [
           {
-            key: 'userId',
-            collection: Meteor.users
+            find: function(comment) {
+              return Meteor.users.find({_id: comment.userId});
+            }
           }
         ]
       }
     ]
-  });
+  };
 });
 
 Meteor.publish("members", function () {
   return Meteor.users.find({}, {fields: {'profile': 1}});
 });
 
-Meteor.publish("member", function(_id) {
-  Meteor.publishWithRelations({
-    handle: this,
-    collection: Meteor.users,
-    filter: _id,
-    mappings: [
+Meteor.publishComposite("member", function(_id) {
+  return {
+    find: function() {
+      return Meteor.users.find({_id: _id});
+    },
+    children: [
       {
-        reverse: true,
-        key: 'userId',
-        collection: Activities
+        find: function(user) {
+          return Activities.find({userId: user._id});
+        }
       }
     ]
-  });
+  };
 });
 
 Meteor.publish("presentations", function() {
   return Presentations.find({});
 });
 
-Meteor.publish("presentation", function(_id) {
-  Meteor.publishWithRelations({
-    handle: this,
-    collection: Presentations,
-    filter: _id,
-    mappings: [
+Meteor.publishComposite("presentation", function(_id) {
+  return {
+    find: function() {
+      return Presentations.find({_id: _id});
+    },
+    children: [
       {
-        key: 'userId', //Author
-        collection: Meteor.users
+        find: function(presentation) {
+          return Meteor.users.find({_id: presentation.userId});
+        }
       },
       {
-        reverse: true,
-        key: 'parentId',
-        collection: Comments,
-        filter: { parentType: 'presentation' },
-        mappings: [
+        find: function(presentation) {
+          return Comments.find({parentId: presentation._id, parentType: 'presentation'});
+        },
+        children: [
           {
-            key: 'userId', //Author of each comment
-            collection: Meteor.users
+            find: function(comment) {
+              return Meteor.users.find({_id: comment.userId});
+            }
           }
         ]
-      },
-      {
-        key: 'profile.likedIds',
-        collection: Meteor.users,
       }
     ]
-  });
+  };
 });

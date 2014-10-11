@@ -55,7 +55,7 @@ Activities.helpers({
       return 'Commented on a topic: ';
       break;
     case 'created_topic':
-      return 'Added a topic: ';
+      return 'Suggested a topic: ';
       break;
     case 'presented_topic':
       return 'Presented a topic: ';

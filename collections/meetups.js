@@ -21,6 +21,10 @@ Meetups.helpers({
 
   isPast: function() {
     return moment(this.dateTime).isBefore(moment());
+  },
+
+  topics: function() {
+    return Topics.find({meetupId: this._id});
   }
 });
 

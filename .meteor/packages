@@ -14,7 +14,7 @@ meteorhacks:npm
 npm-container
 service-configuration
 underscore
-mrt:publish-with-relations
+reywood:publish-composite
 mrt:moment
 alanning:roles
 mrt:underscore-string-latest
@@ -25,4 +25,3 @@ mrt:iron-router-progress
 spiderable
 chfritz:easycron
 matb33:collection-hooks
-

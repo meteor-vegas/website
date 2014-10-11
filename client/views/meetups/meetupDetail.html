@@ -53,40 +53,53 @@
   </div>
 
   <div class="container">
+    {{#if isInRole 'admin'}}
+      <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#add-topic-modal">Add Topic</button>
+    {{/if}}
     <h3>Topics</h3>
 
-    <div class="media">
-      <a class="pull-left" href="#">
-        <img class="media-object img-rounded img-thumbnail" src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg">
-      </a>
-      <div class="media-body">
-        <h4 class="media-heading">Meteor on Mobile</h4>
-        <h5 class="text-muted">By <a href="{{ pathFor 'memberDetail' }}">Firstname Lastname</a></h5>
+    {{#if meetup.topics.count}}
+      {{#each meetup.topics}}
+        <div class="media">
+          {{#with presenter}}
+            <a class="pull-left" href="#">
+              <img class="media-object img-rounded img-thumbnail" src="{{ profile.thumbnailUrl }}" width="150" height="150">
+            </a>
+          {{/with}}
+          <div class="media-body">
+            <h4 class="media-heading">
+              <a href="{{ pathFor 'topicDetail' }}">{{ title }}</a>
+            </h4>
+            {{#with presenter}}
+              <h5 class="text-muted">Presented by <a href="{{ pathFor 'memberDetail' }}">{{ profile.name }}</a></h5>
+            {{/with}}
+            <p>
+              {{ description }}
+            </p>
+            <ul class="list-inline text-muted">
+              {{#with author}}
+                <li><a href="{{ pathFor 'memberDetail' }}">Suggested by {{profile.name}}</a></li>
+              {{/with}}
+              {{#if numberOfComments}}
+                <li><a href="{{ pathFor 'topicDetail' }}">{{numberOfComments}} Comments</a></li>
+              {{/if}}
+            </ul>
+          </div>
+        </div>
+      {{/each}}
+
+      <br>
+
+      <p class="text-center">
+        <a href="{{ pathFor 'topics' }}" class="btn btn-default btn-lg"><i class="ion-ios7-chatbubble"></i> Suggest a Topic</a>
+      </p>
+    {{else}}
+      <div class="alert alert-info">
         <p>
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          There are no topics for this meetup yet. <a href="{{ pathFor 'topics' }}">Suggest one?</a>
         </p>
       </div>
-    </div>
-
-    <div class="media">
-      <a class="pull-left" href="#">
-        <img class="media-object img-rounded img-thumbnail" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg">
-      </a>
-      <div class="media-body">
-        <h4 class="media-heading">Meteor on Mobile</h4>
-        <h5 class="text-muted">By <a href="{{ pathFor 'memberDetail' }}">Firstname Lastname</a></h5>
-        <p>
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-    </div>
-
-    <br>
-
-    <p class="text-center">
-      <a href="{{ pathFor 'topics' }}" class="btn btn-default btn-lg"><i class="ion-ios7-chatbubble"></i> Suggest a Topic</a>
-    </p>
-
+    {{/if}}
     <br>
   </div>
 
@@ -123,12 +136,62 @@
     <p>
       {{#unless meetup.isPast}}
         {{#if currentUserIsAttendee}}
-          <button type="button" class="btn btn-primary btn-lg" disabled><i class="ion-checkmark"></i> Going</button>
+          <button type="button" class="btn btn-primary btn-lg" disabled><i class="ion-checkmark"></i> You're Going</button>
         {{else}}
           <button type="button" class="btn btn-primary btn-lg" data-action="rsvp"><i class="ion-plus"></i> RSVP</button>
         {{/if}}
       {{/unless}}
     </p>
   </div>
+
+  {{#if isInRole 'admin'}}
+    <div class="modal fade" id="add-topic-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form data-action="add-topic">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Add a Topic</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="topic">Choose a suggested topic</label>
+                <select class="form-control" id="topic" name="topicId">
+                  <option value="">Choose a topic</option>
+                  {{#each suggestedTopics}}
+                    <option value="{{ _id }}">{{ title }}</option>
+                  {{/each}}
+                </select>
+              </div>
+              <hr>
+              <h5>Or create a new topic:</h5>
+              <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="customTitle" placeholder="Enter a title for your topic">
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea rows="2" class="form-control" id="description" name="customDescription" placeholder="Enter a description for your topic"></textarea>
+              </div>
+              <hr>
+              <div class="form-group">
+                <label for="presenter">Presenter</label>
+                <select class="form-control" id="presenter" name="presenterId">
+                  <option value="">Choose a member</option>
+                  {{#each members}}
+                    <option value="{{ _id }}">{{ profile.name }}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  {{/if}}
 
 </template>

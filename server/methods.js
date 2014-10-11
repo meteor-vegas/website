@@ -220,5 +220,42 @@ Meteor.methods({
 				type: 'rsvp'
 			});
 		}
+	},
+
+	addTopicToMeetup: function(params) {
+		if (Meteor.userId() && Roles.userIsInRole(Meteor.userId(), ['admin'])) {
+			if (params.topicId) {
+				Topics.update({_id: params.topicId}, {$set: {
+					meetupId: params.meetupId,
+					presented: true,
+					presenterId: params.presenterId
+				}});
+			} else {
+				Topics.insert({
+					title: params.customTitle,
+					description: params.customDescription,
+					meetupId: params.meetupId,
+					presented: true,
+					presenterId: params.presenterId,
+					userId: Meteor.userId(),
+					points: 0
+				});
+			}
+
+			var title = "";
+			if (params.topicId) {
+				var topic = Topics.findOne(params.topicId);
+				title = topic.title;
+			} else {
+				title = params.customTitle;
+			}
+			Activities.insert({
+				userId: params.presenterId,
+				subjectId: params.topicId,
+				subjectTitle: title,
+				subjectType: 'topic',
+				type: 'presented_topic'
+			});
+		}
 	}
 });

@@ -5,29 +5,52 @@
     <div class="row">
       <div class="col-md-10 col-md-push-1">
         <div class="page-header">
-          {{#if currentUser}}
-            <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#new-topic-modal">
-              <i class="ion-plus"></i> Suggest a Topic
-            </button>
-          {{/if}}
+          <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#new-topic-modal">
+            <i class="ion-plus"></i> Suggest a Topic
+          </button>
           <h1>Topics</h1>
         </div>
 
-        {{#if topics.count}}
-          <div class="well">
-            Suggest a topic for an upcoming meetup and vote on your favorites
-          </div>
-          {{#each topics}}
-            {{> _topic}}
-          {{/each}}
-        {{else}}
-          <div class="well">
-            There aren't any topics yet.
-            {{#if currentUser}}
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-topic-modal">Suggest one?</button>
+        <ul class="nav nav-tabs">
+          <li class="{{ activeTabClass 'suggested' }}"><a href="{{ pathFor 'topics' query='tab=suggested'}}">Suggested Topics</a></li>
+          <li class="{{ activeTabClass 'presented' }}"><a href="{{ pathFor 'topics' query='tab=presented'}}">Presented Topics</a></li>
+        </ul>
+
+        <br>
+
+        <div class="tab-content">
+          <div class="tab-pane {{ activeTabClass 'suggested' }}" id="suggested-topics">
+            {{#if suggestedTopics.count}}
+              <div class="well">
+                Suggest a topic for an upcoming meetup and vote on your favorites
+              </div>
+              {{#each suggestedTopics}}
+                {{> _topic}}
+              {{/each}}
+            {{else}}
+              <div class="well">
+                There aren't any topics yet.
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-topic-modal">Suggest one?</button>
+              </div>
             {{/if}}
           </div>
-        {{/if}}
+
+          <div class="tab-pane {{ activeTabClass 'presented' }}" id="presented-topics">
+            {{#if presentedTopics.count}}
+              <div class="well">
+                The following topics were presented at previous meetups
+              </div>
+              {{#each presentedTopics}}
+                {{> _topic}}
+              {{/each}}
+            {{else}}
+              <div class="well">
+                No one has presented any topics yet.
+              </div>
+            {{/if}}
+          </div>
+
+        </div>
 
       </div>
 
@@ -37,26 +60,43 @@
   <div class="modal fade" id="new-topic-modal">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form>
+        {{#if currentUser}}
+          <form>
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Suggest a Topic</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" placeholder="Enter a title for your topic">
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea rows="2" class="form-control" id="description" placeholder="Enter a description for your topic"></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        {{else}}
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Suggest a Topic</h4>
+            <h4 class="modal-title">Suggest a Topic</h4>
           </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="title">Title</label>
-              <input type="text" class="form-control" id="title" placeholder="Enter a title for your topic">
-            </div>
-            <div class="form-group">
-              <label for="description">Description</label>
-              <textarea rows="2" class="form-control" id="description" placeholder="Enter a description for your topic"></textarea>
-            </div>
+          <div class="modal-body text-center">
+            <p>
+              Sign in with Meetup to suggest a topic!
+            </p>
+            <p>
+              <button type="button" class="btn btn-primary" data-login-with="meetup">
+                <img src="/meetup.png" width=22 height=22> Sign In
+              </button>
+            </p>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </form>
+        {{/if}}
       </div>
     </div>
   </div>

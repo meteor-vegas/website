@@ -27,11 +27,17 @@ Router.map(function() {
   this.route('meetupDetail', {
     path: '/meetups/:_id',
     waitOn: function() {
-      return this.subscribe("meetup", this.params._id);
+      return [
+        this.subscribe("meetup", this.params._id),
+        this.subscribe("suggestedTopics"),
+        this.subscribe("members")
+      ];
     },
     data: function() {
       return {
-        meetup: Meetups.findOne({_id: this.params._id})
+        meetup: Meetups.findOne({_id: this.params._id}),
+        suggestedTopics: Topics.find({presented: {$ne: true}}, {sort: {points: -1}}),
+        members: Meteor.users.find({}, {sort: {'profile.points': -1}})
       };
     },
     onAfterAction: function() {
@@ -46,10 +52,19 @@ Router.map(function() {
   this.route('topics', {
     path: '/topics',
     waitOn: function() {
-      return this.subscribe("topics");
+      return [
+        this.subscribe("suggestedTopics"),
+        this.subscribe("presentedTopics")
+      ];
     },
     data: {
-      topics: Topics.find({}, {sort: {points: -1}})
+      suggestedTopics: Topics.find({presented: {$ne: true}}, {sort: {points: -1}}),
+      presentedTopics: Topics.find({presented: true}, {sort: {points: -1}})
+    },
+    onBeforeAction: function() {
+      if (!this.params.tab) {
+        this.params.tab = 'suggested';
+      }
     },
     onAfterAction: function() {
       SEO.set({
@@ -129,15 +144,6 @@ Router.map(function() {
         SEO.set({
           title: this.data().member.profile.name + ' | Members | ' + SEO.settings.title
         });
-      }
-    }
-  });
-
-  this.route('admin', {
-    path: '/admin',
-    onBeforeAction: function() {
-      if (!Meteor.user() || !Roles.userIsInRole(Meteor.userId(), ['admin'])) {
-        Router.go('home');
       }
     }
   });

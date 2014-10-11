@@ -3,8 +3,8 @@ Template._topic.helpers({
     return Meteor.user() && _(Meteor.user().profile.votedTopicIds).contains(this._id)
   },
 
-  author: function() {
-    return Meteor.users.findOne({_id: this.userId});
+  hasComments: function() {
+    return this.numberOfComments > 0;
   }
 });
 

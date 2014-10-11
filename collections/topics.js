@@ -1,5 +1,19 @@
 Topics = new Mongo.Collection('topics');
 
+Topics.helpers({
+  presenter: function() {
+    return Meteor.users.findOne(this.presenterId);
+  },
+  author: function() {
+    return Meteor.users.findOne(this.userId);
+  },
+  meetup: function() {
+    if (this.presented && this.meetupId) {
+      return Meetups.findOne(this.meetupId);
+    }
+  }
+});
+
 Topics.after.insert(function(userId, doc) {
   Activities.insert({
     userId: userId,
@@ -10,6 +24,6 @@ Topics.after.insert(function(userId, doc) {
   });
 });
 
-Comments.before.insert(function (userId, doc) {
+Topics.before.insert(function (userId, doc) {
   doc.createdAt = moment().toDate();
 });

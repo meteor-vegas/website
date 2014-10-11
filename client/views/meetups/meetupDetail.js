@@ -40,5 +40,39 @@ Template.meetupDetail.events({
         alert(error);
       }
     });
+  },
+
+  'submit [data-action=add-topic]': function(event, template) {
+    event.preventDefault();
+
+    var params = {
+      meetupId: this.meetup._id,
+      topicId: $("[name=topicId]").val(),
+      presenterId: $("[name=presenterId]").val(),
+      customTitle: $("[name=customTitle]").val(),
+      customDescription: $("[name=customDescription]").val()
+    };
+
+    if (!params.presenterId) {
+      alert("Please choose a presenter for this topic!");
+      return;
+    }
+
+    if (!params.topicId && !params.customTitle) {
+      alert("Please choose a topic or enter a custom topic!");
+      return;
+    }
+
+    Meteor.call('addTopicToMeetup', params, function(error) {
+      if (error) {
+        alert(error);
+      } else {
+        $("#add-topic-modal").modal("hide");
+        $("[name=topicId]").val("");
+        $("[name=presenterId]").val("");
+        $("[name=customTitle]").val("");
+        $("[name=customDescription]").val("");
+      }
+    });
   }
 });

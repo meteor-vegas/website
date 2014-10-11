@@ -3,11 +3,9 @@
   <div class="container">
 
     <div class="page-header">
-      {{#if currentUser}}
-        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#add-presentation-modal">
-          <i class="ion-plus"></i> Add a Presentation
-        </button>
-      {{/if}}
+      <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#add-presentation-modal">
+        <i class="ion-plus"></i> Add a Presentation
+      </button>
       <h1>Presentations</h1>
     </div>
 
@@ -22,9 +20,7 @@
       {{else}}
         <div class="well">
           There aren't any presentations yet.
-          {{#if currentUser}}
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-presentation-modal">Add one?</button>
-          {{/if}}
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-presentation-modal">Add one?</button>
         </div>
       {{/if}}
 
@@ -35,29 +31,44 @@
   <div class="modal fade" id="add-presentation-modal">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form>
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Add a Presentation</h4>
-          </div>
-          <div class="modal-body">
-            <div id="presentation-wrapper" class="embed-responsive embed-responsive-16by9">
-            <a id="presentation-embed" href="{{presentationURL}}"></a>
+        {{#if currentUser}}
+          <form>
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Add a Presentation</h4>
             </div>
-
-            <div id="url-wrapper">
-              <div class="form-group">
-                <input type="text" class="form-control" id="url" placeholder="Paste URL to the presentation">
-                <small>Slideshare, Prezi, Youtube, etc</small>
+            <div class="modal-body">
+              <div id="presentation-wrapper" class="embed-responsive embed-responsive-16by9">
+              <a id="presentation-embed" href="{{presentationURL}}"></a>
+              </div>
+              <div id="url-wrapper">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="url" placeholder="Paste URL to the presentation">
+                  <small>Slideshare, Prezi, Youtube, etc</small>
+                </div>
               </div>
             </div>
-
+            <div class="modal-footer">
+              <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" id="btn-add-presentation">Next</button>
+            </div>
+          </form>
+        {{else}}
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Add a Presentation</h4>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" id="btn-add-presentation">Next</button>
+          <div class="modal-body text-center">
+            <p>
+              Sign in with Meetup to add a presentation!
+            </p>
+            <p>
+              <button type="button" class="btn btn-primary" data-login-with="meetup">
+                <img src="/meetup.png" width=22 height=22> Sign In
+              </button>
+            </p>
           </div>
-        </form>
+        {{/if}}
       </div>
     </div>
   </div>
