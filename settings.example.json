@@ -18,8 +18,9 @@
     },
     "public" : {
         "meetup" : {
-            "group_name" : "Meteor Las Vegas",
-            "group_urlname" : "Meteor-Las-Vegas"
+            "group_name" : "Meteor Vegas",
+            "group_urlname" : "Meteor-Las-Vegas",
+            "group_info" : "We are a group of Meteor.js enthusiasts who meet twice a month in Las Vegas, NV"
         }
     }
 }
