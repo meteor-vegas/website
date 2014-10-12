@@ -17,19 +17,26 @@
           {{> _member}}
           <hr>
           {{#each profile.answers }}
-              <p><strong>{{question}}</strong><br/>
+              <h5>{{question}}</h5>
               {{answer}}
-              </p>
           {{/each}}
         {{/with}}
-        <br>
+        <hr>
 
         <h4><i class="ion-social-rss"></i> Activity</h4>
+        {{#if member.activities.count}}
         <div class="list-group">
           {{#each member.activities}}
             <a href="{{ subjectURL }}" class="list-group-item"><i class="{{ icon }}"></i> {{ actionDescription }} <strong>{{ subjectTitle }}</strong> <span class="label label-primary">+{{pointsAwarded}}</span></a>
           {{/each}}
         </div>
+        {{else}}
+          <div class="alert alert-info">
+            <p>
+              There are no activities by {{member.profile.name}} yet.
+            </p>
+          </div>
+       {{/if}}
 
       </div>
     </div>

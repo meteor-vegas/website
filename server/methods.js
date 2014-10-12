@@ -108,6 +108,8 @@ Meteor.methods({
 	},
 
 	fetchEvents: function(status) {
+		
+		console.log ( "Fetching Meetup Events");
 		Meteor.call('MeetupAPI', 'getEvents', {"group_urlname": group_urlname, "status": status}, function(err, response) {
 
 			for (var i = 0, l = response.meta.count; i < l; i++) {

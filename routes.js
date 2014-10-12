@@ -15,8 +15,8 @@ Router.map(function() {
       return this.subscribe("meetups");
     },
     data: {
-      upcomingMeetup: Meetups.find({}, {sort: {dateTime: -1}, limit: 1}),
-      previousMeetups: Meetups.find({}, {sort: {dateTime: -1}})
+      upcomingMeetup: Meetups.find({dateTime : {$gt : new Date()} }, {sort: {dateTime: 1}, limit: 1}),
+      previousMeetups: Meetups.find({dateTime : {$lt : new Date()} }, {sort: {dateTime: -1}})
     },
     onAfterAction: function() {
       SEO.set({
