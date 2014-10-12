@@ -1,7 +1,9 @@
 var	list=["getCategories","getCheckins","postCheckin","getCities","getOpenEvents","getConcierge","getEvents","postEvent","getEventComments","postEventComment","postEventCommentFlag","getEventCommentLikes","getEventRatings","postEventRating","getEventAttendance","takeEventAttendance","getEverywhereComments","postEverywhereComment","getEverywhereCommunities","postEverywhereCommunity","getEverywhereFollows","getEverywhereFollowers","postEverywhereFollow","postEverywhereContainer","getEverywhereContainers","postEverywhereSeed","postEverywhereEvent","getEverywhereEvents","postEverywhereRsvp","getEverywhereRsvps","getEverywhereSeeds","getActivity","getGroups","getComments","getMembers","postMemberPhoto","postMessage","getOEMBed","getOEMBed","getPhotoComments","postPhotoComment","getPhotoAlbums","getPhoto","getPhotos","postPhotoAlbum","postPhoto","getProfiles","postProfiles","postRSVP","getRSVPs","getOpenVenues","getVenues","getTopics"],
-	MeetupMe = Meteor.npmRequire("meetup-api"),
-	meetup = new MeetupMe("376915111a5224393a202e7e1d474031");
-  AsyncMeetup = Async.wrap(meetup, list);
+	MeetupMe = Meteor.npmRequire("meetup-api");
+	var api_key = Meteor.settings[Meteor.settings.environment].meetup.api_key;
+	var group_urlname = Meteor.settings[Meteor.settings.environment].meetup.group_urlname;
+	var meetup = new MeetupMe(api_key);
+  var AsyncMeetup = Async.wrap(meetup, list);
 
 Meteor.methods({
 	MeetupAPI: function(endpoint, param) {
@@ -21,9 +23,10 @@ Meteor.methods({
 	},
 
 	fetchMembers: function() {
-		var adminIds = [54118672, 57771272, 32213572, 28932772, 87620262, 11527138, 8187187];
-
-		Meteor.call('MeetupAPI', 'getMembers', {"group_urlname": "Meteor-Las-Vegas"}, function(err, response) {
+		//var adminIds = [54118672, 57771272, 32213572, 28932772, 87620262, 11527138, 8187187];
+		var adminRoles = ["Organizer", "Co-Organizer"];
+		
+		Meteor.call('MeetupAPI', 'getProfiles', {"group_urlname": group_urlname}, function(err, response) {
 
 			for (var i = 0, l = response.meta.count; i < l; i++) {
 				var node = response.results[i];
@@ -74,17 +77,21 @@ Meteor.methods({
 						}
 					});
 				}
-
-				if (_(adminIds).contains(response.results[i].id)) {
-					Roles.addUsersToRoles(userId, ['admin']);
+				
+				//If the meetup user is in leadership team, then the json response will have a "role" variable returned with values such as "Organizer", "Co-Organizer" etc.
+				if ( response.results[i].role ) {
+					if (_(adminRoles).contains(response.results[i].role)) {
+						Roles.addUsersToRoles(userId, ['admin']);
+					}
 				}
+				
 
 			}
 		});
 	},
 
 	fetchEvents: function(status) {
-		Meteor.call('MeetupAPI', 'getEvents', {"group_urlname": "Meteor-Las-Vegas", "status": status}, function(err, response) {
+		Meteor.call('MeetupAPI', 'getEvents', {"group_urlname": group_urlname, "status": status}, function(err, response) {
 
 			for (var i = 0, l = response.meta.count; i < l; i++) {
 				var meetupData = response.results[i];
