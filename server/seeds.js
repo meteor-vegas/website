@@ -1,7 +1,8 @@
 Meteor.startup(function() {
+  Meteor.call("fetchProfiles");
 
   if (Meteor.users.find({}).count() === 0) {
-    Meteor.call("fetchMembers");
+    Meteor.call("fetchProfiles");
   }
 
   if (Meetups.find({}).count() === 0) {

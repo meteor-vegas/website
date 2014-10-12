@@ -2,17 +2,17 @@
     "environment" : "development",
     "production" : {
         "meetup" : {
-            "oauth_key" : "frbivf1rgkts08cefm9mmo71ri",
-            "oauth_secret" : "504dsotpb38vih6qrs1hvi2puu",
-            "api_key" : "376915111a5224393a202e7e1d474031",
+            "oauth_key" : "<production_meetup_consumer_key>",
+            "oauth_secret" : "<production_meetup_consumer_secret>",
+            "api_key" : "<meetup_api_key>",
             "group_urlname" : "Meteor-Las-Vegas"
         }
     },
     "development" : {
         "meetup" : {
-            "oauth_key" : "19sv5n9jh4rfpg7q97vtlu3t3h",
-            "oauth_secret" : "pdhp2e01u6tlevskte5o6n2n8t",
-            "api_key" : "376915111a5224393a202e7e1d474031",
+            "oauth_key" : "<development_meetup_consumer_key>",
+            "oauth_secret" : "<development_meetup_consumer_secret>",
+            "api_key" : "<meetup_api_key>",
             "group_urlname" : "Meteor-Las-Vegas"
         }
     },

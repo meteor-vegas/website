@@ -15,7 +15,14 @@
 
         {{#with member}}
           {{> _member}}
+          <hr>
+          {{#each profile.answers }}
+              <p><strong>{{question}}</strong><br/>
+              {{answer}}
+              </p>
+          {{/each}}
         {{/with}}
+        <br>
 
         <h4><i class="ion-social-rss"></i> Activity</h4>
         <div class="list-group">

@@ -11,8 +11,8 @@ Meteor.methods({
 		case "getEvents":
 			return AsyncMeetup.getEvents(param);
 			break
-		case "getMembers":
-			return AsyncMeetup.getMembers(param);
+		case "getProfiles":
+			return AsyncMeetup.getProfiles(param);
 			break
 		case "getRSVPs":
 			return AsyncMeetup.getRSVPs(param);
@@ -22,8 +22,11 @@ Meteor.methods({
 		}
 	},
 
-	fetchMembers: function() {
+	fetchProfiles: function() {
+		//changed the end point from getMembers to getProfiles to utilize the returned "role" variable ( and "answers" variable ) - Abdul
 		//var adminIds = [54118672, 57771272, 32213572, 28932772, 87620262, 11527138, 8187187];
+		
+		console.log ( "Fetching Meetup Member Profiles ");
 		var adminRoles = ["Organizer", "Co-Organizer"];
 		
 		Meteor.call('MeetupAPI', 'getProfiles', {"group_urlname": group_urlname}, function(err, response) {
@@ -38,6 +41,8 @@ Meteor.methods({
 				}
 
 				var socialLinks = [];
+				var userId;
+				var meetupUid = response.results[i].member_id;
 				for (service in response.results[i].other_services) {
 					if(service === "twitter") {
 						var username = response.results[i].other_services['twitter']['identifier'];
@@ -47,32 +52,44 @@ Meteor.methods({
 						socialLinks.push({'service': service, 'url': url});
 					}
 				}
-
-				var existingUser = Meteor.users.findOne({'profile.meetupId': response.results[i].id});
+				
+				//console.log("member_id: ",  meetupUid); 
+				
+				var existingUser = Meteor.users.findOne({'profile.meetupId': meetupUid});
+				
 
 				if (existingUser) {
-					existingUser.update({'profile.meetupId': response.results[i].id}, {
-						profile: {
-							'name': response.results[i].name,
-							'bio': response.results[i].bio,
-							'meetupProfileUrl': response.results[i].link,
-							'socialLinks': socialLinks,
-							'thumbnailUrl': thumbnailUrl
-						}
+					
+					userId = existingUser._id;
+					//console.log("User exists, updating: ", meetupUid);
+					Meteor.users.update({'profile.meetupId': meetupUid}, 
+						{ $set :
+								{ 
+									
+										'profile.name': response.results[i].name,
+										'profile.bio': response.results[i].bio,
+										'profile.meetupProfileUrl': response.results[i].profile_url,
+										'socialLinks': socialLinks,
+										'profile.thumbnailUrl': thumbnailUrl,
+										'profile.answers' : response.results[i].answers
+									
+								}
 					});
 				} else {
-					var userId = Meteor.users.insert({
+					//console.log ("Creating user with meetup id: ", meetupUid);
+					userId = Meteor.users.insert({
 						profile: {
-							'meetupId': response.results[i].id,
+							'meetupId': meetupUid,
 							'name': response.results[i].name,
 							'bio': response.results[i].bio,
-							'meetupProfileUrl': response.results[i].link,
+							'meetupProfileUrl': response.results[i].profile_url,
 							'socialLinks': socialLinks,
-							'thumbnailUrl': thumbnailUrl
+							'thumbnailUrl': thumbnailUrl,
+							'answers' : response.results[i].answers
 						},
 						services: {
 							meetup: {
-								id: response.results[i].id
+								id: meetupUid
 							}
 						}
 					});
