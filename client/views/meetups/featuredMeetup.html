@@ -1,0 +1,40 @@
+<template name="_featuredMeetup">
+  {{#if featuredMeetup.count}}
+    {{#each featuredMeetup}}
+    <div class="homepage-section homepage-section-meetups">
+        <div class="container">
+          <h3>Featured Meetup</h3>
+          <hr>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                  {{ calendarDay dateTime}}
+                </div>
+                <div class="panel-body">
+                  <h1>{{ calendarDate dateTime}}</h1>
+                </div>
+                <div class="panel-footer">
+                  {{ calendarMonth dateTime}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <h2><a href="{{ pathFor 'meetupDetail' }}">{{ title }}</a></h2>
+
+              <h5 class="text-muted">
+                <i class="ion-calendar"></i> {{ longDate dateTime}}
+              </h5>
+              <p>
+                {{ summarize description }}
+              </p>
+              <p>
+                <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary btn-lg">View Details</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    {{/if}}
+</template>

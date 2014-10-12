@@ -110,7 +110,7 @@ Meteor.methods({
 	fetchEvents: function(status) {
 		
 		console.log ( "Fetching Meetup Events");
-		Meteor.call('MeetupAPI', 'getEvents', {"group_urlname": group_urlname, "status": status}, function(err, response) {
+		Meteor.call('MeetupAPI', 'getEvents', {"group_urlname": group_urlname, "status": status, "fields":"featured"}, function(err, response) {
 
 			for (var i = 0, l = response.meta.count; i < l; i++) {
 				var meetupData = response.results[i];
@@ -124,6 +124,7 @@ Meteor.methods({
 							description: meetupData['description'],
 							meetupId: meetupData['id'],
 							meetupUrl: meetupData['event_url'],
+							featured : meetupData['featured'],
 							dateTime: moment(meetupData['time']).toDate(),
 							location: {
 								name: meetupData['venue']['name'],
@@ -140,6 +141,7 @@ Meteor.methods({
 						description: meetupData['description'],
 						meetupId: meetupData['id'],
 						meetupUrl: meetupData['event_url'],
+						featured : meetupData['featured'],
 						dateTime: moment(meetupData['time']).toDate(),
 						location: {
 							name: meetupData['venue']['name'],

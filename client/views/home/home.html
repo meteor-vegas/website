@@ -2,11 +2,9 @@
 
   <div class="jumbotron jumbotron-home">
     <div class="container">
-      <h1>Meteor Vegas</h1>
+      <h1>{{groupName}}</h1>
       <p>
-        We are a group of Meteor.js enthusiasts who meet
-        <br>
-        twice a month in Las Vegas, NV
+        {{{groupInfo}}}
       </p>
       {{#unless currentUser}}
         <p>
@@ -15,6 +13,8 @@
       {{/unless}}
     </div>
   </div>
+
+  {{> _featuredMeetup}}
 
   {{#if upcomingMeetup.count}}
     {{#each upcomingMeetup}}

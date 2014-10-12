@@ -5,7 +5,9 @@ Router.map(function() {
       return this.subscribe("meetups");
     },
     data: {
-      upcomingMeetup: Meetups.find({}, {sort: {dateTime: -1}, limit: 1})
+      upcomingMeetup: Meetups.find({dateTime : {$gt : new Date()} }, {sort: {dateTime: 1}, limit: 1}),
+      groupName : Meteor.settings.public.meetup.group_name,
+      groupInfo : Meteor.settings.public.meetup.group_info
     }
   });
 
