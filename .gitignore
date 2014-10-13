@@ -1,4 +1,5 @@
 .meteor/local
 .DS_Store
+settings.json
 settings.development.json
 settings.production.json

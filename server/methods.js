@@ -161,10 +161,10 @@ Meteor.methods({
 						if (user) {
 							Meetups.update({_id: meetupId}, {$push: {'attendeeIds': user._id}});
 							var meetup = Meetups.findOne(meetupId);
-							if (meetup && !_(meetup.attendeeIds).contains(user._id)) {
+							if (!Activities.findOne({userId: user._id, subjectId: meetupId, type: 'rsvp'})) {
 								Activities.insert({
 									userId: user._id,
-									subjectId: meetupData['id'],
+									subjectId: meetupId,
 									subjectTitle: meetupData['name'],
 									subjectType: 'meetup',
 									type: 'rsvp'
