@@ -8,6 +8,11 @@
  * Forked by Andrew Mee to Provide a slightly diffent kind of embedding
  * experience
  */
+ 
+ /*
+ Heavily customized by Abdul 
+ */
+ 
 (function($) {
   $.fn.oembed = function(url, options, embedAction) {
 
@@ -92,6 +97,8 @@
           }
         }
         provider = $.fn.oembed.getOEmbedProvider(resourceURL);
+        
+        console.log("Provider found: ", provider);
 
         if (provider !== null) {
           provider.params = getNormalizedParams(settings[provider.name]) || {};
@@ -253,7 +260,7 @@
         var nocache = embedProvider.embedtag.nocache || 0;
         var height = embedProvider.embedtag.height || 'auto';
         var src = externalUrl.replace(embedProvider.templateRegex, embedProvider.apiendpoint);
-        if (!embedProvider.nocache) src += '&jqoemcache=' + rand(5);
+        if (!nocache) src += '&jqoemcache=' + rand(5);
         if (embedProvider.apikey) src = src.replace('_APIKEY_', settings.apikeys[embedProvider.name]);
 
 
@@ -274,10 +281,13 @@
           .attr('scrolling', embedProvider.embedtag.scrolling || "no")
           .attr('frameborder', embedProvider.embedtag.frameborder || "0");
 
-
-        var oembedData = {
-          code: code
-        };
+        if (tag == 'iframe') {
+          var oembedData = {code : code[0].outerHTML}
+        } else {
+          var oembedData = {
+            code: code
+          }
+        }
         success(oembedData, externalUrl, container);
       }
       else if (embedProvider.apiendpoint) {
@@ -529,6 +539,18 @@
 
   /* Native & common providers */
   $.fn.oembed.providers = [
+    
+    //Added by Abdul
+    new $.fn.oembed.OEmbedProvider("slides", "rich", ["slides.com/.+"], "//slides.com/$1/$2/embed", {
+      templateRegex: /.*com\/([\w\-]+)\/([\w\-]+).*/,
+      embedtag: {
+        tag: 'iframe',
+        width: '100%',
+        height: '100%',
+        nocache: 1
+      }
+    }),
+    
 
     //Video
     // new $.fn.oembed.OEmbedProvider("youtube", "video", ["youtube\\.com/watch.+v=[\\w-]+&?", "youtu\\.be/[\\w-]+","youtube.com/embed"], 'http://www.youtube.com/embed/$1?wmode=transparent', {
@@ -1102,6 +1124,8 @@
 
 
     //Use Open Graph Where applicable
+    //Disabling opengraph as it does not work well - Abdul
+    /*
     new $.fn.oembed.OEmbedProvider("opengraph", "rich", [".*"], null, {
       yql: {
         xpath: "//meta|//title|//link",
@@ -1136,6 +1160,7 @@
         }
       }
     })
+    */
 
   ];
 })(jQuery);

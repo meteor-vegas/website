@@ -4,7 +4,13 @@
       {{#if this.thumbnail}}
         <img src="{{this.thumbnail}}" class="img-responsive">
       {{else}}
+        {{#if this.oembed }}
+          {{#if this.oembed.code }}
+            {{{this.oembed.code}}}
+          {{/if}}
+        {{else}}
         <img src="/meteor-black.png">
+        {{/if}}
       {{/if}}
     </a>
     <div class="caption">
