@@ -1,6 +1,6 @@
 Meteor.startup(function() {
-  //var environment = process.env.NODE_ENV || "development";
-  var environment = Meteor.settings.environment || "development" ;
+  var environment = process.env.NODE_ENV || "development";
+  //var environment = Meteor.settings.environment || "development" ;
   
      // first, remove configuration entry in case service is already configured. This is needed when there is a change in key/secret
     ServiceConfiguration.configurations.remove({

@@ -44,7 +44,16 @@
               <div id="url-wrapper">
                 <div class="form-group">
                   <input type="text" class="form-control" id="url" placeholder="Paste URL to the presentation">
-                  <small>Slideshare, Prezi, Youtube, etc</small>
+                  <small>Supports Slides.com, Slideshare, Prezi, Youtube, Vimeo</small>
+                </div>
+              </div>
+              <div id="error-wrapper" class="alert alert-warning">
+                Sorry - {{presentationURL}} could not be loaded. 
+              </div>
+              <div id="title-wrapper">
+                <div class="form-group">
+                  <label for="title">Title</label>
+                  <input type="text" class="form-control" id="title" name="customTitle" placeholder="Enter a title for this presentation">
                 </div>
               </div>
             </div>
