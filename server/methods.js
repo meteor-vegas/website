@@ -25,10 +25,10 @@ Meteor.methods({
 	fetchProfiles: function() {
 		//changed the end point from getMembers to getProfiles to utilize the returned "role" variable ( and "answers" variable ) - Abdul
 		//var adminIds = [54118672, 57771272, 32213572, 28932772, 87620262, 11527138, 8187187];
-		
+
 		console.log ( "Fetching Meetup Member Profiles ");
 		var adminRoles = ["Organizer", "Co-Organizer"];
-		
+
 		Meteor.call('MeetupAPI', 'getProfiles', {"group_urlname": group_urlname}, function(err, response) {
 
 			for (var i = 0, l = response.meta.count; i < l; i++) {
@@ -52,27 +52,27 @@ Meteor.methods({
 						socialLinks.push({'service': service, 'url': url});
 					}
 				}
-				
-				//console.log("member_id: ",  meetupUid); 
-				
+
+				//console.log("member_id: ",  meetupUid);
+
 				var existingUser = Meteor.users.findOne({'profile.meetupId': meetupUid});
-				
+
 
 				if (existingUser) {
-					
+
 					userId = existingUser._id;
 					//console.log("User exists, updating: ", meetupUid);
-					Meteor.users.update({'profile.meetupId': meetupUid}, 
+					Meteor.users.update({'profile.meetupId': meetupUid},
 						{ $set :
-								{ 
-									
+								{
+
 										'profile.name': response.results[i].name,
 										'profile.bio': response.results[i].bio,
 										'profile.meetupProfileUrl': response.results[i].profile_url,
 										'socialLinks': socialLinks,
 										'profile.thumbnailUrl': thumbnailUrl,
 										'profile.answers' : response.results[i].answers
-									
+
 								}
 					});
 				} else {
@@ -94,21 +94,21 @@ Meteor.methods({
 						}
 					});
 				}
-				
+
 				//If the meetup user is in leadership team, then the json response will have a "role" variable returned with values such as "Organizer", "Co-Organizer" etc.
 				if ( response.results[i].role ) {
 					if (_(adminRoles).contains(response.results[i].role)) {
 						Roles.addUsersToRoles(userId, ['admin']);
 					}
 				}
-				
+
 
 			}
 		});
 	},
 
 	fetchEvents: function(status) {
-		
+
 		console.log ( "Fetching Meetup Events");
 		Meteor.call('MeetupAPI', 'getEvents', {"group_urlname": group_urlname, "status": status, "fields":"featured"}, function(err, response) {
 
@@ -160,13 +160,16 @@ Meteor.methods({
 						var user = Meteor.users.findOne({'profile.meetupId': meetupUserId});
 						if (user) {
 							Meetups.update({_id: meetupId}, {$push: {'attendeeIds': user._id}});
-							Activities.insert({
-								userId: user._id,
-								subjectId: meetupData['id'],
-								subjectTitle: meetupData['name'],
-								subjectType: 'meetup',
-								type: 'rsvp'
-							});
+							var meetup = Meetups.findOne(meetupId);
+							if (meetup && !_(meetup.attendeeIds).contains(user._id)) {
+								Activities.insert({
+									userId: user._id,
+									subjectId: meetupData['id'],
+									subjectTitle: meetupData['name'],
+									subjectType: 'meetup',
+									type: 'rsvp'
+								});
+							}
 						}
 					}
 				});
