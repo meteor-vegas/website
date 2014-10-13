@@ -68,7 +68,7 @@ Meteor.methods({
 								'profile.name': response.results[i].name,
 								'profile.bio': response.results[i].bio,
 								'profile.meetupProfileUrl': response.results[i].profile_url,
-								'socialLinks': socialLinks,
+								'profile.socialLinks': socialLinks,
 								'profile.thumbnailUrl': thumbnailUrl,
 								'profile.answers' : response.results[i].answers
 							}
