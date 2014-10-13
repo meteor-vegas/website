@@ -64,19 +64,16 @@ Meteor.methods({
 					//console.log("User exists, updating: ", meetupUid);
 					Meteor.users.update({'profile.meetupId': meetupUid},
 						{ $set :
-								{
-
-										'profile.name': response.results[i].name,
-										'profile.bio': response.results[i].bio,
-										'profile.meetupProfileUrl': response.results[i].profile_url,
-										'socialLinks': socialLinks,
-										'profile.thumbnailUrl': thumbnailUrl,
-										'profile.answers' : response.results[i].answers
-
-								}
+							{
+								'profile.name': response.results[i].name,
+								'profile.bio': response.results[i].bio,
+								'profile.meetupProfileUrl': response.results[i].profile_url,
+								'socialLinks': socialLinks,
+								'profile.thumbnailUrl': thumbnailUrl,
+								'profile.answers' : response.results[i].answers
+							}
 					});
 				} else {
-					//console.log ("Creating user with meetup id: ", meetupUid);
 					userId = Meteor.users.insert({
 						profile: {
 							'meetupId': meetupUid,
@@ -118,7 +115,8 @@ Meteor.methods({
 				var meetupId;
 
 				if (existingMeetup) {
-					meetupId = Meetups.update({_id: existingMeetup._id}, {
+					meetupId = existingMeetup._id;
+					Meetups.update({_id: existingMeetup._id}, {
 						$set: {
 							title: meetupData['name'],
 							description: meetupData['description'],
