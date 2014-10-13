@@ -1,33 +1,36 @@
 <template name="memberDetail">
 
+  {{#with member}}
+    <div class="jumbotron member-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-2">
+            <img class="media-object img-circle" src="{{profile.thumbnailUrl}}" width="150" height="150">
+          </div>
+          <div class="col-md-10">
+            <h1>{{profile.name}}</h1>
+            <p>{{ summarize profile.bio}}</p>
+            <span class="label label-primary">+{{profile.points}} Points</span>
+            <ul class="list-inline">
+              {{#each profile.socialLinks}}
+                <li><a href="{{url}}" class="btn btn-default btn-social-link" target="_blank"><i class="ion-social-{{service}}"></i></a></li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/with}}
+
   <div class="container">
 
     <div class="row">
-      <div class="col-md-10 col-md-push-1">
-        <div class="page-header">
-          <h1>Member</h1>
-        </div>
-
-        <ol class="breadcrumb">
-          <li><a href="{{ pathFor 'members' }}">All Members</a></li>
-          <li class="active">{{member.profile.name}}</li>
-        </ol>
-
-        {{#with member}}
-          {{> _member}}
-          <hr>
-          {{#each profile.answers }}
-              <h5>{{question}}</h5>
-              {{answer}}
-          {{/each}}
-        {{/with}}
-        <hr>
-
-        <h4><i class="ion-social-rss"></i> Activity</h4>
+      <div class="col-md-9">
+        <h4 class="sub-header"><i class="ion-social-rss"></i> Activity</h4>
         {{#if member.activities.count}}
         <div class="list-group">
           {{#each member.activities}}
-            <a href="{{ subjectURL }}" class="list-group-item"><i class="{{ icon }}"></i> {{ actionDescription }} <strong>{{ subjectTitle }}</strong> <span class="label label-primary">+{{pointsAwarded}}</span></a>
+            <a href="{{ subjectURL }}" class="list-group-item"><i class="{{ icon }}"></i> {{ actionDescription }} <strong>{{ subjectTitle }}</strong> <span class="label label-primary pull-right">+{{pointsAwarded}} Points</span></a>
           {{/each}}
         </div>
         {{else}}
@@ -37,8 +40,21 @@
             </p>
           </div>
        {{/if}}
-
       </div>
+
+      <div class="col-md-3">
+        {{#with member}}
+          <h4 class="sub-header">About {{profile.name}}</h4>
+          {{#each profile.answers }}
+            <p>
+              <strong>{{question}}</strong>
+              <br>
+              {{answer}}
+            </p>
+          {{/each}}
+        {{/with}}
+      </div>
+
     </div>
   </div>
 
