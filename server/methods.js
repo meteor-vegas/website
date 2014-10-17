@@ -157,9 +157,9 @@ Meteor.methods({
 						var meetupUserId = rsvpData['member']['member_id'];
 						var user = Meteor.users.findOne({'profile.meetupId': meetupUserId});
 						if (user) {
-							Meetups.update({_id: meetupId}, {$push: {'attendeeIds': user._id}});
 							var meetup = Meetups.findOne(meetupId);
 							if (!Activities.findOne({userId: user._id, subjectId: meetupId, type: 'rsvp'})) {
+								Meetups.update({_id: meetupId}, {$push: {'attendeeIds': user._id}});
 								Activities.insert({
 									userId: user._id,
 									subjectId: meetupId,
