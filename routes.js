@@ -154,7 +154,7 @@ Router.map(function() {
     path: '/cpanel',
     where: 'server',
     action: function() {
-      this.response.writeHead(301, Location: 'http://www.meetup.com/Meteor-Las-Vegas/events/212820662/');
+      this.response.writeHead(301, {Location: 'http://www.meetup.com/Meteor-Las-Vegas/events/212820662/'});
       this.response.end();
     }
   });
