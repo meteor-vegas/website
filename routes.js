@@ -151,7 +151,7 @@ Router.map(function() {
   });
 
   this.route('meteorday', {
-    path: '/cpanel',
+    path: '/meteorday',
     where: 'server',
     action: function() {
       this.response.writeHead(301, {Location: 'http://www.meetup.com/Meteor-Las-Vegas/events/212820662/'});
