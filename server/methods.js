@@ -159,7 +159,7 @@ Meteor.methods({
 						if (user) {
 							var meetup = Meetups.findOne(meetupId);
 							if (!Activities.findOne({userId: user._id, subjectId: meetupId, type: 'rsvp'})) {
-								Meetups.update({_id: meetupId}, {$push: {'attendeeIds': user._id}});
+								Meetups.update({_id: meetupId}, {$addToSet: {'attendeeIds': user._id}});
 								Activities.insert({
 									userId: user._id,
 									subjectId: meetupId,
@@ -238,7 +238,7 @@ Meteor.methods({
 
 	rsvp: function(params) {
 		if (Meteor.userId()) {
-			Meetups.update({_id: params.meetupId}, {$push: {'attendeeIds': Meteor.userId()}})
+			Meetups.update({_id: params.meetupId}, {$addToSet: {'attendeeIds': Meteor.userId()}})
 
 			var meetup = Meetups.findOne(params.meetupId);
 			Activities.insert({
