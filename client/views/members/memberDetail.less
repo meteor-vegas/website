@@ -4,7 +4,12 @@
 .jumbotron.member-header {
   background: @brand-primary url("/moon.png") center center no-repeat;
   background-size: cover;
+  background-blend-mode: color-burn;
   color: #fff;
+
+  @media (max-width: @screen-sm-max) {
+    text-align: center;
+  }
 
   h1 {
     margin-top: 0;

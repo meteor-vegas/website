@@ -39,9 +39,11 @@ footer {
   border-top: 1px solid @gray-lighter;
   padding: 120px 0;
   background: @brand-primary url("/moon.png") center center no-repeat;
+  background-blend-mode: color-burn;
   background-size: cover;
   background-attachment: fixed;
   color: #fff;
+  position: relative;
 
   a {
     color: #fff;
@@ -51,10 +53,30 @@ footer {
     }
   }
 
+  .footer-left {
+    text-align: left;
+
+    @media (max-width: @screen-xs-max) {
+      text-align: center;
+    }
+  }
+  .footer-right {
+    text-align: right;
+
+    @media (max-width: @screen-xs-max) {
+      text-align: center;
+    }
+  }
+
   .footer-meteor-link {
     img {
       margin-top: -6px;
       margin-right: 6px;
+
+      @media (max-width: @screen-xs-max) {
+        display: block;
+        margin: 6px auto;
+      }
     }
   }
 

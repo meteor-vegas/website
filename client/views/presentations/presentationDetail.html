@@ -46,7 +46,7 @@
       <div class="col-md-10 col-md-push-1">
         <ol class="breadcrumb">
           <li><a href="{{ pathFor 'presentations' }}">All Presentations</a></li>
-          <li class="active">{{presentation.title}}</li>
+          <li class="active">{{ truncate presentation.title 20 }}</li>
         </ol>
 
         <div class="page-header">

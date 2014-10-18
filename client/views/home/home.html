@@ -2,7 +2,7 @@
 
   <div class="jumbotron jumbotron-home">
     <div class="container">
-      <img src="/meteor-large.png" width=425 height=100 alt="{{groupName}}" />
+      <img src="/meteor-large.png" width=425 height=100 class="home-logo img-responsive" alt="{{groupName}}" />
       <h1>{{groupName}}</h1>
       <p>
         {{{groupInfo}}}
@@ -24,7 +24,7 @@
           <h3>Next Meetup</h3>
           <hr>
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-sm-3">
               <div class="panel panel-default text-center">
                 <div class="panel-heading">
                   {{ calendarDay dateTime}}
@@ -37,14 +37,14 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-sm-9">
               <h2><a href="{{ pathFor 'meetupDetail' }}">{{ title }}</a></h2>
 
               <h5 class="text-muted">
                 <i class="ion-calendar"></i> {{ longDate dateTime}}
               </h5>
               <p>
-                {{ summarize description }}
+                {{ truncate description 140 }}
               </p>
               <p>
                 <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary btn-lg">View Details</a>
@@ -73,11 +73,17 @@
   <div class="homepage-section homepage-section-sponsors">
     <div class="container">
       <h3>Our Friends and Sponsors</h3>
-      <p>
-        <a href="http://differential.io" target="_blank"><img src="/sponsors/differential.png" alt="Differential"></a>
-        <a href="http://modulus.io" target="_blank"><img src="/sponsors/modulus.png" alt="Modulus"></a>
-        <a href="http://vegastech.com" target="_blank"><img src="/sponsors/vegastech.png" alt="#VegasTech"></a>
-      </p>
+      <div class="row">
+        <div class="col-sm-4">
+          <a href="http://differential.io" target="_blank"><img src="/sponsors/differential.png" class="img-responsive" alt="Differential"></a>
+        </div>
+        <div class="col-sm-4">
+          <a href="http://modulus.io" target="_blank"><img src="/sponsors/modulus.png" class="img-responsive" alt="Modulus"></a>
+        </div>
+        <div class="col-sm-4">
+          <a href="http://vegastech.com" target="_blank"><img src="/sponsors/vegastech.png" class="img-responsive" alt="#VegasTech"></a>
+        </div>
+      </div>
     </div>
   </div>
 

@@ -6,7 +6,7 @@
           <h3>Featured Meetup</h3>
           <hr>
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-sm-3">
               <div class="panel panel-default text-center">
                 <div class="panel-heading">
                   {{ calendarDay dateTime}}
@@ -19,14 +19,14 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-sm-9">
               <h2><a href="{{ pathFor 'meetupDetail' }}">{{ title }}</a></h2>
 
               <h5 class="text-muted">
                 <i class="ion-calendar"></i> {{ longDate dateTime}}
               </h5>
               <p>
-                {{ summarize description }}
+                {{ truncate description 140 }}
               </p>
               <p>
                 <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary btn-lg">View Details</a>

@@ -5,11 +5,11 @@
       <div class="container">
         <div class="row">
           <div class="col-md-2">
-            <img class="media-object img-circle" src="{{profile.thumbnailUrl}}" width="150" height="150">
+            <img class="img-circle" src="{{profile.thumbnailUrl}}" width="150" height="150">
           </div>
           <div class="col-md-10">
             <h1>{{profile.name}}</h1>
-            <p>{{ summarize profile.bio}}</p>
+            <p>{{ truncate profile.bio 140 }}</p>
             <ul class="list-inline">
               <li><span class="label label-primary">+{{profile.points}} Points</span></li>
               {{#each profile.socialLinks}}

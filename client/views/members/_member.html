@@ -7,7 +7,7 @@
     <div class="media-body">
       <h4 class="media-heading"><a href="{{ pathFor 'memberDetail' }}">{{profile.name}}</a></h4>
       <span class="label label-primary">+{{profile.points}} Points</span>
-      <p>{{ summarize profile.bio}}</p>
+      <p>{{ truncate profile.bio 140 }}</p>
 
       <ul class="list-inline">
         {{#each profile.socialLinks}}

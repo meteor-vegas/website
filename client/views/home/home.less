@@ -2,11 +2,16 @@
 @import '../../stylesheets/variables.import.less';
 
 .jumbotron.jumbotron-home {
-  background: @brand-primary url("/vegas.png") center center no-repeat;
+  background: @brand-primary url("/homepage-banner.png") center center no-repeat;
   background-size: cover;
+  background-blend-mode: overlay;
   color: #fff;
   padding: 86px 0;
   text-align: center;
+
+  .home-logo {
+    margin: 0 auto;
+  }
 
   h1 {
     font-size: @font-size-h3;

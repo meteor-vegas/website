@@ -10,7 +10,7 @@
 
         <ol class="breadcrumb">
           <li><a href="{{ pathFor 'topics' }}">All Topics</a></li>
-          <li class="active">{{ topic.title }}</li>
+          <li class="active">{{ truncate topic.title 20 }}</li>
         </ol>
 
         {{#with topic}}

@@ -5,8 +5,8 @@
       <div class="container">
         <div class="row">
           {{#each upcomingMeetup}}
-            <div class="col-md-3">
-              <div class="panel panel-default text-center">
+            <div class="col-sm-3">
+              <div class="panel panel-default panel-calendar text-center">
                 <div class="panel-heading">
                   {{ calendarDay dateTime}}
                 </div>
@@ -18,7 +18,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-sm-9">
               <h5 class="text-uppercase">Next Meetup:</h5>
               <h2><a href="{{ pathFor 'meetupDetail' }}">{{ title }}</a></h2>
 
@@ -26,7 +26,7 @@
                 <i class="ion-calendar"></i> {{ longDate dateTime}}
               </h5>
               <p>
-                {{ summarize description }}
+                {{ truncate description 140 }}
               </p>
               <p>
                 <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary btn-lg">View Details</a>
@@ -59,7 +59,7 @@
       {{#each previousMeetups}}
         <div class="col-md-6 meetup-grid-item">
           <div class="media">
-            <div class="panel panel-default pull-left text-center">
+            <div class="panel panel-default panel-calendar pull-left text-center">
               <div class="panel-heading">
                 {{ calendarDay dateTime}}
               </div>
@@ -76,7 +76,7 @@
                 <i class="ion-calendar"></i> {{ longDate dateTime}}
               </h5>
               <p>
-                {{ summarize description }}
+                {{ truncate description 140 }}
               </p>
               <p>
                 <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary">View Details</a>
