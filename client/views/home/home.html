@@ -70,21 +70,19 @@
     </div>
   </div>
 
-  <div class="homepage-section homepage-section-sponsors">
-    <div class="container">
-      <h3>Our Friends and Sponsors</h3>
-      <div class="row">
-        <div class="col-sm-4">
-          <a href="http://differential.io" target="_blank"><img src="/sponsors/differential.png" class="img-responsive" alt="Differential"></a>
-        </div>
-        <div class="col-sm-4">
-          <a href="http://modulus.io" target="_blank"><img src="/sponsors/modulus.png" class="img-responsive" alt="Modulus"></a>
-        </div>
-        <div class="col-sm-4">
-          <a href="http://vegastech.com" target="_blank"><img src="/sponsors/vegastech.png" class="img-responsive" alt="#VegasTech"></a>
+  {{#if sponsors}}
+    <div class="homepage-section homepage-section-sponsors">
+      <div class="container">
+        <h3>Our Friends and Sponsors</h3>
+        <div class="row">
+          {{#each sponsors}}
+            <div class="col-sm-4">
+              <a href="{{ url }}" target="_blank"><img src="{{ image }}" class="img-responsive" alt="{{ title }}"></a>
+            </div>
+          {{/each}}
         </div>
       </div>
     </div>
-  </div>
+  {{/if}}
 
 </template>

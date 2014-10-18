@@ -9,9 +9,15 @@
         </div>
         <div class="col-sm-6 footer-right">
           <ul class="list-inline">
-            <li><a href="http://www.meetup.com/Meteor-Las-Vegas/" class="footer-social-link" title="Meteor Vegas on Meetup" target="_blank"><img src="/meetup.png" width=26 height=26></a></li>
-            <li><a href="https://twitter.com/MeteorVegas" class="footer-social-link" title="Meteor Vegas on Twitter" target="_blank"><i class="ion-social-twitter"></i></a></li>
-            <li><a href="https://github.com/meteor-vegas" class="footer-social-link" title="Meteor Vegas on Github" target="_blank"><i class="ion-social-github"></i></a></li>
+            {{#if meetupUrl}}
+              <li><a href="{{ meetupUrl }}" class="footer-social-link" target="_blank"><img src="/meetup.png" width=26 height=26></a></li>
+            {{/if}}
+            {{#if twitterUrl}}
+              <li><a href="{{ twitterUrl }}" class="footer-social-link" target="_blank"><i class="ion-social-twitter"></i></a></li>
+            {{/if}}
+            {{#if githubUrl}}
+              <li><a href="{{ githubUrl }}" class="footer-social-link" target="_blank"><i class="ion-social-github"></i></a></li>
+            {{/if}}
           </ul>
         </div>
       </div>
