@@ -57,7 +57,11 @@ Your group's name, description, Meetup URL, Twitter and Github links and even sp
 
 This app uses Less and Bootstrap for easy customization. Simply change or add Less variables in `client/stylesheets/variables.import.less` to change your brand colors or modify the theme.
 
-Additionally, we make use of [CSS blend modes](http://css-tricks.com/basics-css-blend-modes/) to dynamically change the color of background images based on your `$brand-primary` color.
+Additionally, we make use of [CSS blend modes](http://css-tricks.com/basics-css-blend-modes/) to dynamically change the color of background images based on your `$brand-primary` color. As an example:
+
+![](http://cl.ly/Y6jn/vegas.png =200x102)
+![](http://cl.ly/Y6d1/london.png =200x102)
+![](http://cl.ly/Y6j5/cincy.png =200x102)
 
 ## <a name="how-to-deploy"></a> How To Deploy
 
