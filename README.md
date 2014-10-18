@@ -1,46 +1,71 @@
-Meteor Vegas Website
-=======
+# Meteor Meetup Website
 
-This is the website for the [Meteor Vegas](http://vegas.meteor.com) Meetup group. It is still under development, but once it is completed we hope that other Meetup groups will be able to fork it and utlize it for themselves.
+This is a Meteor App that can be used to organize, manage, and market your Meetup group. It was built by the [Meteor Vegas Meetup Group](http://vegas.meteor.com).
 
-<a href="http://cl.ly/image/0Y1B0G0l3Z02">
-  <img src="http://f.cl.ly/items/2v2v10442O2t0S0z2u2U/meteor-vegas-screenshot.png" width=320 />
-</a>
+* [Features Overview](#features-overview)
+* [How To Install](#how-to-install)
+* [How To Customize](#how-to-customize)
+* [How To Deploy](#how-to-deploy)
+* [How To Contribute](#how-to-contribute)
 
-# Feature Development
+## <a name="features-overview"></a> Features Overview
 
-1. Create a new branch
+### Meetup.com Integration
 
-  ```
-  git checkout -b name-of-feature
-  ```
+* One-click sign in with Meetup.com OAuth integration
+* Pulls new meetup events from Meetup.com every 30 minutes
+* Displays members who have RSVP'd on Meetup.com
+* Allows members to RSVP to meetups directly from your site
 
-2. Develop and test your feature
+### Meetups
+Create your meetup on Meetup.com as usual, and the event will be added to your site within 30 minutes (or manually via the button on the `/meetups` page). Once it is on your site, you can add topics and presenters, and even feature it on your homepage.
 
-  ![](http://www.millsworks.net/blog/wp-content/uploads/2009/04/writing_process.gif)
+### Topics
+The topics page allows your members to suggest topics that they would like to hear about in upcoming meetups. Other members can vote on and discuss the topics, allowing the organizers to easily choose which topics should be presented next.
 
-3. Make sure you have the latest `master` branch
+### Presentations
+The presentations page gives you a centralized location to store all of your group's presentations. Members can upload their presentations to YouTube, SlideShare, etc, and simply paste a link into the "Add Presentation" form.
 
-  ```
-  git fetch
-  git merge origin/master
-  ```
+### Member Activity
+Members are granted activity points when performing certain activities. These points are displayed on their profile, and the member list is sorted by those with the most points.
 
-4. Merge your feature branch into the `master` branch
+* Liked a Presentation: 5 points
+* Commented on a Presentation: 5 points
+* Voted on a Topic: 5 points
+* Commented on a Topic: 5 points
+* Suggested a Topic: 10 points
+* Added a Presentation: 10 points
+* RSVP'd to a Meetup: 10 points
+* Presented a Topic at a Meetup: 50 points
 
-  ```
-  git checkout master
-  git merge name-of-feature
-  ```
+## <a name="how-to-install"></a> How To Install
 
-5. Push your new code to Github
+1. Clone the repo `git clone git@github.com:meteor-vegas/website.git`
+2. Copy the contents of `settings.example.json` into a new `settings.json` file
+3. Go to [Meetup OAuth Consumers](https://secure.meetup.com/meetup_api/oauth_consumers/) and create 2 new apps, one for development and one for production
+4. Enter the respective keys and secrets into the the `meetup.oauth_key` and `meetup.oauth_secret` keys in `settings.json`
+5. Go to [Meetup API Keys](https://secure.meetup.com/meetup_api/key/) and copy your API Key into the `meetup.api_key` keys in `settings.json`
+6. Run the app `meteor --settings settings.json`
 
-  ```
-  git push origin/master
-  ```
+## <a name="how-to-customize"></a> How To Customize
 
-# Deployment
+### Basic Info
 
-If you are a member of our [Meteor Organization](https://www.meteor.com/blog/2014/09/04/meteor-091-organizations-blaze-APIs), you can deploy the app with a single command:
+Your group's name, description, Meetup URL, Twitter and Github links and even sponsors can all be customized via the `settings.json` file.
 
-`meteor deploy vegas.meteor.com`
+### Design / Branding
+
+This app uses Less and Bootstrap for easy customization. Simply change or add Less variables in `client/stylesheets/variables.import.less` to change your brand colors or modify the theme.
+
+Additionally, we make use of [CSS blend modes](http://css-tricks.com/basics-css-blend-modes/) to dynamically change the color of background images based on your `$brand-primary` color.
+
+## <a name="how-to-deploy"></a> How To Deploy
+
+1. `meteor create <your-city>`
+2. `meteor deploy <your-city>.meteor.com --settings settings.json`
+3. Open `<your-city>.meteor.com` in your browser
+
+## <a name="how-to-contribute"></a> How To Contribute
+
+1. [Fork the rep](https://help.github.com/articles/fork-a-repo/)
+2. [Submit a Pull Request](https://help.github.com/articles/using-pull-requests/)
