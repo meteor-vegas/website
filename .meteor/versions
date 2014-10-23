@@ -72,6 +72,8 @@ session@1.0.2
 spacebars-compiler@1.0.2
 spacebars@1.0.2
 spiderable@1.0.3
+tap:http-methods@0.0.23
+tap:i18n@1.0.7
 templating@1.0.7
 tracker@1.0.2
 ui@1.0.3
