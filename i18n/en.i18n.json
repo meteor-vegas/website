@@ -1,3 +1,9 @@
 {
-  "meteor_city": "Meteor Montreal"
+  "group_name" : "Meteor Montreal",
+  "group_info" : "We are a group of Meteor.js enthusiasts who meet twice a month in Montreal, QC",
+  "join_us" : "JOIN US!",
+  "who_are_we" : "Who We Are",
+  "view_all_members" : "View All Members",
+  "friends_and_sponsors" : "Our Friends and Sponsors",
+  "build_with_meteor" : "Built with Meteor.js"
 }
