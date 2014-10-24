@@ -1,3 +1,6 @@
 {
-  "meteor_city": "Meteor Montréal"
+  "meteor_city": "Meteor Montréal",
+  "group_info" : "Nous sommes le groupe de Meteor.js a Montreal, QC",
+  "join_us" : "REJOINGNEZ-NOUS!",
+  "who_are_we" : "Qui sommes nous"   
 }
