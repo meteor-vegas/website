@@ -18,6 +18,7 @@ Router.map(function() {
       return this.subscribe("meetups");
     },
     data: {
+      groupName : Meteor.settings.public.meetup.group_name,
       upcomingMeetup: Meetups.find({dateTime : {$gt : new Date()} }, {sort: {dateTime: 1}, limit: 1}),
       previousMeetups: Meetups.find({dateTime : {$lt : new Date()} }, {sort: {dateTime: -1}})
     },
@@ -38,6 +39,7 @@ Router.map(function() {
     },
     data: function() {
       return {
+        groupName : Meteor.settings.public.meetup.group_name,
         meetup: Meetups.findOne({_id: this.params._id}),
         suggestedTopics: Topics.find({presented: {$ne: true}}, {sort: {points: -1}}),
         members: Meteor.users.find({}, {sort: {'profile.points': -1}})
@@ -61,6 +63,7 @@ Router.map(function() {
       ];
     },
     data: {
+      groupName : Meteor.settings.public.meetup.group_name,
       suggestedTopics: Topics.find({presented: {$ne: true}}, {sort: {points: -1}}),
       presentedTopics: Topics.find({presented: true}, {sort: {points: -1}})
     },
@@ -82,6 +85,7 @@ Router.map(function() {
     },
     data: function() {
       return {
+        groupName : Meteor.settings.public.meetup.group_name,
         topic: Topics.findOne({_id: this.params._id}),
         comments: Comments.find({parentType: 'topic', parentId: this.params._id}, {sort: { createdAt: -1 }})
       };
@@ -101,6 +105,7 @@ Router.map(function() {
       return [this.subscribe("presentations"), this.subscribe("members")];
     },
     data: {
+      groupName : Meteor.settings.public.meetup.group_name,
       topics: Presentations.find({})
     }
 
@@ -112,6 +117,7 @@ Router.map(function() {
     },
     data: function() {
       return {
+        groupName : Meteor.settings.public.meetup.group_name,
         presentation: Presentations.findOne({_id: this.params._id}),
         comments: Comments.find({parentType: 'presentation', parentId: this.params._id}, {sort: { createdAt: -1 }})
       };
@@ -124,6 +130,7 @@ Router.map(function() {
       return this.subscribe("members");
     },
     data: {
+      groupName : Meteor.settings.public.meetup.group_name,
       members: Meteor.users.find({}, {sort: {'profile.points': -1}})
     },
     onAfterAction: function() {
@@ -139,6 +146,7 @@ Router.map(function() {
     },
     data: function() {
       return {
+        groupName : Meteor.settings.public.meetup.group_name,
         member: Meteor.users.findOne({_id: this.params._id})
       };
     },
@@ -155,7 +163,7 @@ Router.map(function() {
     path: '/meteorday',
     where: 'server',
     action: function() {
-      this.response.writeHead(301, {Location: 'http://www.meetup.com/Meteor-Las-Vegas/events/212820662/'});
+      this.response.writeHead(301, {Location: Meteor.settings.meetup.meteorday});
       this.response.end();
     }
   });
