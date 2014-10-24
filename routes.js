@@ -6,8 +6,6 @@ Router.map(function() {
     },
     data: {
       upcomingMeetup: Meetups.find({dateTime : {$gt : new Date()} }, {sort: {dateTime: 1}, limit: 1}),
-      groupName : Meteor.settings.public.meetup.group_name,
-      groupInfo : Meteor.settings.public.meetup.group_info,
       sponsors : Meteor.settings.public.sponsors
     }
   });
@@ -155,7 +153,7 @@ Router.map(function() {
     path: '/meteorday',
     where: 'server',
     action: function() {
-      this.response.writeHead(301, {Location: 'http://www.meetup.com/Meteor-Las-Vegas/events/212820662/'});
+      this.response.writeHead(301, {Location: 'http://www.meetup.com/Meteor-Montreal/events/212820662/'});
       this.response.end();
     }
   });
