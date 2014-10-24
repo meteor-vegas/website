@@ -3,7 +3,12 @@ Router.configure({
 
   yieldTemplates: {
     header: {
-      to: 'header'
+      to: 'header',
+      data: {
+        groupName: function() {
+          return Meteor.settings.public.meetup.group_name;
+        }
+      }
     },
     footer: {
       to: 'footer'
