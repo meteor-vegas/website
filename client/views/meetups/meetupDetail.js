@@ -35,11 +35,13 @@ Template.meetupDetail.events({
       return false;
     }
 
-    Meteor.call('rsvp', {'meetupId': this.meetup._id}, function(error) {
-      if (error) {
-        alert(error);
-      }
-    });
+    // Meteor.call('rsvp', {'meetupDocId': this.meetup._id}, function(error) {
+    //   if (error) {
+    //     alert(error);
+    //   }
+    // });
+    // Using the new RSVP method call
+    Meteor.call("doRSVP", this.meetup.meetupId);
   },
 
   'submit [data-action=add-topic]': function(event, template) {

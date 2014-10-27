@@ -17,6 +17,8 @@ Meteor.methods({
 		case "getRSVPs":
 			return AsyncMeetup.getRSVPs(param);
 			break
+		case "postRSVP" :
+			AsyncMeetup.postRSVP(param); //Does not seem to be working, can't pass access token as headers
 		default:
 
 		}
@@ -112,10 +114,10 @@ Meteor.methods({
 			for (var i = 0, l = response.meta.count; i < l; i++) {
 				var meetupData = response.results[i];
 				var existingMeetup = Meetups.findOne({meetupId: meetupData['id']});
-				var meetupId;
+				var meetupDocId; //Mongo doc _id of meetup document. This is not the meetup.com's meetupId
 
 				if (existingMeetup) {
-					meetupId = existingMeetup._id;
+					meetupDocId = existingMeetup._id;
 					Meetups.update({_id: existingMeetup._id}, {
 						$set: {
 							title: meetupData['name'],
@@ -157,12 +159,12 @@ Meteor.methods({
 						var meetupUserId = rsvpData['member']['member_id'];
 						var user = Meteor.users.findOne({'profile.meetupId': meetupUserId});
 						if (user) {
-							var meetup = Meetups.findOne(meetupId);
-							if (!Activities.findOne({userId: user._id, subjectId: meetupId, type: 'rsvp'})) {
-								Meetups.update({_id: meetupId}, {$addToSet: {'attendeeIds': user._id}});
+							var meetup = Meetups.findOne({_id:meetupDocId});
+							if (!Activities.findOne({userId: user._id, subjectId: meetupDocId, type: 'rsvp'})) {
+								Meetups.update({_id: meetupDocId}, {$addToSet: {'attendeeIds': user._id}});
 								Activities.insert({
 									userId: user._id,
-									subjectId: meetupId,
+									subjectId: meetupDocId,
 									subjectTitle: meetupData['name'],
 									subjectType: 'meetup',
 									type: 'rsvp'
@@ -173,6 +175,68 @@ Meteor.methods({
 				});
 			}
 		});
+	},
+	
+	doRSVP : function(eventId) {
+		var user = Meteor.user();
+		if (!user)
+			throw new Meteor.error(403, "You are not currently logged in to RSVP");
+			
+		// If user is not a member, let the client redirect the user to join page ?
+		if (!user.profile.meetupId) {
+			throw new Meteor.error(403, "You are not a member");
+		} else {
+			var meetupUserId = user.profile.meetupId;
+			
+			//Could not make this work..
+			// Meteor.call("MeetupAPI", "postRSVP", {'event_id' : eventId, 'rsvp' : 'yes', 'access_token': user.services["meetup"].accessToken}, function( err, response) {
+			// 	if(err) {
+			// 		console.log("Error: ",JSON.stringify(err));
+			// 		return err;
+			// 	} else {
+			// 		console.log("Success: ", JSON.stringify(response));
+			// 		return response;
+					
+			// 	}
+			// })
+			
+			//Instead using HTTP.call for RSVP post call
+			//Ref: http://www.meetup.com/meetup_api/auth/
+			HTTP.call("POST" , "https://api.meetup.com/2/rsvp/",
+				{
+					params: {'event_id' : eventId, 'rsvp' : 'yes', 'key':api_key}, 
+					headers:{"Accept":"*/*", "User-Agent": "Meetup API lib for Node.js 0.1.3", "Authorization" : "bearer " + user.services["meetup"].accessToken}
+				},
+        function(error, response) {
+        	if (error) {
+        		//handle error here
+        	}
+        	else {
+        		if (user) {
+        			var meetup = Meetups.findOne({meetupId:eventId});
+        			var rsvpData = response.data;
+        			if (rsvpData.response === 'yes') { // Potential responses: "yes", "no", "waitlist" or "yes_pending_payment"
+        				if (!Activities.findOne({
+        					userId: user._id,
+        					subjectId: meetup._id,
+        					type: 'rsvp'
+        				})) {
+        					Meetups.update({ meetupId: eventId }, { $addToSet: { 'attendeeIds': user._id } });
+        					Activities.insert({
+        						userId: user._id,
+        						subjectId: meetup._id,
+        						subjectTitle: rsvpData.event.name,
+        						subjectType: 'meetup',
+        						type: 'rsvp'
+        					});
+        				}
+        			}
+        
+        		}
+        	}
+        }
+      );
+		}
 	},
 
 	createTopic: function(params) {
@@ -238,9 +302,9 @@ Meteor.methods({
 
 	rsvp: function(params) {
 		if (Meteor.userId()) {
-			Meetups.update({_id: params.meetupId}, {$addToSet: {'attendeeIds': Meteor.userId()}})
+			Meetups.update({_id: params.meetupDocId}, {$addToSet: {'attendeeIds': Meteor.userId()}})
 
-			var meetup = Meetups.findOne(params.meetupId);
+			var meetup = Meetups.findOne(params.meetupDocId);
 			Activities.insert({
 				userId: Meteor.userId(),
 				subjectId: meetup._id,
