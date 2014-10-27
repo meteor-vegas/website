@@ -180,11 +180,11 @@ Meteor.methods({
 	doRSVP : function(eventId) {
 		var user = Meteor.user();
 		if (!user)
-			throw new Meteor.error(403, "You are not currently logged in to RSVP");
+			throw new Meteor.Error(403, {'status':'error', 'code':'not-logged-in', 'errorTitle':'Not logged in', 'errorDesc':'You are not logged in to RSVP.'});
 			
 		// If user is not a member, let the client redirect the user to join page ?
 		if (!user.profile.meetupId) {
-			throw new Meteor.error(403, "You are not a member");
+			throw new Meteor.Error(403, {'status':'error', 'code':'not-a-member','errorTitle': 'Not a Member', 'errorDesc':'You are not a member of this group.'});
 		} else {
 			var meetupUserId = user.profile.meetupId;
 			
@@ -210,6 +210,7 @@ Meteor.methods({
         function(error, response) {
         	if (error) {
         		//handle error here
+        		throw new Meteor.Error(403, {'status':'error', 'code':'unknown-error', 'errorTitle':'Unknown Error', 'errorDesc':'There was an error processing this RSVP.'});
         	}
         	else {
         		if (user) {

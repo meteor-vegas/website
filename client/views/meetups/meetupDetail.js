@@ -27,6 +27,7 @@ Template.meetupDetail.helpers({
 });
 
 Template.meetupDetail.events({
+
   'click [data-action=rsvp]': function(event, template) {
     event.preventDefault();
 
@@ -41,7 +42,14 @@ Template.meetupDetail.events({
     //   }
     // });
     // Using the new RSVP method call
-    Meteor.call("doRSVP", this.meetup.meetupId);
+    Meteor.call("doRSVP", this.meetup.meetupId , function(error, response) {
+      if(error) {
+        console.log(error);
+        if(error.reason.code==='not-a-member') {
+          $("#not-a-member-modal").modal("show");
+        }
+      } 
+    });
   },
 
   'submit [data-action=add-topic]': function(event, template) {

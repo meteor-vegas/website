@@ -30,7 +30,11 @@
               {{#if currentUserIsAttendee}}
                 <button type="button" class="btn btn-primary btn-lg" disabled><i class="ion-checkmark"></i> Going</button>
               {{else}}
-                <button type="button" class="btn btn-primary btn-lg" data-action="rsvp"><i class="ion-plus"></i> RSVP</button>
+                {{#if currentUser}}
+                    <button type="button" class="btn btn-primary btn-lg" data-action="rsvp"><i class="ion-plus"></i> RSVP</button>
+                {{else}}
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login-required-modal"><i class="ion-plus"></i> RSVP</button>
+                {{/if}}
               {{/if}}
               {{#each meetup.truncatedAttendees}}
                 <a href="{{ pathFor 'memberDetail' }}" title="{{ profile.name }}" data-toggle="tooltip"><img class="img-circle" width=30 height=30 src="{{profile.thumbnailUrl}}"></a>
@@ -193,5 +197,41 @@
       </div>
     </div>
   {{/if}}
+  
+  <div class="modal fade" id="login-required-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Login Required</h4>
+          </div>
+          <div class="modal-body">
+            <p>You must login first to RSVP</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+    <div class="modal fade" id="not-a-member-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Not a member</h4>
+          </div>
+          <div class="modal-body">
+            <p>You are not a member of this meetup group to RSVP. <br/>
+              Please go to meetup.com to become member of this group first.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+          </div>
+      </div>
+    </div>
+  </div>  
 
 </template>
