@@ -176,18 +176,18 @@ Meteor.methods({
 			}
 		});
 	},
-	
+
 	doRSVP : function(eventId) {
 		var user = Meteor.user();
 		if (!user)
 			throw new Meteor.Error(403, {'status':'error', 'code':'not-logged-in', 'errorTitle':'Not logged in', 'errorDesc':'You are not logged in to RSVP.'});
-			
+
 		// If user is not a member, let the client redirect the user to join page ?
 		if (!user.profile.meetupId) {
 			throw new Meteor.Error(403, {'status':'error', 'code':'not-a-member','errorTitle': 'Not a Member', 'errorDesc':'You are not a member of this group.'});
 		} else {
 			var meetupUserId = user.profile.meetupId;
-			
+
 			//Could not make this work..
 			// Meteor.call("MeetupAPI", "postRSVP", {'event_id' : eventId, 'rsvp' : 'yes', 'access_token': user.services["meetup"].accessToken}, function( err, response) {
 			// 	if(err) {
@@ -196,15 +196,15 @@ Meteor.methods({
 			// 	} else {
 			// 		console.log("Success: ", JSON.stringify(response));
 			// 		return response;
-					
+
 			// 	}
 			// })
-			
+
 			//Instead using HTTP.call for RSVP post call
 			//Ref: http://www.meetup.com/meetup_api/auth/
 			HTTP.call("POST" , "https://api.meetup.com/2/rsvp/",
 				{
-					params: {'event_id' : eventId, 'rsvp' : 'yes', 'key':api_key}, 
+					params: {'event_id' : eventId, 'rsvp' : 'yes', 'key':api_key},
 					headers:{"Accept":"*/*", "User-Agent": "Meetup API lib for Node.js 0.1.3", "Authorization" : "bearer " + user.services["meetup"].accessToken}
 				},
         function(error, response) {
@@ -232,7 +232,7 @@ Meteor.methods({
         					});
         				}
         			}
-        
+
         		}
         	}
         }

@@ -23,6 +23,10 @@ Template.meetupDetail.helpers({
     } else {
       return "Who's Going";
     }
+  },
+
+  groupUrl: function() {
+    return 'http://www.meetup.com/' + Meteor.settings[Meteor.settings.environment].meetup.group_urlname;
   }
 });
 
@@ -36,19 +40,13 @@ Template.meetupDetail.events({
       return false;
     }
 
-    // Meteor.call('rsvp', {'meetupDocId': this.meetup._id}, function(error) {
-    //   if (error) {
-    //     alert(error);
-    //   }
-    // });
     // Using the new RSVP method call
     Meteor.call("doRSVP", this.meetup.meetupId , function(error, response) {
       if(error) {
-        console.log(error);
-        if(error.reason.code==='not-a-member') {
+        if(error.reason.code === 'not-a-member') {
           $("#not-a-member-modal").modal("show");
         }
-      } 
+      }
     });
   },
 

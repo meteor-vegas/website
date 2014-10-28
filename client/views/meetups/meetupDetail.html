@@ -197,41 +197,45 @@
       </div>
     </div>
   {{/if}}
-  
+
   <div class="modal fade" id="login-required-modal">
     <div class="modal-dialog">
       <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Login Required</h4>
-          </div>
-          <div class="modal-body">
-            <p>You must login first to RSVP</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-          </div>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Login Required</h4>
+        </div>
+        <div class="modal-body text-center">
+          <p>
+            Sign in with Meetup to RSVP!
+          </p>
+          <p>
+            <button type="button" class="btn btn-primary" data-login-with="meetup">
+              <img src="/meetup.png" width=22 height=22> Sign In
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   </div>
-  
-    <div class="modal fade" id="not-a-member-modal">
+
+  <div class="modal fade" id="not-a-member-modal">
     <div class="modal-dialog">
       <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Not a member</h4>
-          </div>
-          <div class="modal-body">
-            <p>You are not a member of this meetup group to RSVP. <br/>
-              Please go to meetup.com to become member of this group first.
-            </p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-          </div>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Not a member</h4>
+        </div>
+        <div class="modal-body">
+          <p>You are not a member of this meetup group yet!<br/>
+            Please <a href="{{ groupUrl }}" target="_blank">join this group on Meetup.com</a> before RSVPing.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+        </div>
       </div>
     </div>
-  </div>  
+  </div>
 
 </template>
