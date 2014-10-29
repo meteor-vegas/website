@@ -33,7 +33,8 @@ Meteor.startup(function() {
       'meetupProfileUrl': userData.link,
       'bio': userData.bio,
       'socialLinks': socialLinks,
-      'thumbnailUrl': thumbnailUrl
+      'thumbnailUrl': thumbnailUrl,
+      'meetupId': userMeetupId
     };
     user.profile = options.profile;
     return user;
