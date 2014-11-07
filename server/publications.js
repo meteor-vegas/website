@@ -122,7 +122,7 @@ Meteor.publishComposite("member", function(_id) {
 });
 
 Meteor.publish("presentations", function() {
-  return Presentations.find({});
+  return Presentations.find({}, {sort: {createdAt: -1}});
 });
 
 Meteor.publishComposite("presentation", function(_id) {
