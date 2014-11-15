@@ -114,41 +114,28 @@ Meteor.methods({
 				var existingMeetup = Meetups.findOne({meetupId: meetupData['id']});
 				var meetupId;
 
-				if (existingMeetup) {
-					meetupId = existingMeetup._id;
-					Meetups.update({_id: existingMeetup._id}, {
-						$set: {
-							title: meetupData['name'],
-							description: meetupData['description'],
-							meetupId: meetupData['id'],
-							meetupUrl: meetupData['event_url'],
-							featured : meetupData['featured'],
-							dateTime: moment(meetupData['time']).toDate(),
-							location: {
-								name: meetupData['venue']['name'],
-								address: meetupData['venue']['address_1'],
-								lat: meetupData['venue']['lat'],
-								lon: meetupData['venue']['lon'],
-								description: meetupData['how_to_find_us']
-							}
-						}
-					});
-				} else {
-					meetupId = Meetups.insert({
-						title: meetupData['name'],
-						description: meetupData['description'],
-						meetupId: meetupData['id'],
-						meetupUrl: meetupData['event_url'],
-						featured : meetupData['featured'],
-						dateTime: moment(meetupData['time']).toDate(),
-						location: {
+				var meetup_hash = {
+					title: meetupData['name'],
+					description: meetupData['description'],
+					meetupId: meetupData['id'],
+					meetupUrl: meetupData['event_url'],
+					featured : meetupData['featured'],
+					dateTime: moment(meetupData['time']).toDate()
+				}
+				if(!isNaN(meetupData['venue'])){
+					meetup_hash = _.extend(meetup_hash, {location: {
 							name: meetupData['venue']['name'],
 							address: meetupData['venue']['address_1'],
 							lat: meetupData['venue']['lat'],
 							lon: meetupData['venue']['lon'],
 							description: meetupData['how_to_find_us']
-						}
-					});
+					}})
+				}
+				if (existingMeetup) {
+					meetupId = existingMeetup._id;
+					Meetups.update({_id: existingMeetup._id}, {$set: meetup_hash });
+				} else {
+					meetupId = Meetups.insert(meetup_hash);
 				}
 
 				Meteor.call('MeetupAPI', 'getRSVPs', {"event_id": meetupData['id'], "rsvp": "yes"}, function(err, response) {
