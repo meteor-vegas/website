@@ -30,12 +30,17 @@
       {
         "title" : "La Commune",
         "url" : "http://www.lacommune.ca",
-        "image" : ""
+        "image" : "/sponsors/lacommune.jpg"
+      },
+      {
+        "title" : "Bitcoin Embassy",
+        "url" : "http://bitcoinembassy.ca",
+        "image" : "/sponsors/bitcoin_embassy.png"
       },
       {
         "title" : "Smashing Boxes",
         "url" : "http://smashingboxes.com",
-        "image" : ""
+        "image" : "/sponsors/smashingboxes.jpg"
       }
     ]
   }
