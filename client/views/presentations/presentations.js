@@ -26,13 +26,17 @@ function ShakeIt (obj,margin,time,cycles,dir) {
 Template.presentations.rendered = function() {
 };
 
-Template.presentations.presentations = function() {
-  return Presentations.find({});
-}
+Template.presentations.helpers( {
+  presentations: function(){
+    return Presentations.find({});
+  }
+});
 
-Template.presentations.presentationURL = function() {
-    return Session.get("presentationURL");
-}
+Template.presentations.helpers({
+    presentationURL: function() {
+      return Session.get("presentationURL");
+    }
+});
 
 Template.presentations.events({
 
