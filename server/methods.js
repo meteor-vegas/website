@@ -122,15 +122,16 @@ Meteor.methods({
 					featured : meetupData['featured'],
 					dateTime: moment(meetupData['time']).toDate()
 				}
-				if(!isNaN(meetupData['venue'])){
+				if(meetupData['venue']){
 					meetup_hash = _.extend(meetup_hash, {location: {
 							name: meetupData['venue']['name'],
 							address: meetupData['venue']['address_1'],
 							lat: meetupData['venue']['lat'],
 							lon: meetupData['venue']['lon'],
 							description: meetupData['how_to_find_us']
-					}})
+					}});
 				}
+				
 				if (existingMeetup) {
 					meetupId = existingMeetup._id;
 					Meetups.update({_id: existingMeetup._id}, {$set: meetup_hash });
