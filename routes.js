@@ -1,8 +1,10 @@
+var subs = new SubsManager();
+
 Router.map(function() {
   this.route('home', {
     path: '/',
     waitOn: function() {
-      return this.subscribe("meetups");
+      return subs.subscribe("meetups");
     },
     data: {
       upcomingMeetup: Meetups.find({dateTime : {$gt : new Date()} }, {sort: {dateTime: 1}, limit: 1}),
@@ -13,7 +15,7 @@ Router.map(function() {
   this.route('meetups', {
     path: '/meetups',
     waitOn: function() {
-      return this.subscribe("meetups");
+      return subs.subscribe("meetups");
     },
     data: {
       upcomingMeetup: Meetups.find({dateTime : {$gt : new Date()} }, {sort: {dateTime: 1}, limit: 1}),
@@ -29,9 +31,9 @@ Router.map(function() {
     path: '/meetups/:_id',
     waitOn: function() {
       return [
-        this.subscribe("meetup", this.params._id),
-        this.subscribe("suggestedTopics"),
-        this.subscribe("members")
+        subs.subscribe("meetup", this.params._id),
+        subs.subscribe("suggestedTopics"),
+        subs.subscribe("members")
       ];
     },
     data: function() {
@@ -54,8 +56,8 @@ Router.map(function() {
     path: '/topics',
     waitOn: function() {
       return [
-        this.subscribe("suggestedTopics"),
-        this.subscribe("presentedTopics")
+        subs.subscribe("suggestedTopics"),
+        subs.subscribe("presentedTopics")
       ];
     },
     data: {
@@ -77,7 +79,7 @@ Router.map(function() {
   this.route('topicDetail', {
     path: '/topics/:_id',
     waitOn: function() {
-      return this.subscribe("topic", this.params._id);
+      return subs.subscribe("topic", this.params._id);
     },
     data: function() {
       return {
@@ -97,7 +99,7 @@ Router.map(function() {
   this.route('presentations', {
     path: '/presentations',
     waitOn: function() {
-      return [this.subscribe("presentations"), this.subscribe("members")];
+      return [subs.subscribe("presentations"), subs.subscribe("members")];
     },
     data: {
       topics: Presentations.find({})
@@ -107,7 +109,7 @@ Router.map(function() {
   this.route('presentationDetail', {
     path: '/presentations/:_id',
     waitOn: function() {
-      return this.subscribe("presentation", this.params._id);
+      return subs.subscribe("presentation", this.params._id);
     },
     data: function() {
       return {
@@ -120,7 +122,7 @@ Router.map(function() {
   this.route('members', {
     path: '/members',
     waitOn: function() {
-      return this.subscribe("members");
+      return subs.subscribe("members");
     },
     data: {
       members: Meteor.users.find({}, {sort: {'profile.points': -1}})
@@ -134,7 +136,7 @@ Router.map(function() {
   this.route('memberDetail', {
     path: '/members/:_id',
     waitOn: function() {
-      return this.subscribe("member", this.params._id);
+      return subs.subscribe("member", this.params._id);
     },
     data: function() {
       return {
