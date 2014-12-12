@@ -18,8 +18,8 @@ function ShakeIt (obj,margin,time,cycles,dir) {
 		if (dir == 'vert') {$(obj).animate({marginTop: (i!=cycles)*j*margin}, {duration:speed, queue:true});}
 		else {$(obj).animate({marginLeft: (i!=cycles)*j*margin}, {duration:speed, queue:true});}
 		margin/=margRat;
-	};
-};
+	}
+}
 
 ////////////////////
 
@@ -28,11 +28,11 @@ Template.presentations.rendered = function() {
 
 Template.presentations.presentations = function() {
   return Presentations.find({});
-}
+};
 
 Template.presentations.presentationURL = function() {
     return Session.get("presentationURL");
-}
+};
 
 Template.presentations.events({
 
@@ -107,17 +107,17 @@ Template.presentations.events({
                       }
                   }
             }
-        })
+        });
         }, 500);
     } else {
         console.log ("presObj ", presObj);
         if(loaderror) {
           $('#add-presentation-modal').modal('hide');
         } else {
-          if(presObj.title=="" && $("#title").val()=="") {
+          if(presObj.title === "" && $("#title").val() === "") {
             $("#title-wrapper").addClass("has-error");
             ShakeIt ('#title-wrapper',20,2000,8,'horz');
-            setTimeout(function() {$("#title-wrapper").removeClass("has-error", 1000, "easeInBack" )}, 3000);
+            setTimeout(function () { $("#title-wrapper").removeClass("has-error", 1000, "easeInBack" ); }, 3000);
             return false;
           } else {
             presObj.title = presObj.title || $("#title").val();
@@ -128,7 +128,7 @@ Template.presentations.events({
                   console.log ( "Routing to ", newPresentationID);
                   Router.go("presentationDetail",{_id: newPresentationID});
               }
-            }, 500)
+            }, 500);
           }
         }
 
@@ -139,4 +139,4 @@ Template.presentations.events({
       alert("This feature is not implemented yet..");
   }
 
-})
+});
