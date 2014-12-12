@@ -8,11 +8,11 @@
  * Forked by Andrew Mee to Provide a slightly diffent kind of embedding
  * experience
  */
- 
+
  /*
- Heavily customized by Abdul 
+ Heavily customized by Abdul
  */
- 
+
 (function($) {
   $.fn.oembed = function(url, options, embedAction) {
 
@@ -97,7 +97,7 @@
           }
         }
         provider = $.fn.oembed.getOEmbedProvider(resourceURL);
-        
+
         console.log("Provider found: ", provider);
 
         if (provider !== null) {
@@ -247,7 +247,7 @@
           oembedData.code = result;
           success(oembedData, externalUrl, container);
         },
-        error: settings.onError.call(container, externalUrl, embedProvider)
+        error: settings.onError.bind(container, externalUrl, embedProvider)
       }, settings.ajaxOptions || {});
 
       $.ajax(ajaxopts);
@@ -301,7 +301,7 @@
             oembedData.code = embedProvider.templateData(data);
             success(oembedData, externalUrl, container);
           },
-          error: settings.onError.call(container, externalUrl, embedProvider)
+          error: settings.onError.bind(container, externalUrl, embedProvider)
         }, settings.ajaxOptions || {});
 
         $.ajax(ajaxopts);
@@ -336,7 +336,7 @@
             }
             success(oembedData, externalUrl, container);
           },
-          error: settings.onError.call(container, externalUrl, embedProvider)
+          error: settings.onError.bind(container, externalUrl, embedProvider)
         }, settings.ajaxOptions || {});
 
       $.ajax(ajaxopts);
@@ -539,7 +539,7 @@
 
   /* Native & common providers */
   $.fn.oembed.providers = [
-    
+
     //Added by Abdul
     new $.fn.oembed.OEmbedProvider("slides", "rich", ["slides.com/.+"], "//slides.com/$1/$2/embed", {
       templateRegex: /.*com\/([\w\-]+)\/([\w\-]+).*/,
@@ -550,7 +550,7 @@
         nocache: 1
       }
     }),
-    
+
 
     //Video
     // new $.fn.oembed.OEmbedProvider("youtube", "video", ["youtube\\.com/watch.+v=[\\w-]+&?", "youtu\\.be/[\\w-]+","youtube.com/embed"], 'http://www.youtube.com/embed/$1?wmode=transparent', {
