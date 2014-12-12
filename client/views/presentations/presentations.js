@@ -5,7 +5,7 @@ var loaderror = false;
 
 /////////////////
 /*
- * Shake It plugin - http://www.soslignes-ecrivain-public.fr/ 
+ * Shake It plugin - http://www.soslignes-ecrivain-public.fr/
  * v1.0
  * October 1st, 2012
  * Use and abuse!
@@ -55,13 +55,13 @@ Template.presentations.events({
         Session.set("presentationURL", $("input#url").val());
 
         $("#url-wrapper").slideUp();
-        
+
         step=2;
         Meteor.setTimeout(function(){
            $("a#presentation-embed").oembed(null, {
               embedMethod:"fill",
               onError: function(externalUrl,provider) {
-                console.log("Error loading presentation at url: ", externalUrl);
+                console.log("Error loading presentation at url: ", externalUrl, arguments);
                 $("#error-wrapper").show();
                 loaderror = true;
                 $("#btn-add-presentation").text("Cancel");
@@ -114,13 +114,13 @@ Template.presentations.events({
         if(loaderror) {
           $('#add-presentation-modal').modal('hide');
         } else {
-          if($("#title").val()=="") {
+          if(presObj.title=="" && $("#title").val()=="") {
             $("#title-wrapper").addClass("has-error");
             ShakeIt ('#title-wrapper',20,2000,8,'horz');
             setTimeout(function() {$("#title-wrapper").removeClass("has-error", 1000, "easeInBack" )}, 3000);
             return false;
           } else {
-            presObj.title = $("#title").val();
+            presObj.title = presObj.title || $("#title").val();
             $('#add-presentation-modal').modal('hide');
             var newPresentationID = Presentations.insert(presObj);
             Meteor.setTimeout(function(){
@@ -131,7 +131,7 @@ Template.presentations.events({
             }, 500)
           }
         }
-        
+
     }
   },
   'click [data-upload-presentation]': function(event, template) {
