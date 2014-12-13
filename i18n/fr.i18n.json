@@ -84,5 +84,6 @@
   "add_points": "Ajouter des points",
   "activity": "Activité",
   "no_activity_no_points": "aucune activité pour le moment !",
-  "about": "A propos de"
+  "about": "A propos de",
+  "more_are_going": "et %s autres"
 }
