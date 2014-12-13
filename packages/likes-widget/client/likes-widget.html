@@ -1,9 +1,9 @@
 <template name="likesWidget">
 
     {{#if likedByMe}}
-      <button type="button" class="btn btn-primary" data-unlike><i class="ion-heart"></i> Liked </button>
+      <button type="button" class="btn btn-primary" data-unlike><i class="ion-heart"></i> {{_ "liked"}} </button>
     {{else}}
-      <button type="button" class="btn btn-default" data-like><i class="ion-heart"></i> Like </button>
+      <button type="button" class="btn btn-default" data-like><i class="ion-heart"></i> {{_ "like"}} </button>
     {{/if}}
 
     {{#each likedBy}}
