@@ -17,6 +17,7 @@
     }
   },
   "public" : {
+    "default_lang": "fr",
     "meetup" : {
       "group_name" : "Meteor Vegas",
       "group_urlname" : "Meteor-Las-Vegas",
@@ -44,6 +45,41 @@
         "url" : "http://smashingboxes.com",
         "image" : "/sponsors/smashingboxes.jpg"
       }
+    ],
+    "projects" : [
+      {
+        "title" : "La Commune",
+        "url" : "http://www.lacommune.ca",
+        "image" : "/sponsors/lacommune.jpg"
+      },
+      {
+        "title" : "Bitcoin Embassy",
+        "url" : "http://bitcoinembassy.ca",
+        "image" : "/sponsors/bitcoin_embassy.png"
+      },
+      {
+        "title" : "Smashing Boxes",
+        "url" : "http://smashingboxes.com",
+        "image" : "/sponsors/smashingboxes.jpg"
+      }
+    ],
+    "subcontractors" : [
+      {
+        "title" : "Good dev guys",
+        "url" : "http://www.lacommune.ca",
+        "image" : "/sponsors/lacommune.jpg"
+      },
+      {
+        "title" : "The best dev",
+        "url" : "http://bitcoinembassy.ca",
+        "image" : "/sponsors/bitcoin_embassy.png"
+      },
+      {
+        "title" : "Someone who cares",
+        "url" : "http://smashingboxes.com",
+        "image" : "/sponsors/smashingboxes.jpg"
+      }
     ]
+
   }
 }

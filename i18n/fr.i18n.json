@@ -6,6 +6,7 @@
   "who_are_we" : "Qui sommes nous",
   "view_all_members" : "Voir les %s membres",
   "friends_and_sponsors" : "Nos amis et sponsors",
+  "confirm_remove_activity": "Voulez-vous vraiment supprimer cette activité ?",
   "close" : "Fermer",
   "submit" : "Valider",
   "next" : "Suivant",

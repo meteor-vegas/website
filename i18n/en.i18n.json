@@ -6,6 +6,7 @@
   "who_are_we" : "Who We Are",
   "view_all_members" : "View all %s members",
   "friends_and_sponsors" : "Our Friends and Sponsors",
+  "confirm_remove_activity": "Are you sure you want to remove this activity?",
   "close" : "Close",
   "submit" : "Submit",
   "next" : "Next",

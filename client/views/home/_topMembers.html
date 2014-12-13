@@ -2,7 +2,9 @@
 
   <div class="top-members">
     {{#each topMembers}}
-      {{> _profilePhoto profile=profile size="100"}}
+      <a href="{{ pathFor 'memberDetail' }}">
+        {{> _profilePhoto profile=profile size="100"}}
+      </a>
     {{/each}}
   </div>
 
