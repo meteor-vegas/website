@@ -1,5 +1,5 @@
 Meteor.users.allow({
-  'insert': function (userId,doc) {
+  'insert': function(userId, doc) {
     return true;
   },
 
@@ -9,7 +9,10 @@ Meteor.users.allow({
 });
 
 Meteor.users.deny({
-  update: function (userId, doc, fields, modifier) {
+  update: function(userId, doc, fields, modifier) {
+    if (!userId) return true;
+    if (Roles.userIsInRole(userId, ['admin']))
+      return false;
     return _.contains(_.keys(modifier.$set), 'profile.points');
   }
 });
