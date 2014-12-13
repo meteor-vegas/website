@@ -4,7 +4,7 @@
   "group_info" : "We are a group of Meteor.js enthusiasts in Paris",
   "join_us" : "JOIN US!",
   "who_are_we" : "Who We Are",
-  "view_all_members" : "View All Members",
+  "view_all_members" : "View all %s members",
   "friends_and_sponsors" : "Our Friends and Sponsors",
   "build_with_meteor" : "Built with Meteor.js"
 }
