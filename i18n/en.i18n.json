@@ -39,6 +39,8 @@
   "like": "Like",
   "liked": "Liked",
   "topics" : "Topics",
+  "suggest_topic": "Suggest a topic",
+  "suggest_topic_upcoming": "Suggest a topic for an upcoming meetup and vote on your favorites",
   "members" : "Members",
   "my_profile" : "My profile",
   "logout" : "Logout",

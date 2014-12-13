@@ -39,6 +39,8 @@
   "like": "Aimer",
   "liked": "J'aime",
   "topics" : "Sujets",
+  "suggest_topic": "Suggérer un sujet",
+  "suggest_topic_upcoming": "Suggérer un sujet pour un prochain meetup et voter pour vos favoris",
   "members" : "Membres",
   "my_profile" : "Mon profil",
   "logout" : "Déconnexion",
