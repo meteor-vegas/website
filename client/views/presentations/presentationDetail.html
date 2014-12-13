@@ -17,6 +17,12 @@
               {{/if}}
             {{/if}}
           </div>
+          <br>
+          <p>
+            {{#if isInRole 'admin'}}
+                <button type="button" class="btn btn-primary" data-action="removePresentation">Remove</button>
+            {{/if}}
+          </p>
         </div>
         <div class="col-md-6">
           <h2>{{presentation.title}}</h2>
