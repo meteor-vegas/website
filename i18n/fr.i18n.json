@@ -1,4 +1,5 @@
 {
+  "colon": " :",
   "meteor_city": "Meteor Paris",
   "group_name" : "Meteor Paris",
   "group_info" : "Nous sommes le groupe de Meteor.js à Paris",
@@ -21,7 +22,7 @@
   "next_meetup": "Prochain Meetup",
   "all_meetups" : "Tous les Meetup",
   "previous_meetups" : "Meetup précedents",
-  "reason" : "Raison :",
+  "reason" : "Raison",
   "add": "Ajouter",
   "cancel": "Annuler",
   "home" : "Accueil",

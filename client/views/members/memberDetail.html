@@ -56,7 +56,7 @@
           {{#each member.activities}}
             {{#if isTypeCustom}}
               <a href="#" class="list-group-item">
-                <i class="{{ icon }}"></i> {{_ "reason"}} <strong>{{ subjectTitle }}</strong>
+                <i class="{{ icon }}"></i> {{_ "reason"}}{{_ "colon"}} <strong>{{ subjectTitle }}</strong>
                 {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>{{_ "remove"}}</span>{{/if}}
                 <span class="label label-primary pull-right">+{{points}} {{_ "points"}}</span>
               </a>
