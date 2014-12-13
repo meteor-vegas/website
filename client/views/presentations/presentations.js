@@ -69,22 +69,22 @@ Template.presentations.events({
                 console.log("Error loading presentation at url: ", externalUrl, arguments);
                 $("#error-wrapper").show();
                 loaderror = true;
-                $("#btn-add-presentation").text("Cancel");
+                $("#btn-add-presentation").text(TAPi18n.__('cancel'));
                 return false;
               },
               onProviderNotFound: function(url) {
                 console.log("Error - provider not found for ", url);
                 $("#error-wrapper").show();
                 loaderror = true;
-                $("#btn-add-presentation").text("Cancel");
+                $("#btn-add-presentation").text(TAPi18n.__('cancel'));
                 return false;
               },
               beforeEmbed: function(data) {
                 if(loaderror) {
-                  $("#btn-add-presentation").text("Cancel");
+                  $("#btn-add-presentation").text(TAPi18n.__('cancel'));
                 } else {
                   $("#presentation-wrapper").slideDown();
-                  $("#btn-add-presentation").text("Add");
+                  $("#btn-add-presentation").text(TAPi18n.__('add'));
                 }
               },
               afterEmbed: function(data) {
