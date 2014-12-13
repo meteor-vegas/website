@@ -66,7 +66,7 @@
       {{#each meetup.topics}}
         <div class="media">
           {{#with presenter}}
-            {{> _profilePhoto profile=profile size="150" class="pull-left"}} 
+            {{> _profilePhoto profile=profile size="150" class="pull-left"}}
           {{/with}}
           <div class="media-body">
             <h4 class="media-heading">
@@ -130,8 +130,11 @@
     <h3>{{ attendeesHeading }}</h3>
     <hr>
     <p>
-      {{#each meetup.attendees}}
-        {{> _profilePhoto profile=profile size="100"}} 
+      {{#each meetup.attendeesWithPhoto}}
+        {{> _profilePhoto profile=profile size="100"}}
+      {{/each}}
+      {{#each meetup.attendeesWithoutPhoto}}
+        {{> _profilePhoto profile=profile size="100"}}
       {{/each}}
     </p>
     <hr>
