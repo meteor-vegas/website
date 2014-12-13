@@ -28,6 +28,9 @@
               <ul class="dropdown-menu" role="menu">
                 {{#with currentUser}}
                   <li><a href="{{ pathFor 'memberDetail' }}"><i class="ion-person"></i> {{_ "my_profile"}}</a></li>
+                  {{#if isInRole 'admin'}}
+                  <li><a href="{{ pathFor 'coupons' }}"><i class="ion-person"></i> {{_ "Coupons"}}</a></li>
+                    {{/if}}
                 {{/with}}
                 <li><a href="#" data-action="logout"><i class="ion-locked"></i> {{_ "logout"}}</a></li>
               </ul>

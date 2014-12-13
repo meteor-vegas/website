@@ -39,5 +39,8 @@
   "suggested" : "Proposés",
   "presented" : "Présentés",
   "meetup_date_format" : "dddd Do MMMM  [à] HH:mm",
-  "build_with_meteor" : "Développé avec Meteor.js"
+  "build_with_meteor" : "Développé avec Meteor.js",
+  "points": "Points",
+  "add_points": "Ajouter des points",
+  "activity": "Activité"
 }

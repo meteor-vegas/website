@@ -11,14 +11,14 @@
             <h1>{{profile.name}}</h1>
             <p>{{ truncate profile.bio 140 }}</p>
             <ul class="list-inline">
-              <li><span class="label label-primary">+{{profile.points}} Points</span></li>
+              <li><span class="label label-primary">+{{profile.points}} {{_ "points"}}</span></li>
               <li><a href="{{ profile.meetupProfileUrl }}" class="member-detail" title="{{ profile.name }} sur meetup.com" target="_blank"><i class="ion-person"></i></a></li>
               {{#each profile.socialLinks}}
                 <li><a href="{{url}}" target="_blank"><i class="ion-social-{{service}}"></i></a></li>
               {{/each}}
               <li>
                 {{#if isInRole 'admin'}}
-                  <a href="#" class="btn add-points-toggle">Add Points</a>
+                  <a href="#" class="btn add-points-toggle">{{_ "add_points"}}</a>
                 {{/if}}
               </li>
               <!-- Hack for missing Meetup.com social icon in ionicons font. -->
@@ -50,7 +50,7 @@
 
     <div class="row">
       <div class="col-md-9">
-        <h4 class="sub-header"><i class="ion-social-rss"></i> Activity</h4>
+        <h4 class="sub-header"><i class="ion-social-rss"></i> {{_ "activity"}}</h4>
         {{#if member.activities.count}}
         <div class="list-group">
           {{#each member.activities}}
