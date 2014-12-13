@@ -48,7 +48,7 @@ Template.presentations.events({
     $("#error-wrapper").hide();
     $("input#url").val("");
     $("#title").val("");
-    $("#btn-add-presentation").text("Next");
+    $("#btn-add-presentation").text(TAPi18n.__("next"));
     step = 1;
     loaderror = false;
     console.log("initializing modal");
