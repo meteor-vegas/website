@@ -27,24 +27,20 @@
               {{/each}}
             {{else}}
               <div class="well">
-                There aren't any topics yet.
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-topic-modal">Suggest one?</button>
+                {{_ "no_topic"}}
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-topic-modal">{{_ "suggest_one"}}</button>
               </div>
             {{/if}}
           </div>
 
           <div class="tab-pane {{ activeTabClass 'presented' }}" id="presented-topics">
             {{#if presentedTopics.count}}
-              <div class="well">
-                The following topics were presented at previous meetups
-              </div>
+              <div class="well">{{_ "suggested_topics_last_meetup"}}</div>
               {{#each presentedTopics}}
                 {{> _topic}}
               {{/each}}
             {{else}}
-              <div class="well">
-                No one has presented any topics yet.
-              </div>
+              <div class="well">{{_ "no_one_presented_topic"}}</div>
             {{/if}}
           </div>
 
@@ -66,12 +62,12 @@
             </div>
             <div class="modal-body">
               <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" placeholder="Enter a title for your topic">
+                <label for="title">{{_ "title"}}</label>
+                <input type="text" class="form-control" id="title" placeholder={{_ "topic_title"}}>
               </div>
               <div class="form-group">
-                <label for="description">Description</label>
-                <textarea rows="2" class="form-control" id="description" placeholder="Enter a description for your topic"></textarea>
+                <label for="description">{{_ "description"}}</label>
+                <textarea rows="2" class="form-control" id="description" placeholder={{_ "topic_descrption"}}></textarea>
               </div>
             </div>
             <div class="modal-footer">
@@ -85,9 +81,7 @@
             <h4 class="modal-title">{{_ "suggest_topic"}}</h4>
           </div>
           <div class="modal-body text-center">
-            <p>
-              Sign in with Meetup to suggest a topic!
-            </p>
+            <p>{{_ "suggest_require_signin"}}</p>
             <p>
               <button type="button" class="btn btn-primary" data-login-with="meetup">
                 <img src="/meetup.png" width=22 height=22> {{_ "sign_in"}}
