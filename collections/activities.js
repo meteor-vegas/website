@@ -27,78 +27,39 @@ ACTIVITY_ICONS = {
 Activities.helpers({
   subjectURL: function() {
     switch (this.subjectType) {
-<<<<<<< HEAD
-    case 'topic':
-      return Router.routes.topicDetail.path({_id: this.subjectId});
-    case 'presentation':
-      return Router.routes.presentationDetail.path({_id: this.subjectId});
-    case 'meetup':
-      return Router.routes.meetupDetail.path({_id: this.subjectId});
-=======
       case 'topic':
-        return Router.routes['topicDetail'].path({
+        return Router.routes.topicDetail.path({
           _id: this.subjectId
         });
-        break;
       case 'presentation':
-        return Router.routes['presentationDetail'].path({
+        return Router.routes.presentationDetail.path({
           _id: this.subjectId
         });
-        break;
       case 'meetup':
-        return Router.routes['meetupDetail'].path({
+        return Router.routes.meetupDetail.path({
           _id: this.subjectId
         });
-        break;
->>>>>>> 557578689caeae93051ede2353e0d172ff8a4096
     }
   },
 
   actionDescription: function() {
     switch (this.type) {
-<<<<<<< HEAD
-    case 'liked_presentation':
-      return 'Liked a presentation: ';
-    case 'commented_on_presentation':
-      return 'Commented on a presentation: ';
-    case 'created_presentation':
-      return 'Added a presentation: ';
-    case 'voted_on_topic':
-      return 'Voted on a topic: ';
-    case 'commented_on_topic':
-      return 'Commented on a topic: ';
-    case 'created_topic':
-      return 'Suggested a topic: ';
-    case 'presented_topic':
-      return 'Presented a topic: ';
-    case 'rsvp':
-      return 'RSVP\'d to a meetup: ';
-=======
       case 'liked_presentation':
         return 'Liked a presentation: ';
-        break;
       case 'commented_on_presentation':
         return 'Commented on a presentation: ';
-        break;
       case 'created_presentation':
         return 'Added a presentation: ';
-        break;
       case 'voted_on_topic':
         return 'Voted on a topic: ';
-        break;
       case 'commented_on_topic':
         return 'Commented on a topic: ';
-        break;
       case 'created_topic':
         return 'Suggested a topic: ';
-        break;
       case 'presented_topic':
         return 'Presented a topic: ';
-        break;
       case 'rsvp':
         return 'RSVP\'d to a meetup: ';
-        break;
->>>>>>> 557578689caeae93051ede2353e0d172ff8a4096
     }
   },
 
