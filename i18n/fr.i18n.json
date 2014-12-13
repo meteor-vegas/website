@@ -20,6 +20,8 @@
   "next_meetup": "Prochain Meetup",
   "all_meetups" : "Tous les Meetup",
   "previous_meetups" : "Meetup précedents",
+  "reason" : "Raison",
+  "add": "Ajouter",
   "home" : "Accueil",
   "meetups" : "Meetups",
   "presentations" : "Présentations",
