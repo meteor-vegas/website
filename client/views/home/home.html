@@ -3,7 +3,7 @@
   <div class="jumbotron jumbotron-home">
     <div class="container">
       <img src="/meteor-large.png" width=425 height=100 class="home-logo img-responsive" alt="{{groupName}}" />
-      <h1>{{_ "group_name"}}</h1>
+      <h1>Paris</h1>
       <p>
         {{{_ "group_info"}}}
       </p>
@@ -47,7 +47,7 @@
                 {{ truncate description 140 }}
               </p>
               <p>
-                <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary btn-lg">View Details</a>
+                <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary btn-lg">{{_ "view_details"}}</a>
               </p>
             </div>
           </div>
@@ -84,5 +84,38 @@
       </div>
     </div>
   {{/if}}
+
+
+  {{#if projects}}
+    <div class="homepage-section homepage-section-projects">
+      <div class="container">
+        <h3>Nos projets sur Meteor</h3>
+        <div class="row">
+          {{#each projects}}
+            <div class="col-sm-4">
+              <a href="{{ url }}" target="_blank"><img src="{{ image }}" class="img-responsive" alt="{{ title }}"></a>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if subcontractors}}
+    <div class="homepage-section homepage-section-subcontractors">
+      <div class="container">
+        <h3>Des experts à votre disposition</h3>
+        <div class="row">
+          {{#each subcontractors}}
+            <div class="col-sm-4">
+              <a href="{{ url }}" target="_blank"><img src="{{ image }}" class="img-responsive" alt="{{ title }}"></a>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+
 
 </template>

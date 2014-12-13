@@ -3,7 +3,7 @@
     {{#each featuredMeetup}}
     <div class="homepage-section homepage-section-meetups">
         <div class="container">
-          <h3>Featured Meetup</h3>
+          <h3>{{_ "meetups_featured_meetup"}}</h3>
           <hr>
           <div class="row">
             <div class="col-sm-3">
@@ -29,7 +29,7 @@
                 {{ truncate description 140 }}
               </p>
               <p>
-                <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary btn-lg">View Details</a>
+                <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary btn-lg">{{_ "view_details"}}</a>
               </p>
             </div>
           </div>
