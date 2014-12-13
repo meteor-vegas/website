@@ -1,6 +1,7 @@
 Meteor.startup(function() {
   if(Meteor.isClient) {
-    TAPi18n.setLanguage(Meteor.settings.public.default_lang);
+    if(Meteor.settings && Meteor.settings.public && Meteor.settings.public.default_lang)
+      TAPi18n.setLanguage(Meteor.settings.public.default_lang);
 
     SEO.config({
       title: Meteor.settings.public.meetup.group_name,
