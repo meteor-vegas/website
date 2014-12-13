@@ -70,8 +70,8 @@ Router.map(function() {
       presentedTopics: Topics.find({presented: true}, {sort: {points: -1}})
     },
     onBeforeAction: function() {
-      if (!this.params.tab) {
-        this.params.tab = 'suggested';
+      if (!this.params.query.tab) {
+        this.params.query.tab = 'suggested';
       }
       this.next();
     },
