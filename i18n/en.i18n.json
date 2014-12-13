@@ -27,5 +27,6 @@
   "header_my_profile" : "My profile",
   "header_logout" : "Logout",
   "header_sign_in" : "Sign In",
+  "meetup_date_format" : "dddd MMMM Do [at] h:mmA",
   "build_with_meteor" : "Built with Meteor.js"
 }
