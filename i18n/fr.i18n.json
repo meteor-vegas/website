@@ -6,5 +6,11 @@
   "who_are_we" : "Qui sommes nous",
   "view_all_members" : "Voir tous les membres",
   "friends_and_sponsors" : "Nos amis et sponsors",
+  "close" : "Fermer",
+  "submit" : "Valider",
+  "next" : "Suivant",
+  "comment_posted_by" : "Posté par",
+  "add_a_comment" : "Ajouter un commentaire",
+  "add_a_comment_placeholder" : "Saisissez votre commentaire…",
   "build_with_meteor" : "Développé avec Meteor.js"
 }
