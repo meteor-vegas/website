@@ -57,14 +57,14 @@
             {{#if isTypeCustom}}
               <a href="#" class="list-group-item">
                 <i class="{{ icon }}"></i> Reason: <strong>{{ subjectTitle }}</strong>
-                {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>Remove</span>{{/if}}
-                <span class="label label-primary pull-right">+{{points}} Points</span>
+                {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>{{_ "remove"}}</span>{{/if}}
+                <span class="label label-primary pull-right">+{{points}} {{_ "points"}}</span>
               </a>
             {{else}}
               <a href="{{ subjectURL }}" class="list-group-item">
                 <i class="{{ icon }}"></i> {{ actionDescription }} <strong>{{ subjectTitle }}</strong>
-                {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>Remove</span>{{/if}}
-                <span class="label label-primary pull-right">+{{pointsAwarded}} Points</span>
+                {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>{{_ "remove"}}</span>{{/if}}
+                <span class="label label-primary pull-right">+{{pointsAwarded}} {{_ "points"}}</span>
               </a>
             {{/if}}
           {{/each}}
@@ -72,7 +72,7 @@
         {{else}}
           <div class="alert alert-info">
             <p>
-              {{member.profile.name}} hasn't gained any activity points yet!
+              {{member.profile.name}} {{_ "no_activity_no_points"}}
             </p>
           </div>
        {{/if}}
@@ -80,7 +80,7 @@
 
       <div class="col-md-3">
         {{#with member}}
-          <h4 class="sub-header">About {{profile.name}}</h4>
+          <h4 class="sub-header">{{_ "about"}} {{profile.name}}</h4>
           {{#each profile.answers }}
             <p>
               <strong>{{question}}</strong>
