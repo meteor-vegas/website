@@ -1,4 +1,6 @@
 Meteor.startup(function() {
-  Meteor.call("fetchProfiles");
-  Meteor.call("fetchEvents", "upcoming,past");
+  if(Meetups.find().count() === 0) {
+    Meteor.call("fetchProfiles");
+    Meteor.call("fetchEvents", "upcoming,past");
+  }
 });
