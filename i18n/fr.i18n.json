@@ -27,5 +27,6 @@
   "header_my_profile" : "Mon profil",
   "header_logout" : "Déconnexion",
   "header_sign_in" : "Connexion",
-  "build_with_meteor" : "Développé avec Meteor.js"
+  "build_with_meteor" : "Développé avec Meteor.js",
+  "next_meetup": "Prochain Meetup"
 }
