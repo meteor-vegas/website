@@ -57,14 +57,14 @@
             {{#if isTypeCustom}}
               <a href="#" class="list-group-item">
                 <i class="{{ icon }}"></i> Reason: <strong>{{ subjectTitle }}</strong>
-                <span class="label label-primary pull-right">+{{points}} Points</span>
                 {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>Remove</span>{{/if}}
+                <span class="label label-primary pull-right">+{{points}} Points</span>
               </a>
             {{else}}
               <a href="{{ subjectURL }}" class="list-group-item">
                 <i class="{{ icon }}"></i> {{ actionDescription }} <strong>{{ subjectTitle }}</strong>
-                <span class="label label-primary pull-right">+{{pointsAwarded}} Points</span>
                 {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>Remove</span>{{/if}}
+                <span class="label label-primary pull-right">+{{pointsAwarded}} Points</span>
               </a>
             {{/if}}
           {{/each}}
