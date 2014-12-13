@@ -172,6 +172,9 @@ Router.map(function() {
   });
 
   this.route('coupons', {
+    path: '/coupons'
+  });
+  this.route('couponAdd', {
     path: '/coupons/:_id',
     onRun: function () {
       console.log(this.params._id);
