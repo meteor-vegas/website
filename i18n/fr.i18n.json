@@ -18,7 +18,7 @@
   "meetups_going" : "Going",
   "meetups_rsvp" : "RSVP",
   "all_meetups" : "Tous les Meetup",
-  "previous_meetups" : "Meetup précedent",
+  "previous_meetups" : "Meetup précedents",
   "header_home" : "Accueil",
   "header_meetups" : "Meetups",
   "header_presentations" : "Présentations",
@@ -27,5 +27,6 @@
   "header_my_profile" : "Mon profil",
   "header_logout" : "Déconnexion",
   "header_sign_in" : "Connexion",
+  "meetup_date_format" : "dddd Do MMMM  [à] HH:mm",
   "build_with_meteor" : "Développé avec Meteor.js"
 }
