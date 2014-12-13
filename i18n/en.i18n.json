@@ -16,6 +16,7 @@
   "add_a_comment" : "Add a comment",
   "reason": "Reason:",
   "add": "Add",
+  "cancel": "Cancel",
   "add_a_comment_placeholder" : "Enter your comment…",
   "meetups_featured_meetup" : "Featured Meetup",
   "meetups_going" : "Going",
