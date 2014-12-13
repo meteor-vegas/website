@@ -13,6 +13,8 @@
   "view_details" : "View Details",
   "comment_posted_by" : "Posted by",
   "add_a_comment" : "Add a comment",
+  "reason": "Reason",
+  "add": "Add",
   "add_a_comment_placeholder" : "Enter your comment…",
   "meetups_featured_meetup" : "Featured Meetup",
   "meetups_going" : "Going",

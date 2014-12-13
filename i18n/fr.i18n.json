@@ -19,6 +19,8 @@
   "meetups_rsvp" : "RSVP",
   "all_meetups" : "Tous les Meetup",
   "previous_meetups" : "Meetup précedents",
+  "reason" : "Raison",
+  "add": "Ajouter",
   "header_home" : "Accueil",
   "header_meetups" : "Meetups",
   "header_presentations" : "Présentations",
