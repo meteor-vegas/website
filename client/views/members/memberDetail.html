@@ -15,6 +15,8 @@
               {{#each profile.socialLinks}}
                 <li><a href="{{url}}" target="_blank"><i class="ion-social-{{service}}"></i></a></li>
               {{/each}}
+              <!-- Hack for missing Meetup.com social icon in ionicons font. -->
+              <li><a href="{{profile.meetupProfileUrl}}" class="member-detail" title="{{ profile.name }} sur meetup.com" target="_blank"><i class="ion-social-meetup">M</i></a></li>
             </ul>
           </div>
         </div>

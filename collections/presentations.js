@@ -13,3 +13,11 @@ Presentations.after.insert(function(userId, doc) {
 Presentations.before.insert(function (userId, doc) {
   doc.createdAt = moment().toDate();
 });
+
+if (Meteor.isServer) {
+  Presentations.after.remove(function (userId, doc) {
+    Activities.remove({
+      subjectId: doc._id
+    });
+  });
+}
