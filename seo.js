@@ -1,6 +1,6 @@
 Meteor.startup(function() {
   if(Meteor.isClient) {
-    if(Meteor.settings && Meteor.settings.public && Meteor.settings.public.default_lang)
+    if(Meteor.settings.public.default_lang)
       TAPi18n.setLanguage(Meteor.settings.public.default_lang);
 
     SEO.config({
