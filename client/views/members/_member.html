@@ -10,8 +10,8 @@
 
       <ul class="list-inline">
         <li><a href="{{ profile.meetupProfileUrl }}" class="btn btn-default btn-social-link" target="_blank"><i class="ion-person"></i></a></li>
-        {{#each profile.socialLinks}}
-          <li><a href="{{url}}" class="btn btn-default btn-social-link" target="_blank"><i class="ion-social-{{service}}"></i></a></li>
+        {{#each social}}
+          <li><a href="{{url}}" class="btn btn-default btn-social-link" target="_blank"><i class="ion-{{icon}}"></i></a></li>
         {{/each}}
       </ul>
     </div>

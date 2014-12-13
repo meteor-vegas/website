@@ -18,8 +18,8 @@ function ShakeIt (obj,margin,time,cycles,dir) {
     if (dir == 'vert') {$(obj).animate({marginTop: (i!=cycles)*j*margin}, {duration:speed, queue:true});}
     else {$(obj).animate({marginLeft: (i!=cycles)*j*margin}, {duration:speed, queue:true});}
     margin/=margRat;
-	};
-};
+	}
+}
 
 ////////////////////
 

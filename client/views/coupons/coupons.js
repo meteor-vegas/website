@@ -1,0 +1,2 @@
+Template.coupons.rendered = function() {
+};

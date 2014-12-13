@@ -11,19 +11,20 @@ Meteor.startup(function() {
     });
     var userData = response.data;
 
+    var thumbnailUrl;
     if(userData.hasOwnProperty("photo") && userData.photo.photo_link !== "") {
-      var thumbnailUrl = userData.photo.photo_link;
+      thumbnailUrl = userData.photo.photo_link;
     } else {
-      var thumbnailUrl = "/default-avatar.png";
+      thumbnailUrl = "/default-avatar.png";
     }
 
     var socialLinks = [];
-    for (service in userData.other_services) {
+    for (var service in userData.other_services) {
       if(service === "twitter") {
-        var username = userData.other_services['twitter']['identifier'];
+        var username = userData.other_services.twitter.identifier;
         socialLinks.push({'service': 'twitter', 'url': 'https://twitter.com/' + username});
       } else if(service) {
-        var url = userData.other_services[service]['identifier'];
+        var url = userData.other_services[service].identifier;
         socialLinks.push({'service': service, 'url': url});
       }
     }

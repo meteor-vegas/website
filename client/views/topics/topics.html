@@ -6,14 +6,14 @@
       <div class="col-md-10 col-md-push-1">
         <div class="page-header">
           <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#new-topic-modal">
-            <i class="ion-plus"></i> Suggest a Topic
+            <i class="ion-plus"></i> {{_ "sugest_topic"}}
           </button>
-          <h1>Topics</h1>
+          <h1>{{_ "topics"}}</h1>
         </div>
 
         <ul class="nav nav-tabs">
-          <li class="{{ activeTabClass 'suggested' }}"><a href="{{ pathFor 'topics' query='tab=suggested'}}">Suggested</a></li>
-          <li class="{{ activeTabClass 'presented' }}"><a href="{{ pathFor 'topics' query='tab=presented'}}">Presented</a></li>
+          <li class="{{ activeTabClass 'suggested' }}"><a href="{{ pathFor 'topics' query='tab=suggested'}}">{{_ "suggested"}}</a></li>
+          <li class="{{ activeTabClass 'presented' }}"><a href="{{ pathFor 'topics' query='tab=presented'}}">{{_ "presented"}}</a></li>
         </ul>
 
         <br>
@@ -64,7 +64,7 @@
           <form>
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Suggest a Topic</h4>
+              <h4 class="modal-title">{{_ "sugest_topic"}}</h4>
             </div>
             <div class="modal-body">
               <div class="form-group">
@@ -84,7 +84,7 @@
         {{else}}
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Suggest a Topic</h4>
+            <h4 class="modal-title">{{_ "sugest_topic"}}</h4>
           </div>
           <div class="modal-body text-center">
             <p>
@@ -92,7 +92,7 @@
             </p>
             <p>
               <button type="button" class="btn btn-primary" data-login-with="meetup">
-                <img src="/meetup.png" width=22 height=22> Sign In
+                <img src="/meetup.png" width=22 height=22> {{_ "sign_in"}}
               </button>
             </p>
           </div>

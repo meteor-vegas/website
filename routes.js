@@ -171,6 +171,16 @@ Router.map(function() {
     }
   });
 
+  this.route('coupons', {
+    path: '/coupons/:_id',
+    onRun: function () {
+      console.log(this.params._id);
+      Meteor.call('useCoupon', this.params._id, function (err, result) {
+        if (err) alert(err);
+      });
+    }
+  });
+
   this.route('notFound', {
     path: '*',
     where: 'server',
