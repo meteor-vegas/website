@@ -3,7 +3,7 @@ Meetups = new Mongo.Collection('meetups');
 Meetups.helpers({
   attendees: function() {
     if (this.attendeeIds) {
-      return Meteor.users.find({_id: {$in: this.attendeeIds}});
+      return Meteor.users.find({_id: {$in: this.attendeeIds}}, { sort: { "profile.points": -1 }});
     }
   },
 
