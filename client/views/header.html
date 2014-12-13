@@ -14,11 +14,11 @@
 
       <div class="collapse navbar-collapse" id="main-nav">
         <ul class="nav navbar-nav navbar-right">
-          <li class="{{ isActiveRoute regex='home' }}"><a href="{{ pathFor 'home' }}">{{_ "header_home"}}</a></li>
-          <li class="{{ isActivePath regex='meetups' }}"><a href="{{ pathFor 'meetups' }}">{{_ "header_meetups"}}</a></li>
-          <li class="{{ isActivePath regex='presentations' }}"><a href="{{ pathFor 'presentations' }}">{{_ "header_presentations"}}</a></li>
-          <li class="{{ isActivePath regex='topics' }}"><a href="{{ pathFor 'topics' }}">{{_ "header_topics"}}</a></li>
-          <li class="{{ isActivePath regex='members' }}"><a href="{{ pathFor 'members' }}">{{_ "header_members"}}</a></li>
+          <li class="{{ isActiveRoute regex='home' }}"><a href="{{ pathFor 'home' }}">{{_ "home"}}</a></li>
+          <li class="{{ isActivePath regex='meetups' }}"><a href="{{ pathFor 'meetups' }}">{{_ "meetups"}}</a></li>
+          <li class="{{ isActivePath regex='presentations' }}"><a href="{{ pathFor 'presentations' }}">{{_ "presentations"}}</a></li>
+          <li class="{{ isActivePath regex='topics' }}"><a href="{{ pathFor 'topics' }}">{{_ "topics"}}</a></li>
+          <li class="{{ isActivePath regex='members' }}"><a href="{{ pathFor 'members' }}">{{_ "members"}}</a></li>
           {{#if currentUser}}
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -27,15 +27,15 @@
               </a>
               <ul class="dropdown-menu" role="menu">
                 {{#with currentUser}}
-                  <li><a href="{{ pathFor 'memberDetail' }}"><i class="ion-person"></i> {{_ "header_my_profile"}}</a></li>
+                  <li><a href="{{ pathFor 'memberDetail' }}"><i class="ion-person"></i> {{_ "my_profile"}}</a></li>
                 {{/with}}
-                <li><a href="#" data-action="logout"><i class="ion-locked"></i> {{_ "header_logout"}}</a></li>
+                <li><a href="#" data-action="logout"><i class="ion-locked"></i> {{_ "logout"}}</a></li>
               </ul>
             </li>
           {{else}}
             <li>
               <button type="button" class="btn btn-primary navbar-btn" data-login-with="meetup">
-                <img src="/meetup.png" width=22 height=22> {{_ "header_sign_in"}}
+                <img src="/meetup.png" width=22 height=22> {{_ "sign_in"}}
               </button>
             </li>
           {{/if}}
