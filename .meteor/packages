@@ -15,7 +15,7 @@ npm-container
 service-configuration
 underscore
 reywood:publish-composite
-mrt:moment
+momentjs:moment
 alanning:roles
 mrt:underscore-string-latest
 meteor-vegas:likes-widget
