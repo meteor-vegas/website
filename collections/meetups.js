@@ -16,7 +16,7 @@ Meetups.helpers({
           "profile.points": -1,
           createdAt: 1
         }
-      }
+      };
 
       return Meteor.users.find(query, options);
     }
@@ -34,7 +34,7 @@ Meetups.helpers({
         "profile.points": -1,
         createdAt: 1
       }
-    }
+    };
 
     return Meteor.users.find(query, options);
   },

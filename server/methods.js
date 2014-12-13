@@ -10,17 +10,14 @@ Meteor.methods({
     switch(endpoint){
     case "getEvents":
       return AsyncMeetup.getEvents(param);
-      break
     case "getProfiles":
       return AsyncMeetup.getProfiles(param);
-      break
     case "getRSVPs":
       return AsyncMeetup.getRSVPs(param);
-      break
     case "postRSVP" :
       AsyncMeetup.postRSVP(param); //Does not seem to be working, can't pass access token as headers
+      break;
     default:
-
     }
   },
 
@@ -39,21 +36,22 @@ Meteor.methods({
       for (var i = 0, l = response.meta.count; i < l; i++) {
         var node = response.results[i];
 
+        var thumbnailUrl;
         if(response.results[i].hasOwnProperty("photo") && response.results[i].photo.photo_link !== "") {
-          var thumbnailUrl = response.results[i].photo.photo_link;
+          thumbnailUrl = response.results[i].photo.photo_link;
         } else {
-          var thumbnailUrl = "/default-avatar.png";
+          thumbnailUrl = "/default-avatar.png";
         }
 
         var socialLinks = [];
         var userId;
         var meetupUid = response.results[i].member_id;
-        for (service in response.results[i].other_services) {
+        for (var service in response.results[i].other_services) {
           if(service === "twitter") {
-            var username = response.results[i].other_services['twitter']['identifier'];
+            var username = response.results[i].other_services.twitter.identifier;
             socialLinks.push({'service': 'twitter', 'url': 'https://twitter.com/' + username});
           } else if(service) {
-            var url = response.results[i].other_services[service]['identifier'];
+            var url = response.results[i].other_services[service].identifier;
             socialLinks.push({'service': service, 'url': url});
           }
         }
@@ -115,24 +113,24 @@ Meteor.methods({
       }
       for (var i = 0, l = response.meta.count; i < l; i++) {
         var meetupData = response.results[i];
-        var existingMeetup = Meetups.findOne({meetupId: meetupData['id']});
+        var existingMeetup = Meetups.findOne({meetupId: meetupData.id});
         var meetupDocId; //Mongo doc _id of meetup document. This is not the meetup.com's meetupId
 
         var meetup_hash = {
-          title: meetupData['name'],
-          description: meetupData['description'],
-          meetupId: meetupData['id'],
-          meetupUrl: meetupData['event_url'],
-          featured : meetupData['featured'],
-          dateTime: moment(meetupData['time']).toDate()
-        }
-        if(meetupData['venue']){
+          title: meetupData.name,
+          description: meetupData.description,
+          meetupId: meetupData.id,
+          meetupUrl: meetupData.event_url,
+          featured : meetupData.featured,
+          dateTime: moment(meetupData.time).toDate()
+        };
+        if(meetupData.venue){
           meetup_hash = _.extend(meetup_hash, {location: {
-              name: meetupData['venue']['name'],
-              address: meetupData['venue']['address_1'],
-              lat: meetupData['venue']['lat'],
-              lon: meetupData['venue']['lon'],
-              description: meetupData['how_to_find_us']
+              name: meetupData.venue.name,
+              address: meetupData.venue.address_1,
+              lat: meetupData.venue.lat,
+              lon: meetupData.venue.lon,
+              description: meetupData.how_to_find_us
           }});
         }
 
@@ -143,10 +141,10 @@ Meteor.methods({
           meetupId = Meetups.insert(meetup_hash);
         }
 
-        Meteor.call('MeetupAPI', 'getRSVPs', {"event_id": meetupData['id'], "rsvp": "yes"}, function(err, response) {
+        Meteor.call('MeetupAPI', 'getRSVPs', {"event_id": meetupData.id, "rsvp": "yes"}, function(err, response) {
           for (var j = 0, l = response.meta.count; j < l; j++) {
             var rsvpData = response.results[j];
-            var meetupUserId = rsvpData['member']['member_id'];
+            var meetupUserId = rsvpData.member.member_id;
             var user = Meteor.users.findOne({'profile.meetupId': meetupUserId});
             if (user) {
               var meetup = Meetups.findOne({_id:meetupDocId});
@@ -155,7 +153,7 @@ Meteor.methods({
                 Activities.insert({
                   userId: user._id,
                   subjectId: meetupDocId,
-                  subjectTitle: meetupData['name'],
+                  subjectTitle: meetupData.name,
                   subjectType: 'meetup',
                   type: 'rsvp'
                 });
@@ -181,7 +179,7 @@ Meteor.methods({
       HTTP.call("POST" , "https://api.meetup.com/2/rsvp/",
         {
           params: {'event_id' : eventId, 'rsvp' : 'yes', 'key':api_key},
-          headers:{"Accept":"*/*", "User-Agent": "Meetup API lib for Node.js 0.1.3", "Authorization" : "bearer " + user.services["meetup"].accessToken}
+          headers:{"Accept":"*/*", "User-Agent": "Meetup API lib for Node.js 0.1.3", "Authorization" : "bearer " + user.services.meetup.accessToken}
         },
         function(error, response) {
           if (error) {
@@ -279,7 +277,7 @@ Meteor.methods({
 
   rsvp: function(params) {
     if (Meteor.userId()) {
-      Meetups.update({_id: params.meetupDocId}, {$addToSet: {'attendeeIds': Meteor.userId()}})
+      Meetups.update({_id: params.meetupDocId}, {$addToSet: {'attendeeIds': Meteor.userId()}});
 
       var meetup = Meetups.findOne(params.meetupDocId);
       Activities.insert({

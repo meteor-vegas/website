@@ -26,14 +26,11 @@ Activities.helpers({
   subjectURL: function() {
     switch (this.subjectType) {
     case 'topic':
-      return Router.routes['topicDetail'].path({_id: this.subjectId});
-      break;
+      return Router.routes.topicDetail.path({_id: this.subjectId});
     case 'presentation':
-      return Router.routes['presentationDetail'].path({_id: this.subjectId});
-      break;
+      return Router.routes.presentationDetail.path({_id: this.subjectId});
     case 'meetup':
-      return Router.routes['meetupDetail'].path({_id: this.subjectId});
-      break;
+      return Router.routes.meetupDetail.path({_id: this.subjectId});
     }
   },
 
@@ -41,28 +38,20 @@ Activities.helpers({
     switch (this.type) {
     case 'liked_presentation':
       return 'Liked a presentation: ';
-      break;
     case 'commented_on_presentation':
       return 'Commented on a presentation: ';
-      break;
     case 'created_presentation':
       return 'Added a presentation: ';
-      break;
     case 'voted_on_topic':
       return 'Voted on a topic: ';
-      break;
     case 'commented_on_topic':
       return 'Commented on a topic: ';
-      break;
     case 'created_topic':
       return 'Suggested a topic: ';
-      break;
     case 'presented_topic':
       return 'Presented a topic: ';
-      break;
     case 'rsvp':
       return 'RSVP\'d to a meetup: ';
-      break;
     }
   },
 

@@ -1,6 +1,6 @@
 Template._topic.helpers({
   alreadyVoted: function() {
-    return Meteor.user() && _(Meteor.user().profile.votedTopicIds).contains(this._id)
+    return Meteor.user() && _(Meteor.user().profile.votedTopicIds).contains(this._id);
   },
 
   hasComments: function() {
