@@ -131,10 +131,10 @@
     <hr>
     <p>
       {{#each meetup.attendeesWithPhoto}}
-        {{> _profilePhoto profile=profile size="100"}}
+        {{> _profilePhoto profile=profile _id=_id size="100"}}
       {{/each}}
       {{#each meetup.attendeesWithoutPhoto}}
-        {{> _profilePhoto profile=profile size="100"}}
+        {{> _profilePhoto profile=profile _id=_id size="100"}}
       {{/each}}
     </p>
     <hr>
