@@ -7,13 +7,14 @@
   "view_all_members" : "View all %s members",
   "friends_and_sponsors" : "Our Friends and Sponsors",
   "confirm_remove_activity": "Are you sure you want to remove this activity?",
+  "remove": "Remove",
   "close" : "Close",
   "submit" : "Submit",
   "next" : "Next",
   "view_details" : "View Details",
   "comment_posted_by" : "Posted by",
   "add_a_comment" : "Add a comment",
-  "reason": "Reason",
+  "reason": "Reason:",
   "add": "Add",
   "cancel": "Cancel",
   "view": "View",
@@ -49,5 +50,7 @@
   "build_with_meteor" : "Built with Meteor.js",
   "points": "Points",
   "add_points": "Add Points",
-  "activity": "Activity"
+  "activity": "Activity",
+  "no_activity_no_points": "hasn't gained any activity points yet!",
+  "about": "About"
 }

@@ -44,6 +44,9 @@ Comments.allow({
 Activities.allow({
   'insert': function(userId, doc) {
     return false;
+  },
+  'remove': function(userId, doc) {
+    return userId && Roles.userIsInRole(userId, ['admin']);
   }
 });
 

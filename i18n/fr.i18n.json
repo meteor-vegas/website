@@ -7,6 +7,7 @@
   "view_all_members" : "Voir les %s membres",
   "friends_and_sponsors" : "Nos amis et sponsors",
   "confirm_remove_activity": "Voulez-vous vraiment supprimer cette activité ?",
+  "remove": "Supprimer",
   "close" : "Fermer",
   "submit" : "Valider",
   "next" : "Suivant",
@@ -20,7 +21,7 @@
   "next_meetup": "Prochain Meetup",
   "all_meetups" : "Tous les Meetup",
   "previous_meetups" : "Meetup précedents",
-  "reason" : "Raison",
+  "reason" : "Raison :",
   "add": "Ajouter",
   "cancel": "Annuler",
   "view": "Voir",
@@ -49,5 +50,7 @@
   "build_with_meteor" : "Développé avec Meteor.js",
   "points": "Points",
   "add_points": "Ajouter des points",
-  "activity": "Activité"
+  "activity": "Activité",
+  "no_activity_no_points": "aucune activité pour le moment !",
+  "about": "A propos de"
 }
