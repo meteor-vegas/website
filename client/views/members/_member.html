@@ -1,7 +1,7 @@
 <template name="_member">
 
   <div class="media">
-    {{> _profilePhoto profile=profile size="100" class="pull-left"}} 
+    {{> _profilePhoto profile=profile size="100" class="pull-left"}}
 
     <div class="media-body">
       <h4 class="media-heading"><a href="{{ pathFor 'memberDetail' }}">{{profile.name}}</a></h4>
@@ -9,8 +9,9 @@
       <p>{{ truncate profile.bio 140 }}</p>
 
       <ul class="list-inline">
+        <li><a href="{{ profile.meetupProfileUrl }}" class="btn btn-default btn-social-link" target="_blank"><i class="ion-person"></i></a></li>
         {{#each profile.socialLinks}}
-          <li><a href="{{url}}" class="btn btn-default btn-social-link" target="_blank"><i class="ion-social-{{service}}"></i></a></li>
+          <li><a href="{{url}}" class="btn btn-default btn-social-link" target="_blank"><i class="ion-person"></i></a></li>
         {{/each}}
       </ul>
     </div>

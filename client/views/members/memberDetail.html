@@ -12,11 +12,11 @@
             <p>{{ truncate profile.bio 140 }}</p>
             <ul class="list-inline">
               <li><span class="label label-primary">+{{profile.points}} Points</span></li>
+              <li><a href="{{ profile.meetupProfileUrl }}" class="member-detail" title="{{ profile.name }} sur meetup.com" target="_blank"><i class="ion-person"></i></a></li>
               {{#each profile.socialLinks}}
                 <li><a href="{{url}}" target="_blank"><i class="ion-social-{{service}}"></i></a></li>
               {{/each}}
               <!-- Hack for missing Meetup.com social icon in ionicons font. -->
-              <li><a href="{{profile.meetupProfileUrl}}" class="member-detail" title="{{ profile.name }} sur meetup.com" target="_blank"><i class="ion-social-meetup">M</i></a></li>
             </ul>
           </div>
         </div>
