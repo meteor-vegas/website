@@ -1,19 +1,13 @@
 Meteor.users.allow({
-  'insert': function(userId, doc) {
-    return true;
+  'insert': function (userId,doc) {
+    return false;
   },
 
   'update': function(userId, doc, fields, modifier) {
-    return userId && userId === doc._id;
-  }
-});
-
-Meteor.users.deny({
-  update: function(userId, doc, fields, modifier) {
-    if (!userId) return true;
-    if (Roles.userIsInRole(userId, ['admin']))
-      return false;
-    return _.contains(_.keys(modifier.$set), 'profile.points');
+    return false;
+  },
+  'remove': function(userId, doc) {
+    return false;
   }
 });
 
@@ -50,6 +44,12 @@ Comments.allow({
 Activities.allow({
   'insert': function(userId, doc) {
     return false;
+  }
+});
+
+Coupons.allow({
+  'insert': function(userId, doc) {
+    return userId && Roles.userIsInRole(userId, ['admin']);
   },
   'remove': function(userId, doc) {
     return userId && Roles.userIsInRole(userId, ['admin']);

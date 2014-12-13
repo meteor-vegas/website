@@ -4,9 +4,9 @@
 
     <div class="page-header">
       <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#add-presentation-modal">
-        <i class="ion-plus"></i> Add a Presentation
+        <i class="ion-plus"></i> {{_ "add_presentation"}}
       </button>
-      <h1>Presentations</h1>
+      <h1>{{_ "presentations"}}</h1>
     </div>
 
     <div class="row">
@@ -35,7 +35,7 @@
           <form>
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Add a Presentation</h4>
+              <h4 class="modal-title">{{_ "add_presentation"}}</h4>
             </div>
             <div class="modal-body">
               <div id="presentation-wrapper" class="embed-responsive embed-responsive-16by9">
@@ -65,7 +65,7 @@
         {{else}}
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Add a Presentation</h4>
+            <h4 class="modal-title">{{_ "add_presentation"}}</h4>
           </div>
           <div class="modal-body text-center">
             <p>
@@ -73,7 +73,7 @@
             </p>
             <p>
               <button type="button" class="btn btn-primary" data-login-with="meetup">
-                <img src="/meetup.png" width=22 height=22> Sign In
+                <img src="/meetup.png" width=22 height=22> {{_ "sign_in"}}
               </button>
             </p>
           </div>
