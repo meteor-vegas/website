@@ -18,14 +18,20 @@ function ShakeIt (obj,margin,time,cycles,dir) {
 		if (dir == 'vert') {$(obj).animate({marginTop: (i!=cycles)*j*margin}, {duration:speed, queue:true});}
 		else {$(obj).animate({marginLeft: (i!=cycles)*j*margin}, {duration:speed, queue:true});}
 		margin/=margRat;
-	};
-};
+	}
+}
 
 ////////////////////
 
 Template.presentations.rendered = function() {
 };
 
+<<<<<<< HEAD
+Template.presentations.presentations = function() {
+  return Presentations.find({});
+};
+=======
+>>>>>>> montreal/master
 
 Template.presentations.helpers( {
   presentations: function(){
@@ -36,8 +42,12 @@ Template.presentations.helpers( {
 Template.presentations.helpers({
   presentationURL: function() {
     return Session.get("presentationURL");
+<<<<<<< HEAD
+};
+=======
   }
 });
+>>>>>>> montreal/master
 
 Template.presentations.events({
 

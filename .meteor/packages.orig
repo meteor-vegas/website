@@ -24,7 +24,11 @@ manuelschoebel:ms-seo
 spiderable
 chfritz:easycron
 matb33:collection-hooks
+<<<<<<< HEAD
+http
+=======
 tap:i18n
 multiply:iron-router-progress
 meteorhacks:subs-manager
+>>>>>>> montreal/master
 

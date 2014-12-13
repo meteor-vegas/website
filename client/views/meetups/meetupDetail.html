@@ -37,7 +37,7 @@
                 {{/if}}
               {{/if}}
               {{#each meetup.truncatedAttendees}}
-                <a href="{{ pathFor 'memberDetail' }}" title="{{ profile.name }}" data-toggle="tooltip"><img class="img-circle" width=30 height=30 src="{{profile.thumbnailUrl}}"></a>
+                {{> _profilePhoto profile=profile size="30"}}
               {{/each}}
               {{#if displayOverflowAttendees}}
                 <small>and {{ meetup.numberOfOverflowAttendees }} more are going</small>
@@ -66,9 +66,7 @@
       {{#each meetup.topics}}
         <div class="media">
           {{#with presenter}}
-            <a class="pull-left" href="#">
-              <img class="media-object img-rounded img-thumbnail" src="{{ profile.thumbnailUrl }}" width="150" height="150">
-            </a>
+            {{> _profilePhoto profile=profile size="150" class="pull-left"}} 
           {{/with}}
           <div class="media-body">
             <h4 class="media-heading">
@@ -133,7 +131,7 @@
     <hr>
     <p>
       {{#each meetup.attendees}}
-        <a href="{{ pathFor 'memberDetail' }}" data-toggle="tooltip" title="{{ profile.name }}"><img class="img-circle" src="{{profile.thumbnailUrl}}" width=100 height=100></a>
+        {{> _profilePhoto profile=profile size="100"}} 
       {{/each}}
     </p>
     <hr>

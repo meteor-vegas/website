@@ -18,10 +18,15 @@
   },
   "public" : {
     "meetup" : {
+<<<<<<< HEAD
       "group_name" : "Meteor Vegas",
       "group_urlname" : "Meteor-Las-Vegas",
       "group_info" : "We are a group of Meteor.js enthusiasts who meet twice a month in Las Vegas, NV",
       "meteorday": "http://www.meetup.com/Meteor-Las-Vegas/events/212820662/"
+=======
+      "group_name" : "Meteor Montreal",
+      "group_urlname" : "Meteor-Montreal",
+>>>>>>> montreal/master
     },
     "links" : {
       "meetup": "http://www.meetup.com/Meteor-Montreal/",

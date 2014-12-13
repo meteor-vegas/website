@@ -21,7 +21,8 @@
 
         {{#if topic.presented}}
           <div class="alert alert-info">
-            <img src="{{topic.presenter.profile.thumbnailUrl}}" width=30 height=30 class="img-circle" /> This topic was presented by <a href="{{ pathFor 'memberDetail' _id=topic.presenterId}}">{{ topic.presenter.profile.name }}</a> at <a href="{{ pathFor 'meetupDetail' _id=topic.meetupId }}">{{ topic.meetup.title }}</a>
+            {{> _profilePhoto profile=topic.presenter.profile size="30"}} 
+            This topic was presented by <a href="{{ pathFor 'memberDetail' _id=topic.presenterId}}">{{ topic.presenter.profile.name }}</a> at <a href="{{ pathFor 'meetupDetail' _id=topic.meetupId }}">{{ topic.meetup.title }}</a>
           </div>
         {{/if}}
 

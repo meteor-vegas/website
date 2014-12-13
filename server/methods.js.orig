@@ -111,6 +111,36 @@ Meteor.methods({
 				var existingMeetup = Meetups.findOne({meetupId: meetupData['id']});
 				var meetupDocId; //Mongo doc _id of meetup document. This is not the meetup.com's meetupId
 
+<<<<<<< HEAD
+				if (existingMeetup) {
+					meetupDocId = existingMeetup._id;
+					Meetups.update({_id: existingMeetup._id}, {
+						$set: {
+							title: meetupData['name'],
+							description: meetupData['description'],
+							meetupId: meetupData['id'],
+							meetupUrl: meetupData['event_url'],
+							featured : meetupData['featured'],
+							dateTime: moment(meetupData['time']).toDate(),
+							location: {
+								name: meetupData['venue']['name'],
+								address: meetupData['venue']['address_1'],
+								lat: meetupData['venue']['lat'],
+								lon: meetupData['venue']['lon'],
+								description: meetupData['how_to_find_us']
+							}
+						}
+					});
+				} else {
+					meetupId = Meetups.insert({
+						title: meetupData['name'],
+						description: meetupData['description'],
+						meetupId: meetupData['id'],
+						meetupUrl: meetupData['event_url'],
+						featured : meetupData['featured'],
+						dateTime: moment(meetupData['time']).toDate(),
+						location: {
+=======
 				var meetup_hash = {
 					title: meetupData['name'],
 					description: meetupData['description'],
@@ -121,6 +151,7 @@ Meteor.methods({
 				}
 				if(meetupData['venue']){
 					meetup_hash = _.extend(meetup_hash, {location: {
+>>>>>>> montreal/master
 							name: meetupData['venue']['name'],
 							address: meetupData['venue']['address_1'],
 							lat: meetupData['venue']['lat'],

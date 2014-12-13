@@ -14,7 +14,7 @@
       <p>{{ description }}</p>
       <ul class="list-inline">
         {{#with author}}
-          <li><a href="{{ pathFor 'memberDetail' }}"><img class="img-circle" width=30 height=30 src="{{profile.thumbnailUrl}}"> By {{profile.name}}</a></li>
+          <li>{{> _profilePhoto profile=profile size="30"}} By {{profile.name}}</li>
         {{/with}}
         <li>{{ points }} Points</li>
         {{#if hasComments}}

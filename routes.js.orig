@@ -164,7 +164,11 @@ Router.map(function() {
     path: '/meteorday',
     where: 'server',
     action: function() {
+<<<<<<< HEAD
       this.response.writeHead(301, {Location: Meteor.settings.meetup.meteorday});
+=======
+      this.response.writeHead(301, {Location: 'http://www.meetup.com/Meteor-Montreal/events/212820662/'});
+>>>>>>> montreal/master
       this.response.end();
     }
   });

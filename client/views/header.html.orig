@@ -9,7 +9,11 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
+<<<<<<< HEAD
+        <a class="navbar-brand" href="{{ pathFor 'home' }}"><img src="/meteor-white.png" width=30 height=30> {{groupName}}</a>
+=======
         <a class="navbar-brand" href="{{ pathFor 'home' }}"><img src="/meteor-white.png" width=30 height=30> {{_ "group_name"}}</a>
+>>>>>>> montreal/master
       </div>
 
       <div class="collapse navbar-collapse" id="main-nav">

@@ -1,9 +1,8 @@
 <template name="_member">
 
   <div class="media">
-    <a class="pull-left" href="{{ pathFor 'memberDetail' }}">
-      <img class="media-object img-circle" src="{{profile.thumbnailUrl}}" width="100" height="100">
-    </a>
+    {{> _profilePhoto profile=profile size="100" class="pull-left"}} 
+
     <div class="media-body">
       <h4 class="media-heading"><a href="{{ pathFor 'memberDetail' }}">{{profile.name}}</a></h4>
       <span class="label label-primary">+{{profile.points}} Points</span>
