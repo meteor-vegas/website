@@ -3,7 +3,7 @@ Template.topics.rendered = function() {
 
 Template.topics.helpers({
   'activeTabClass': function(tab) {
-    if (tab === Router.current().params.tab) {
+    if (tab === Router.current().params.query.tab) {
       return 'active';
     }
   }
