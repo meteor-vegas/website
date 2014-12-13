@@ -2,7 +2,7 @@
 @import '../../stylesheets/variables.import.less';
 
 .jumbotron.jumbotron-home {
-  background: @brand-primary url("/homepage-banner.png") center center no-repeat;
+  background: -webkit-linear-gradient(left, rgba(0,0,255,1) 0%,rgba(0,0,255,1) 33%,rgba(128,128,128,1) 33%,rgba(255,255,255,1) 66%,rgba(255,0,0,1) 66%,rgba(255,0,0,1) 100%), url("/homepage-banner.png") center center no-repeat;
   background-size: cover;
   background-blend-mode: overlay;
   color: #fff;
@@ -20,6 +20,12 @@
   p {
     font-size: @font-size-large;
     color: lighten(@brand-primary, 30%);
+  }
+
+  .container {
+    width: 50%;
+    padding-top: 15px;
+    background: rgba(0, 0, 0, 0.5);
   }
 
   .btn-primary {
@@ -46,7 +52,7 @@
   }
 }
 
-.homepage-section-members {
+.homepage-section-members, .homepage-section-projects {
   background: @gray-lighter;
 
   .top-members a {

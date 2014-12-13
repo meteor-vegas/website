@@ -101,6 +101,13 @@ if (Meteor.isServer) {
       });
     }
   });
+
+  Activities.after.remove(function(userId, doc) {
+    var points = ACTIVITY_POINTS[doc.type];
+    if (points) {
+      Meteor.users.update({_id: doc.userId}, {$inc: {'profile.points': (-1)*points}});
+    }
+  });
 }
 
 Activities.before.insert(function(userId, doc) {

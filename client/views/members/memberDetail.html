@@ -12,6 +12,7 @@
             <p>{{ truncate profile.bio 140 }}</p>
             <ul class="list-inline">
               <li><span class="label label-primary">+{{profile.points}} Points</span></li>
+              <li><a href="{{ profile.meetupProfileUrl }}" class="member-detail" title="{{ profile.name }} sur meetup.com" target="_blank"><i class="ion-person"></i></a></li>
               {{#each profile.socialLinks}}
                 <li><a href="{{url}}" target="_blank"><i class="ion-social-{{service}}"></i></a></li>
               {{/each}}
@@ -20,6 +21,7 @@
                   <a href="#" class="btn add-points-toggle">Add Points</a>
                 {{/if}}
               </li>
+              <!-- Hack for missing Meetup.com social icon in ionicons font. -->
             </ul>
           </div>
             {{#if isInRole 'admin'}}
@@ -52,11 +54,15 @@
         {{#if member.activities.count}}
         <div class="list-group">
           {{#each member.activities}}
+<<<<<<< HEAD
             {{#if isTypeCustom}}
               <a href="#" class="list-group-item"><i class="{{ icon }}"></i> Reason: <strong>{{ subjectTitle }}</strong> <span class="label label-primary pull-right">+{{points}} Points</span></a>
             {{else}}
               <a href="{{ subjectURL }}" class="list-group-item"><i class="{{ icon }}"></i> {{ actionDescription }} <strong>{{ subjectTitle }}</strong> <span class="label label-primary pull-right">+{{pointsAwarded}} Points</span></a>
             {{/if}}
+=======
+            <a href="{{ subjectURL }}" class="list-group-item"><i class="{{ icon }}"></i> {{ actionDescription }}<strong>{{ subjectTitle }}</strong> {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>Remove</span>{{/if}} <span class="label label-primary pull-right">+{{pointsAwarded}} Points</span></a>
+>>>>>>> 252aaba19a392e53d728ec349852700028cf97a2
           {{/each}}
         </div>
         {{else}}
