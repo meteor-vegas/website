@@ -6,5 +6,6 @@
   "who_are_we" : "Who We Are",
   "view_all_members" : "View All Members",
   "friends_and_sponsors" : "Our Friends and Sponsors",
-  "build_with_meteor" : "Built with Meteor.js"
+  "build_with_meteor" : "Built with Meteor.js",
+  "confirm_remove_activity": "Are you sure you want to remove this activity?"
 }

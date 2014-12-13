@@ -30,7 +30,7 @@
         {{#if member.activities.count}}
         <div class="list-group">
           {{#each member.activities}}
-            <a href="{{ subjectURL }}" class="list-group-item"><i class="{{ icon }}"></i> {{ actionDescription }} <strong>{{ subjectTitle }}</strong> <span class="label label-primary pull-right">+{{pointsAwarded}} Points</span></a>
+            <a href="{{ subjectURL }}" class="list-group-item"><i class="{{ icon }}"></i> {{ actionDescription }}<strong>{{ subjectTitle }}</strong> {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>Remove</span>{{/if}} <span class="label label-primary pull-right">+{{pointsAwarded}} Points</span></a>
           {{/each}}
         </div>
         {{else}}
