@@ -43,17 +43,17 @@
               </div>
               <div id="url-wrapper">
                 <div class="form-group">
-                  <input type="text" class="form-control" id="url" placeholder="Paste URL to the presentation">
-                  <small>Supports Slides.com, Slideshare, Prezi, Youtube, Vimeo</small>
+                  <input type="text" class="form-control" id="url" placeholder={{_ "presentation_url"}}>
+                  <small>{{_ "supports"}} Slides.com, Slideshare, Prezi, Youtube, Vimeo</small>
                 </div>
               </div>
               <div id="error-wrapper" class="alert alert-warning">
-                Sorry - {{presentationURL}} could not be loaded.
+                {{_ "sorry"}} - {{presentationURL}} {{_ "could_not_loaded"}}.
               </div>
               <div id="title-wrapper">
                 <div class="form-group">
                   <label for="title">Title</label>
-                  <input type="text" class="form-control" id="title" name="customTitle" placeholder="Enter a title for this presentation">
+                  <input type="text" class="form-control" id="title" name="customTitle" placeholder={{_ "presentation_title"}}>
                 </div>
               </div>
             </div>
@@ -68,9 +68,7 @@
             <h4 class="modal-title">{{_ "add_presentation"}}</h4>
           </div>
           <div class="modal-body text-center">
-            <p>
-              Sign in with Meetup to add a presentation!
-            </p>
+            <p>{{_ "presentation_required_signin"}}</p>
             <p>
               <button type="button" class="btn btn-primary" data-login-with="meetup">
                 <img src="/meetup.png" width=22 height=22> {{_ "sign_in"}}
