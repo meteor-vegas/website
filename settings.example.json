@@ -16,6 +16,18 @@
       "group_urlname" : "Meteor-Montreal"
     }
   },
+  "coupons": {
+    "MD14": {
+      "state": true,
+      "title": "Participation au Meteor day 2014",
+      "points": 200
+    },
+    "MD13": {
+      "state": false,
+      "title": "Participation au Meteor day 2013",
+      "points": 20
+    }
+  },
   "public" : {
     "default_lang": "fr",
     "meetup" : {

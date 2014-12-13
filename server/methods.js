@@ -336,5 +336,30 @@ Meteor.methods({
         type: 'presented_topic'
       });
     }
+  },
+  useCoupon: function (couponCode) {
+    var coupon = Meteor.settings.coupons[couponCode];
+    if (!Meteor.userId()) {
+      throw new Meteor.Error('not-logged', 'Vous devez etre connecter');
+    }
+    if (!coupon) {
+      throw new Meteor.Error('unknown-coupon', 'Ce coupon n exist pas');
+    }
+    if (!coupon.state) {
+      throw new Meteor.Error('disabled-coupon', 'Ce coupon n est pas active');
+    }
+    if (Meteor.user().profile.coupons && ~Meteor.user().profile.coupons.indexOf(couponCode)) {
+      throw new Meteor.Error('already-used-coupon', 'Vous avez deja utilise ce coupon');
+    }
+
+    Activities.insert({
+      userId: Meteor.userId(),
+      subjectId: couponCode,
+      subjectTitle: coupon.title,
+      subjectType: 'coupon',
+      type: 'custom',
+      points: coupon.points
+    });
+    Meteor.users.update(Meteor.userId(), {$addToSet: {'profile.coupons': couponCode}});
   }
 });
