@@ -25,6 +25,8 @@
   "home" : "Accueil",
   "meetups" : "Meetups",
   "presentations" : "Présentations",
+  "no_presentations": "Il n'y a pas encore de présentations.",
+  "add_one": "En ajouter une ?",
   "all_presentations": "Toutes les présentations",
   "add_comment": "Ajouter un commentaire",
   "author": "Auteur :",

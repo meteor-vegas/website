@@ -25,6 +25,8 @@
   "home" : "Home",
   "meetups" : "Meetups",
   "presentations" : "Presentations",
+  "no_presentations": "There aren't any presentations yet.",
+  "add_one": "Add one?",
   "all_presentations": "All Presentations",
   "add_comment": "Add a Comment",
   "author": "Author:",
