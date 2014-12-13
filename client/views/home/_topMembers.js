@@ -8,7 +8,7 @@ Template._topMembers.rendered = function() {
 
 
 Template._topMembers.helpers({
-  topMembers: function (){
-    return Meteor.users.find({}, {fields: {profile: 1}, sort: {'profile.points': -1}, limit: 6} );
+  topMembers: function () {
+    return Meteor.users.find({}, { fields: { profile: 1 }, sort: { 'profile.points': -1 }, limit: 9 } );
   }
 });
