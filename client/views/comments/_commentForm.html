@@ -2,16 +2,16 @@
   <form>
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal">&times;</button>
-      <h4 class="modal-title">Add a Comment</h4>
+      <h4 class="modal-title">{{_ "add_a_comment"}}</h4>
     </div>
     <div class="modal-body">
       <div class="form-group">
-        <textarea rows="3" class="form-control" id="body" placeholder="Enter your comment…"></textarea>
+        <textarea rows="3" class="form-control" id="body" placeholder="{{_ "add_a_comment_placeholder"}}"></textarea>
       </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="button" class="btn btn-link" data-dismiss="modal">{{_ "close"}}</button>
+      <button type="submit" class="btn btn-primary">{{_ "submit"}}</button>
     </div>
   </form>
 </template>

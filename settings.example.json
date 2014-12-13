@@ -17,6 +17,7 @@
     }
   },
   "public" : {
+    "default_lang": "fr",
     "meetup" : {
       "group_name" : "Meteor Vegas",
       "group_urlname" : "Meteor-Las-Vegas",

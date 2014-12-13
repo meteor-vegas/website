@@ -4,8 +4,14 @@
   "group_info" : "Nous sommes le groupe de Meteor.js à Paris",
   "join_us" : "REJOIGNEZ-NOUS!",
   "who_are_we" : "Qui sommes nous",
-  "view_all_members" : "Voir tous les membres",
+  "view_all_members" : "Voir les %s membres",
   "friends_and_sponsors" : "Nos amis et sponsors",
-  "build_with_meteor" : "Développé avec Meteor.js",
-  "confirm_remove_activity": "Voulez-vous vraiment supprimer cette activité ?"
+  "confirm_remove_activity": "Voulez-vous vraiment supprimer cette activité ?",
+  "close" : "Fermer",
+  "submit" : "Valider",
+  "next" : "Suivant",
+  "comment_posted_by" : "Posté par",
+  "add_a_comment" : "Ajouter un commentaire",
+  "add_a_comment_placeholder" : "Saisissez votre commentaire…",
+  "build_with_meteor" : "Développé avec Meteor.js"
 }
