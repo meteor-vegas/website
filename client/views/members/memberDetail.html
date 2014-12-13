@@ -54,15 +54,19 @@
         {{#if member.activities.count}}
         <div class="list-group">
           {{#each member.activities}}
-<<<<<<< HEAD
             {{#if isTypeCustom}}
-              <a href="#" class="list-group-item"><i class="{{ icon }}"></i> Reason: <strong>{{ subjectTitle }}</strong> <span class="label label-primary pull-right">+{{points}} Points</span></a>
+              <a href="#" class="list-group-item">
+                <i class="{{ icon }}"></i> Reason: <strong>{{ subjectTitle }}</strong>
+                <span class="label label-primary pull-right">+{{points}} Points</span>
+                {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>Remove</span>{{/if}}
+              </a>
             {{else}}
-              <a href="{{ subjectURL }}" class="list-group-item"><i class="{{ icon }}"></i> {{ actionDescription }} <strong>{{ subjectTitle }}</strong> <span class="label label-primary pull-right">+{{pointsAwarded}} Points</span></a>
+              <a href="{{ subjectURL }}" class="list-group-item">
+                <i class="{{ icon }}"></i> {{ actionDescription }} <strong>{{ subjectTitle }}</strong>
+                <span class="label label-primary pull-right">+{{pointsAwarded}} Points</span>
+                {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>Remove</span>{{/if}}
+              </a>
             {{/if}}
-=======
-            <a href="{{ subjectURL }}" class="list-group-item"><i class="{{ icon }}"></i> {{ actionDescription }}<strong>{{ subjectTitle }}</strong> {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>Remove</span>{{/if}} <span class="label label-primary pull-right">+{{pointsAwarded}} Points</span></a>
->>>>>>> 252aaba19a392e53d728ec349852700028cf97a2
           {{/each}}
         </div>
         {{else}}
