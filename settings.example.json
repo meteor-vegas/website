@@ -17,14 +17,14 @@
     }
   },
   "coupons": {
-    "MD14": {
+    "mdb": {
       "state": true,
-      "title": "Participation au Meteor day 2014",
+      "title": "Participate to Meteor Day 2014",
       "points": 200
     },
-    "MD13": {
+    "mda": {
       "state": false,
-      "title": "Participation au Meteor day 2013",
+      "title": "Participate to Meteor Day 2013",
       "points": 20
     }
   },

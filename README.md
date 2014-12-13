@@ -38,6 +38,13 @@ Members are granted activity points when performing certain activities. These po
 * RSVP'd to a Meetup: 10 points
 * Presented a Topic at a Meetup: 50 points
 
+### Coupons
+You can add in `settings.json` an objects with coupons. When a member found a coupon code urls, he can use this url to automatically won the points related to this coupon. In the settings.example.json, it could be `http://localhost:3000/coupons/mdb`.
+
+For example, people who RSVP won 5 points. And during the event, organizers can give the coupon link to people who really are in the event to win more points.
+
+It's a very good way to reward members who help Meteor community.
+
 ## <a name="how-to-install"></a> How To Install
 
 1. Clone the repo `git clone git@github.com:meteor-vegas/website.git`

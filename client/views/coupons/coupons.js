@@ -10,13 +10,7 @@ Template.coupons.events({
   "submit form": function (event) {
     var couponCode = event.target.text.value;
 
-    Meteor.call('useCoupon', couponCode, function (err, result) {
-      // Clear form
-      if (err)
-        Session.set('coupons-error', TAPi18n.__(err.error));
-      else
-        event.target.text.value = "";
-    });
+    Router.go('/coupons/'+couponCode);
 
     // Prevent default form submit
     return false;

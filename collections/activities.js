@@ -80,21 +80,17 @@ Activities.helpers({
 if (Meteor.isServer) {
   Activities.after.insert(function(userId, doc) {
     var points = ACTIVITY_POINTS[doc.type];
+    if(doc.type === 'custom') points = doc.points;
     if (points) {
-      Meteor.users.update({
-        _id: doc.userId
-      }, {
-        $inc: {
-          'profile.points': points
-        }
-      });
+      Meteor.users.update(doc.userId, { $inc: { 'profile.points': points } });
     }
   });
 
   Activities.after.remove(function(userId, doc) {
     var points = ACTIVITY_POINTS[doc.type];
+    if(doc.type === 'custom') points = doc.points;
     if (points) {
-      Meteor.users.update({_id: doc.userId}, {$inc: {'profile.points': (-1)*points}});
+      Meteor.users.update(doc.userId, { $inc: { 'profile.points': -points } });
     }
   });
 }
