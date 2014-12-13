@@ -28,5 +28,7 @@
   "header_logout" : "Logout",
   "header_sign_in" : "Sign In",
   "build_with_meteor" : "Built with Meteor.js",
-  "next_meetup": "Next Meetup"
+  "next_meetup": "Next Meetup",
+  "meetup_date_format" : "dddd MMMM Do [at] h:mmA",
+  "build_with_meteor" : "Built with Meteor.js"
 }

@@ -1,5 +1,5 @@
 Template.registerHelper('longDate', function(date) {
-  return moment(date).format('dddd MMMM Do [at] h:mmA');
+  return moment(date).format(TAPi18n.__('meetup_date_format'));
 });
 
 Template.registerHelper('calendarDay', function(date) {

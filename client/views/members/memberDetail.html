@@ -16,9 +16,31 @@
               {{#each profile.socialLinks}}
                 <li><a href="{{url}}" target="_blank"><i class="ion-social-{{service}}"></i></a></li>
               {{/each}}
+              <li>
+                {{#if isInRole 'admin'}}
+                  <a href="#" class="btn add-points-toggle">Add Points</a>
+                {{/if}}
+              </li>
               <!-- Hack for missing Meetup.com social icon in ionicons font. -->
             </ul>
           </div>
+            {{#if isInRole 'admin'}}
+              <div class="row add-points-container hide">
+                <div class="input-group col-md-12">
+                  <form>
+                    <div class="col-md-2">
+                      <input type="number" class="form-control add-points-amount" placeholder="10">
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" class="form-control add-points-reason" placeholder="Reason">
+                    </div>
+                    <div class="col-md-4">
+                      <input class="btn btn-lg add-points-handler btn-primary" value="ADD" type="submit"/>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            {{/if}}
         </div>
       </div>
     </div>
@@ -32,7 +54,19 @@
         {{#if member.activities.count}}
         <div class="list-group">
           {{#each member.activities}}
-            <a href="{{ subjectURL }}" class="list-group-item"><i class="{{ icon }}"></i> {{ actionDescription }}<strong>{{ subjectTitle }}</strong> {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>Remove</span>{{/if}} <span class="label label-primary pull-right">+{{pointsAwarded}} Points</span></a>
+            {{#if isTypeCustom}}
+              <a href="#" class="list-group-item">
+                <i class="{{ icon }}"></i> Reason: <strong>{{ subjectTitle }}</strong>
+                <span class="label label-primary pull-right">+{{points}} Points</span>
+                {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>Remove</span>{{/if}}
+              </a>
+            {{else}}
+              <a href="{{ subjectURL }}" class="list-group-item">
+                <i class="{{ icon }}"></i> {{ actionDescription }} <strong>{{ subjectTitle }}</strong>
+                <span class="label label-primary pull-right">+{{pointsAwarded}} Points</span>
+                {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>Remove</span>{{/if}}
+              </a>
+            {{/if}}
           {{/each}}
         </div>
         {{else}}

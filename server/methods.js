@@ -290,6 +290,17 @@ Meteor.methods({
     }
   },
 
+  custom: function(params) {
+    if (Meteor.userId() && Roles.userIsInRole(Meteor.userId(), ['admin'])) {
+      Activities.insert({
+        userId: params.userId,
+        subjectTitle: params.reason,
+        points: params.points,
+        type: 'custom'
+      });
+    }
+  },
+
   addTopicToMeetup: function(params) {
     if (Meteor.userId() && Roles.userIsInRole(Meteor.userId(), ['admin'])) {
       if (params.topicId) {
