@@ -8,7 +8,9 @@ Router.map(function() {
     },
     data: {
       upcomingMeetup: Meetups.find({dateTime : {$gt : new Date()} }, {sort: {dateTime: 1}, limit: 1}),
-      sponsors : Meteor.settings.public.sponsors
+      sponsors : Meteor.settings.public.sponsors,
+      projects: Meteor.settings.public.projects,
+      subcontractors: Meteor.settings.public.subcontractors
     }
   });
 

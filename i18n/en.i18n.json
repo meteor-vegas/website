@@ -10,8 +10,14 @@
   "close" : "Close",
   "submit" : "Submit",
   "next" : "Next",
+  "view_details" : "View Details",
   "comment_posted_by" : "Posted by",
   "add_a_comment" : "Add a comment",
   "add_a_comment_placeholder" : "Enter your comment…",
+  "meetups_featured_meetup" : "Featured Meetup",
+  "meetups_going" : "Going",
+  "meetups_rsvp" : "RSVP",
+  "all_meetups" : "All Meetups",
+  "previous_meetups" : "Previous Meetup",
   "build_with_meteor" : "Built with Meteor.js"
 }
