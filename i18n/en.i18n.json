@@ -16,6 +16,8 @@
   "reason": "Reason",
   "add": "Add",
   "cancel": "Cancel",
+  "view": "View",
+  "by": "By",
   "add_a_comment_placeholder" : "Enter your comment…",
   "meetups_featured_meetup" : "Featured Meetup",
   "meetups_going" : "Going",
