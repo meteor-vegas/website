@@ -1,60 +1,59 @@
-Meteor.users.allow({
-  'insert': function (userId,doc) {
-    return false;
+Meteor.users.deny({
+  insert: function (userId,doc) {
+    return true;
   },
-
-  'update': function(userId, doc, fields, modifier) {
-    return false;
+  update: function(userId, doc, fields, modifier) {
+    return true;
   },
-  'remove': function(userId, doc) {
-    return false;
+  remove: function(userId, doc) {
+    return true;
   }
 });
 
 Topics.allow({
-  'insert': function(userId, doc) {
+  insert: function(userId, doc) {
     return userId;
   },
-  'update': function(userId, doc, fields, modifier) {
+  update: function(userId, doc, fields, modifier) {
     return userId;
   },
-  'remove': function(userId, doc) {
+  remove: function(userId, doc) {
     return userId && Roles.userIsInRole(userId, ['admin']);
   }
 });
 
 Presentations.allow({
-  'insert': function(userId, doc) {
+  insert: function(userId, doc) {
     return userId;
   },
-  'update': function(userId, doc, fields, modifier) {
+  update: function(userId, doc, fields, modifier) {
     return userId;
   },
-  'remove': function(userId, doc) {
+  remove: function(userId, doc) {
     return userId && Roles.userIsInRole(userId, ['admin']);
   }
 });
 
 Comments.allow({
-  'insert': function(userId, doc) {
+  insert: function(userId, doc) {
     return userId;
   }
 });
 
 Activities.allow({
-  'insert': function(userId, doc) {
+  insert: function(userId, doc) {
     return false;
   },
-  'remove': function(userId, doc) {
+  remove: function(userId, doc) {
     return userId && Roles.userIsInRole(userId, ['admin']);
   }
 });
 
 Coupons.allow({
-  'insert': function(userId, doc) {
+  insert: function(userId, doc) {
     return userId && Roles.userIsInRole(userId, ['admin']);
   },
-  'remove': function(userId, doc) {
+  remove: function(userId, doc) {
     return userId && Roles.userIsInRole(userId, ['admin']);
   }
 });
