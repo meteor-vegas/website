@@ -28,12 +28,12 @@
           {{#unless meetup.isPast}}
             <p>
               {{#if currentUserIsAttendee}}
-                <button type="button" class="btn btn-primary btn-lg" disabled><i class="ion-checkmark"></i> Going</button>
+                <button type="button" class="btn btn-primary btn-lg" disabled><i class="ion-checkmark"></i> {{_ "meetups_going"}}</button>
               {{else}}
                 {{#if currentUser}}
-                    <button type="button" class="btn btn-primary btn-lg" data-action="rsvp"><i class="ion-plus"></i> RSVP</button>
+                    <button type="button" class="btn btn-primary btn-lg" data-action="rsvp"><i class="ion-plus"></i> {{_ "meetups_rsvp"}}</button>
                 {{else}}
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login-required-modal"><i class="ion-plus"></i> RSVP</button>
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#login-required-modal"><i class="ion-plus"></i> {{_ "meetups_rsvp"}}</button>
                 {{/if}}
               {{/if}}
               {{#each meetup.truncatedAttendees}}
@@ -51,7 +51,7 @@
 
   <div class="container">
     <ol class="breadcrumb">
-      <li><a href="{{ pathFor 'meetups' }}">All Meetups</a></li>
+      <li><a href="{{ pathFor 'meetups' }}">{{_ "all_meetups"}}</a></li>
       <li class="active">{{ meetup.title }}</li>
     </ol>
   </div>
