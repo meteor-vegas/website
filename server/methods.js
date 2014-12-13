@@ -32,6 +32,10 @@ Meteor.methods({
 		console.log ( "Fetching Meetup Member Profiles offset", offset);
 
 		Meteor.call('MeetupAPI', 'getProfiles', {"offset": offset, "page": 200, "group_urlname": group_urlname, "fields":"other_services"}, function(err, response) {
+			if (err) {
+				console.error("Fetch error");
+				return ; // Silently ignore fetch errors
+			}
 			for (var i = 0, l = response.meta.count; i < l; i++) {
 				var node = response.results[i];
 
@@ -105,7 +109,10 @@ Meteor.methods({
 	fetchEvents: function(status) {
 		console.log ( "Fetching Meetup Events");
 		Meteor.call('MeetupAPI', 'getEvents', {"group_urlname": group_urlname, "status": status, "fields":"featured"}, function(err, response) {
-
+			if (err) {
+				console.error("Fetch error");
+				return ; // Silently ignore fetch errors
+			}
 			for (var i = 0, l = response.meta.count; i < l; i++) {
 				var meetupData = response.results[i];
 				var existingMeetup = Meetups.findOne({meetupId: meetupData['id']});
@@ -128,7 +135,7 @@ Meteor.methods({
 							description: meetupData['how_to_find_us']
 					}});
 				}
-				
+
 				if (existingMeetup) {
 					meetupId = existingMeetup._id;
 					Meetups.update({_id: existingMeetup._id}, {$set: meetup_hash });
