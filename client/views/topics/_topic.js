@@ -29,6 +29,7 @@ Template._topic.events({
     if(Roles.userIsInRole(Meteor.userId(), ['admin'])) {
       if (confirm('Are you sure you want to remove this topic?')) {
         Topics.remove({_id: this._id});
+        Router.go('/topics');
       }
     }
   }
