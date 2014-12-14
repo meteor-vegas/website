@@ -12,31 +12,33 @@ Meteor.users.deny({
 
 Topics.allow({
   insert: function(userId, doc) {
-    return userId;
+    return userId && doc.userId === userId;
   },
   update: function(userId, doc, fields, modifier) {
-    return userId;
+    return userId && doc.userId === userId;
   },
   remove: function(userId, doc) {
     return userId && Roles.userIsInRole(userId, ['admin']);
-  }
+  },
+  fetch: ['userId']
 });
 
 Presentations.allow({
   insert: function(userId, doc) {
-    return userId;
+    return userId && doc.presenter && doc.presenter._id === userId;
   },
   update: function(userId, doc, fields, modifier) {
-    return userId;
+    return userId && doc.presenter && doc.presenter._id === userId;
   },
   remove: function(userId, doc) {
     return userId && Roles.userIsInRole(userId, ['admin']);
-  }
+  },
+  fetch: ['presenter']
 });
 
 Comments.allow({
   insert: function(userId, doc) {
-    return userId;
+    return userId && doc.userId === userId;
   }
 });
 

@@ -7,6 +7,9 @@ var list=["getCategories","getCheckins","postCheckin","getCities","getOpenEvents
 
 Meteor.methods({
   MeetupAPI: function(endpoint, param) {
+    check(endpoint, String);
+    check(param, Object);
+
     switch(endpoint){
     case "getEvents":
       return AsyncMeetup.getEvents(param);
@@ -22,6 +25,8 @@ Meteor.methods({
   },
 
   fetchProfiles: function(offset) {
+    check(offset, Match.Optional(Number));
+
     var adminRoles = ["Organizer", "Co-Organizer"];
 
     offset = offset || 0;
@@ -105,6 +110,7 @@ Meteor.methods({
   },
 
   fetchEvents: function(status) {
+    check(status, String);
     console.log ( "Fetching Meetup Events");
     Meteor.call('MeetupAPI', 'getEvents', {"group_urlname": group_urlname, "status": status, "fields":"featured"}, function(err, response) {
       if (err) {
@@ -166,6 +172,8 @@ Meteor.methods({
   },
 
   doRSVP : function(eventId) {
+    check(eventId, String);
+
     var user = Meteor.user();
     if (!user)
       throw new Meteor.Error(403, {'status':'error', 'code':'not-logged-in', 'errorTitle':'Not logged in', 'errorDesc':'You are not logged in to RSVP.'});
@@ -215,6 +223,15 @@ Meteor.methods({
   },
 
   createTopic: function(params) {
+    check(params, {
+      _id: String,
+      title: String,
+      description: String
+    });
+
+    if (! Meteor.userId())
+      throw new Meteor.Error("logged-out");
+
     Topics.insert({
       _id: params._id,
       title: params.title,
@@ -225,6 +242,16 @@ Meteor.methods({
   },
 
   createComment: function(params) {
+    check(params, {
+      body: String,
+      parentType: String,
+      parentId: String,
+      parentTitle: String
+    });
+
+    if (! Meteor.userId())
+      throw new Meteor.Error("logged-out");
+
     Comments.insert({
       body: params.body,
       parentType: params.parentType,
@@ -250,6 +277,14 @@ Meteor.methods({
   },
 
   voteOnTopic: function(topic) {
+    check(topic, Match.ObjectIncluding({
+      _id: String,
+      title: String
+    }));
+
+    if (! Meteor.userId())
+      throw new Meteor.Error("logged-out");
+
     var points = topic.points + 1;
     Topics.update({_id: topic._id}, {$set: {points: points}});
     Meteor.users.update({_id: Meteor.userId()}, {$push: {'profile.votedTopicIds': topic._id}});
@@ -264,6 +299,14 @@ Meteor.methods({
   },
 
   likePresentation: function(presentation) {
+    check(topic, Match.ObjectIncluding({
+      _id: String,
+      title: String
+    }));
+
+    if (! Meteor.userId())
+      throw new Meteor.Error("logged-out");
+
     Meteor.users.update({_id: Meteor.userId()}, { $addToSet: {'profile.likedItemIds' : presentation._id} } );
 
     Activities.insert({
@@ -276,21 +319,32 @@ Meteor.methods({
   },
 
   rsvp: function(params) {
-    if (Meteor.userId()) {
-      Meetups.update({_id: params.meetupDocId}, {$addToSet: {'attendeeIds': Meteor.userId()}});
+    check(params, Match.ObjectIncluding({
+      meetupDocId: String
+    }));
 
-      var meetup = Meetups.findOne(params.meetupDocId);
-      Activities.insert({
-        userId: Meteor.userId(),
-        subjectId: meetup._id,
-        subjectTitle: meetup.title,
-        subjectType: 'meetup',
-        type: 'rsvp'
-      });
-    }
+    if (! Meteor.userId())
+      throw new Meteor.Error("logged-out");
+
+    Meetups.update({_id: params.meetupDocId}, {$addToSet: {'attendeeIds': Meteor.userId()}});
+
+    var meetup = Meetups.findOne(params.meetupDocId);
+    Activities.insert({
+      userId: Meteor.userId(),
+      subjectId: meetup._id,
+      subjectTitle: meetup.title,
+      subjectType: 'meetup',
+      type: 'rsvp'
+    });
   },
 
   custom: function(params) {
+    check(params, Match.ObjectIncluding({
+      userId: String,
+      reason: String,
+      points: Number
+    }));
+
     if (Meteor.userId() && Roles.userIsInRole(Meteor.userId(), ['admin'])) {
       Activities.insert({
         userId: params.userId,
@@ -302,6 +356,14 @@ Meteor.methods({
   },
 
   addTopicToMeetup: function(params) {
+    check(params, Match.ObjectIncluding({
+      meetupId: String,
+      topicId: String,
+      presenterId: String,
+      customTitle: String,
+      customDescription: String
+    }));
+
     if (Meteor.userId() && Roles.userIsInRole(Meteor.userId(), ['admin'])) {
       if (params.topicId) {
         Topics.update({_id: params.topicId}, {$set: {
@@ -338,6 +400,8 @@ Meteor.methods({
     }
   },
   useCoupon: function (couponCode) {
+    check(couponCode, String);
+
     var coupon = Meteor.settings.coupons[couponCode];
     if (!Meteor.userId()) {
       throw new Meteor.Error('not_logged', 'Vous devez etre connecter');

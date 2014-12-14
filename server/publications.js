@@ -3,30 +3,32 @@ Meteor.publish("meetups", function() {
 });
 
 Meteor.publishComposite("meetup", function(_id) {
+  check(_id, String);
+
   return {
     find: function() {
       return Meetups.find({_id: _id});
     },
     children: [
-     {
-       find: function(meetup) {
-         if (meetup.attendeeIds) {
-           return Meteor.users.find({_id: {$in: meetup.attendeeIds}});
-         }
-       }
-     },
-     {
-       find: function(meetup) {
-         return Topics.find({meetupId: meetup._id});
-       },
-       children: [
+    {
+      find: function(meetup) {
+        if (meetup.attendeeIds) {
+          return Meteor.users.find({_id: {$in: meetup.attendeeIds}});
+        }
+      }
+    },
+    {
+      find: function(meetup) {
+        return Topics.find({meetupId: meetup._id});
+      },
+      children: [
         {
           find: function(topic) {
             return Meteor.users.find({_id: topic.presenterId});
           }
         }
-       ]
-     }
+      ]
+    }
     ]
   };
 });
@@ -69,6 +71,8 @@ Meteor.publishComposite("presentedTopics", function() {
 });
 
 Meteor.publishComposite("topic", function(_id) {
+  check(_id, String);
+
   return {
     find: function() {
       return Topics.find({_id: _id});
@@ -107,6 +111,8 @@ Meteor.publish("members", function () {
 });
 
 Meteor.publishComposite("member", function(_id) {
+  check(_id, String);
+
   return {
     find: function() {
       return Meteor.users.find(_id);
@@ -126,6 +132,8 @@ Meteor.publish("presentations", function() {
 });
 
 Meteor.publishComposite("presentation", function(_id) {
+  check(_id, String);
+
   return {
     find: function() {
       return Presentations.find({_id: _id});
@@ -151,4 +159,3 @@ Meteor.publishComposite("presentation", function(_id) {
     ]
   };
 });
-
