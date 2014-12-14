@@ -1,5 +1,13 @@
 var subs = new SubsManager();
 
+Router.options.loadingTemplate = new Blaze.Template('loadingTemplate', function () {
+  return TAPi18n.__('loading_page');
+});
+
+Router.options.notFoundTemplate = new Blaze.Template('notFoundTemplate', function () {
+  return TAPi18n.__('data_not_found');
+});
+
 Router.map(function() {
   this.route('home', {
     path: '/',
