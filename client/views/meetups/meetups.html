@@ -35,7 +35,7 @@
                     {{> _profilePhoto profile=profile size="30"}}
                   {{/each}}
                   {{#if displayOverflowAttendees}}
-                    <small>{{_ "more_are_going" numberOfOverflowAttendees }}</small>
+                    <small>{{_ "more_are_going" attendees=numberOfOverflowAttendees }}</small>
                   {{/if}}
                 {{/unless}}
               </p>

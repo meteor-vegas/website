@@ -49,7 +49,7 @@
   "meetups_rsvp" : "RSVP",
   "members" : "Members",
   "meteor_city": "Meteor Paris",
-  "more_are_going": "and %s more are going",
+  "more_are_going": "and __attendees__ more are going",
   "my_profile" : "My profile",
   "next" : "Next",
   "next_meetup": "Next Meetup",
