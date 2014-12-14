@@ -204,15 +204,15 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Login Required</h4>
+          <h4 class="modal-title">{{_ "login_required"}}</h4>
         </div>
         <div class="modal-body text-center">
           <p>
-            Sign in with Meetup to RSVP!
+            {{_ "sign_in_to_rsvp"}}
           </p>
           <p>
             <button type="button" class="btn btn-primary" data-login-with="meetup">
-              <img src="/meetup.png" width=22 height=22> Sign In
+              <img src="/meetup.png" width=22 height=22> {{_ "sign_in"}}
             </button>
           </p>
         </div>
@@ -225,12 +225,10 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Not a member</h4>
+          <h4 class="modal-title">{{_ "not_member"}}</h4>
         </div>
         <div class="modal-body">
-          <p>You are not a member of this meetup group yet!<br/>
-            Please <a href="{{ groupUrl }}" target="_blank">join this group on Meetup.com</a> before RSVPing.
-          </p>
+          <p>{{{_ "please_join" groupUrl}}}</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
