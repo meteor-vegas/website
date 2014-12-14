@@ -340,16 +340,16 @@ Meteor.methods({
   useCoupon: function (couponCode) {
     var coupon = Meteor.settings.coupons[couponCode];
     if (!Meteor.userId()) {
-      throw new Meteor.Error('not-logged', 'Vous devez etre connecter');
+      throw new Meteor.Error('not_logged', 'Vous devez etre connecter');
     }
     if (!coupon) {
-      throw new Meteor.Error('unknown-coupon', 'Ce coupon n exist pas');
+      throw new Meteor.Error('coupon_unknown', 'Ce coupon n existe pas');
     }
     if (!coupon.state) {
-      throw new Meteor.Error('disabled-coupon', 'Ce coupon n est pas active');
+      throw new Meteor.Error('coupon_disabled', 'Ce coupon n est pas active');
     }
     if (Meteor.user().profile.coupons && ~Meteor.user().profile.coupons.indexOf(couponCode)) {
-      throw new Meteor.Error('already-used-coupon', 'Vous avez deja utilise ce coupon');
+      throw new Meteor.Error('coupon_already_used', 'Vous avez deja utilise ce coupon');
     }
 
     Activities.insert({

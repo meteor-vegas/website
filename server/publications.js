@@ -103,18 +103,18 @@ Meteor.publishComposite("topic", function(_id) {
 });
 
 Meteor.publish("members", function () {
-  return Meteor.users.find({}, {fields: {'profile': 1}});
+  return Meteor.users.find({}, { fields: { 'profile.coupons': 0 } });
 });
 
 Meteor.publishComposite("member", function(_id) {
   return {
     find: function() {
-      return Meteor.users.find({_id: _id});
+      return Meteor.users.find(_id);
     },
     children: [
       {
         find: function(user) {
-          return Activities.find({userId: user._id});
+          return Activities.find({ userId: user._id });
         }
       }
     ]

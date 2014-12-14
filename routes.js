@@ -174,12 +174,20 @@ Router.map(function() {
   this.route('coupons', {
     path: '/coupons'
   });
+  this.route('couponAdded', {
+    path: '/coupons/added'
+  });
   this.route('couponAdd', {
     path: '/coupons/:_id',
     onRun: function () {
       console.log(this.params._id);
       Meteor.call('useCoupon', this.params._id, function (err, result) {
-        if (err) alert(err);
+        if (err) {
+          Session.set('coupons-error', TAPi18n.__(err.error));
+          Router.go('/coupons');
+        } else {
+          Router.go('/coupons/added');
+        }
       });
     }
   });
