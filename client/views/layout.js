@@ -9,7 +9,5 @@ Template.layout.events({
     });
   },
 
-  'click [data-action=logout]': function() {
-    Meteor.logout();
-  }
+  'click [data-action=logout]': Meteor.logout
 });

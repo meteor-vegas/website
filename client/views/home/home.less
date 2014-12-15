@@ -2,7 +2,15 @@
 @import '../../stylesheets/variables.import.less';
 
 .jumbotron.jumbotron-home {
-  background: @brand-primary url("/homepage-banner.png") center center no-repeat;
+  background: -o-linear-gradient(left, blue 0%,blue 33%, gray 33%,white 66%, red 66%,red 100%),
+              url("/homepage-banner.jpg") center center no-repeat;
+  background: -moz-linear-gradient(left, blue 0%,blue 33%, gray 33%,white 66%, red 66%,red 100%),
+              url("/homepage-banner.jpg") center center no-repeat;
+  background: -webkit-linear-gradient(left, blue 0%,blue 33%, gray 33%,white 66%, red 66%,red 100%),
+              url("/homepage-banner.jpg") center center no-repeat;
+  background: linear-gradient(left, blue 0%,blue 33%, gray 33%,white 66%, red 66%,red 100%),
+              url("/homepage-banner.jpg") center center no-repeat;
+
   background-size: cover;
   background-blend-mode: overlay;
   color: #fff;
@@ -15,11 +23,19 @@
 
   h1 {
     font-size: @font-size-h3;
+    text-shadow: 0 0 5px black;
   }
 
   p {
     font-size: @font-size-large;
-    color: lighten(@brand-primary, 30%);
+    color: silver;
+    text-shadow: 0 0 5px black;
+    }
+
+  .container {
+    width: 50%;
+    padding-top: 15px;
+    background: rgba(0, 0, 0, 0.5);
   }
 
   .btn-primary {
@@ -46,7 +62,7 @@
   }
 }
 
-.homepage-section-members {
+.homepage-section-members, .homepage-section-projects {
   background: @gray-lighter;
 
   .top-members a {

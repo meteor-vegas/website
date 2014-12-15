@@ -12,11 +12,17 @@
                 <img src="{{presentation.thumbnail}}" class="img-responsive">
               {{else}}
                 <div class="presentation-item well">
-                  <img src="/meteor-black.png">
+                  <img src="/meteor-icon-black.svg">
                 </div>
               {{/if}}
             {{/if}}
           </div>
+          <br>
+          <p>
+            {{#if isInRole 'admin'}}
+                <button type="button" class="btn btn-primary" data-action="removePresentation">Remove</button>
+            {{/if}}
+          </p>
         </div>
         <div class="col-md-6">
           <h2>{{presentation.title}}</h2>
@@ -24,12 +30,12 @@
             {{#if presentation.oembed}}
               {{#with presentation.oembed}}
                 {{#if author_name}}
-                  <a href="{{author_url}}">{{> _profilePhotoCircular "default"}} Author: {{author_name}}</a>
+                  <a href="{{author_url}}">{{> _profilePhotoCircular "default"}} {{_ "author"}} {{author_name}}</a>
                   <br/><br/>
                 {{/if}}
               {{/with}}
             {{/if}}
-            <a href="{{ pathFor 'memberDetail' _id=presentation.presenter._id }}">{{> _profilePhotoCircular presentation.presenter._id}} Added By: {{presentation.presenter.name}}</a>
+            <a href="{{ pathFor 'memberDetail' _id=presentation.presenter._id }}">{{> _profilePhotoCircular presentation.presenter._id}} {{_ "added_by"}} {{presentation.presenter.name}}</a>
           </h5>
           <p>{{presentation.description}}</p>
           <p>
@@ -45,17 +51,17 @@
     <div class="row">
       <div class="col-md-10 col-md-push-1">
         <ol class="breadcrumb">
-          <li><a href="{{ pathFor 'presentations' }}">All Presentations</a></li>
+          <li><a href="{{ pathFor 'presentations' }}">{{_ "all_presentations"}}</a></li>
           <li class="active">{{ truncate presentation.title 20 }}</li>
         </ol>
 
         <div class="page-header">
           {{#if currentUser}}
             <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#new-comment-modal">
-              <i class="ion-plus"></i> Add a Comment
+              <i class="ion-plus"></i> {{_ "add_comment"}}
             </button>
           {{/if}}
-          <h3>Comments</h3>
+          <h3>{{_ "comments"}}</h3>
         </div>
 
         <ul class="media-list">

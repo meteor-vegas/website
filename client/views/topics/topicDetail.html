@@ -5,11 +5,11 @@
     <div class="row">
       <div class="col-md-10 col-md-push-1">
         <div class="page-header">
-          <h1>Topics</h1>
+          <h1>{{_ "topics"}}</h1>
         </div>
 
         <ol class="breadcrumb">
-          <li><a href="{{ pathFor 'topics' }}">All Topics</a></li>
+          <li><a href="{{ pathFor 'topics' }}">{{_ "all_topics"}}</a></li>
           <li class="active">{{ truncate topic.title 20 }}</li>
         </ol>
 
@@ -21,17 +21,18 @@
 
         {{#if topic.presented}}
           <div class="alert alert-info">
-            <img src="{{topic.presenter.profile.thumbnailUrl}}" width=30 height=30 class="img-circle" /> This topic was presented by <a href="{{ pathFor 'memberDetail' _id=topic.presenterId}}">{{ topic.presenter.profile.name }}</a> at <a href="{{ pathFor 'meetupDetail' _id=topic.meetupId }}">{{ topic.meetup.title }}</a>
+            {{> _profilePhoto profile=topic.presenter.profile size="30"}}
+            {{_ "topic_presented_by"}} <a href="{{ pathFor 'memberDetail' _id=topic.presenterId}}">{{ topic.presenter.profile.name }}</a> {{_ "at"}} <a href="{{ pathFor 'meetupDetail' _id=topic.meetupId }}">{{ topic.meetup.title }}</a>
           </div>
         {{/if}}
 
         <div class="page-header">
           {{#if currentUser}}
             <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#new-comment-modal">
-              <i class="ion-plus"></i> Add a Comment
+              <i class="ion-plus"></i> {{_ "add_a_comment"}}
             </button>
           {{/if}}
-          <h3>Comments</h3>
+          <h3>{{_ "comments"}}</h3>
         </div>
 
         <ul class="media-list">

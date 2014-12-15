@@ -1,0 +1,35 @@
+<template name="coupons">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>{{_ "enter_coupon"}}</h2>
+        <form class="form-horizontal" role="form">
+          <div class="form-group {{errorClass}}">
+            <label class="control-label">{{error}}</label>
+            <input type="text" class="new-coupon form-control" name="text" placeholder='{{_ "coupon_enter_the_code"}}' />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="couponAdd">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>{{_ "coupon_please_wait"}}</h2>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="couponAdded">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>{{_ "coupon_added"}}</h2>
+      </div>
+    </div>
+  </div>
+</template>

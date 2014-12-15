@@ -8,7 +8,8 @@ ACTIVITY_POINTS = {
   'commented_on_topic': 5,
   'created_topic': 10,
   'presented_topic': 50,
-  'rsvp': 10
+  'rsvp': 10,
+  'custom': 0
 };
 
 ACTIVITY_ICONS = {
@@ -19,51 +20,51 @@ ACTIVITY_ICONS = {
   'commented_on_topic': 'ion-ios7-chatbubble',
   'created_topic': 'ion-plus',
   'presented_topic': 'ion-mic-a',
+  'custom': 'ion-flash',
   'rsvp': 'ion-checkmark'
 };
 
 Activities.helpers({
   subjectURL: function() {
     switch (this.subjectType) {
-    case 'topic':
-      return Router.routes['topicDetail'].path({_id: this.subjectId});
-      break;
-    case 'presentation':
-      return Router.routes['presentationDetail'].path({_id: this.subjectId});
-      break;
-    case 'meetup':
-      return Router.routes['meetupDetail'].path({_id: this.subjectId});
-      break;
+      case 'topic':
+        return Router.routes.topicDetail.path({
+          _id: this.subjectId
+        });
+      case 'presentation':
+        return Router.routes.presentationDetail.path({
+          _id: this.subjectId
+        });
+      case 'meetup':
+        return Router.routes.meetupDetail.path({
+          _id: this.subjectId
+        });
     }
   },
 
   actionDescription: function() {
     switch (this.type) {
-    case 'liked_presentation':
-      return 'Liked a presentation: ';
-      break;
-    case 'commented_on_presentation':
-      return 'Commented on a presentation: ';
-      break;
-    case 'created_presentation':
-      return 'Added a presentation: ';
-      break;
-    case 'voted_on_topic':
-      return 'Voted on a topic: ';
-      break;
-    case 'commented_on_topic':
-      return 'Commented on a topic: ';
-      break;
-    case 'created_topic':
-      return 'Suggested a topic: ';
-      break;
-    case 'presented_topic':
-      return 'Presented a topic: ';
-      break;
-    case 'rsvp':
-      return 'RSVP\'d to a meetup: ';
-      break;
+      case 'liked_presentation':
+        return 'Liked a presentation: ';
+      case 'commented_on_presentation':
+        return 'Commented on a presentation: ';
+      case 'created_presentation':
+        return 'Added a presentation: ';
+      case 'voted_on_topic':
+        return 'Voted on a topic: ';
+      case 'commented_on_topic':
+        return 'Commented on a topic: ';
+      case 'created_topic':
+        return 'Suggested a topic: ';
+      case 'presented_topic':
+        return 'Presented a topic: ';
+      case 'rsvp':
+        return 'RSVP\'d to a meetup: ';
     }
+  },
+
+  isTypeCustom: function() {
+    return this.type == 'custom';
   },
 
   pointsAwarded: function() {
@@ -76,15 +77,22 @@ Activities.helpers({
 });
 
 // Only update points once, on the server
-if(Meteor.isServer) {
+if (Meteor.isServer) {
   Activities.after.insert(function(userId, doc) {
-    var points = ACTIVITY_POINTS[doc.type];
+    var points = doc.type !== 'custom' ? ACTIVITY_POINTS[doc.type] : doc.points;
     if (points) {
-      Meteor.users.update({_id: doc.userId}, {$inc: {'profile.points': points}});
+      Meteor.users.update(doc.userId, { $inc: { 'profile.points': points } });
+    }
+  });
+
+  Activities.after.remove(function(userId, doc) {
+    var points = doc.type !== 'custom' ? ACTIVITY_POINTS[doc.type] : doc.points;
+    if (points) {
+      Meteor.users.update(doc.userId, { $inc: { 'profile.points': -points } });
     }
   });
 }
 
-Activities.before.insert(function (userId, doc) {
+Activities.before.insert(function(userId, doc) {
   doc.createdAt = moment().toDate();
 });

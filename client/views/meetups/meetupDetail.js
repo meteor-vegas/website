@@ -17,16 +17,8 @@ Template.meetupDetail.helpers({
     }
   },
 
-  attendeesHeading: function() {
-    if (this.meetup && this.meetup.isPast()) {
-      return 'Who Went';
-    } else {
-      return "Who's Going";
-    }
-  },
-
   groupUrl: function() {
-    return 'http://www.meetup.com/' + Meteor.settings[Meteor.settings.environment].meetup.group_urlname;
+    return 'http://www.meetup.com/' + Meteor.settings.public.meetup.group_urlname;
   }
 });
 
@@ -36,8 +28,7 @@ Template.meetupDetail.events({
     event.preventDefault();
 
     if (!Meteor.userId()) {
-      alert("Please sign in to RSVP!");
-      return false;
+      return alert(TAPi18n.__("sign_in_to_rsvp"));
     }
 
     // Using the new RSVP method call

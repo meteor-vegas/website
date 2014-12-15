@@ -6,6 +6,13 @@ Template._topMembers.rendered = function() {
   }, 800);
 };
 
-Template._topMembers.topMembers = function (){
-  return Meteor.users.find({}, {fields: {profile: 1}, sort: {'profile.points': -1}, limit: 6} );
-};
+
+Template._topMembers.helpers({
+  topMembers: function () {
+    return Meteor.users.find({}, {
+      fields: { profile: 1 },
+      sort: { 'profile.points': -1 },
+      limit: 9
+    });
+  }
+});

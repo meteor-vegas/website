@@ -5,18 +5,42 @@
       <div class="container">
         <div class="row">
           <div class="col-md-2">
-            <img class="img-circle" src="{{profile.thumbnailUrl}}" width="150" height="150">
+            {{> _profilePhoto profile=profile size="150"}}
           </div>
           <div class="col-md-10">
             <h1>{{profile.name}}</h1>
             <p>{{ truncate profile.bio 140 }}</p>
             <ul class="list-inline">
-              <li><span class="label label-primary">+{{profile.points}} Points</span></li>
+              <li><span class="label label-primary">+{{profile.points}} {{_ "points"}}</span></li>
+              <li><a href="{{ profile.meetupProfileUrl }}" class="member-detail" title="{{ profile.name }} sur meetup.com" target="_blank"><i class="ion-person"></i></a></li>
               {{#each profile.socialLinks}}
                 <li><a href="{{url}}" target="_blank"><i class="ion-social-{{service}}"></i></a></li>
               {{/each}}
+              <li>
+                {{#if isInRole 'admin'}}
+                  <a href="#" class="btn add-points-toggle">{{_ "add_points"}}</a>
+                {{/if}}
+              </li>
+              <!-- Hack for missing Meetup.com social icon in ionicons font. -->
             </ul>
           </div>
+            {{#if isInRole 'admin'}}
+              <div class="row add-points-container hide">
+                <div class="input-group col-md-12">
+                  <form>
+                    <div class="col-md-2">
+                      <input type="number" class="form-control add-points-amount" placeholder="10">
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" class="form-control add-points-reason" placeholder="Reason">
+                    </div>
+                    <div class="col-md-4">
+                      <input class="btn btn-lg add-points-handler btn-primary" value="{{_ "add"}}" type="submit"/>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            {{/if}}
         </div>
       </div>
     </div>
@@ -26,17 +50,29 @@
 
     <div class="row">
       <div class="col-md-9">
-        <h4 class="sub-header"><i class="ion-social-rss"></i> Activity</h4>
+        <h4 class="sub-header"><i class="ion-social-rss"></i> {{_ "activity"}}</h4>
         {{#if member.activities.count}}
         <div class="list-group">
           {{#each member.activities}}
-            <a href="{{ subjectURL }}" class="list-group-item"><i class="{{ icon }}"></i> {{ actionDescription }} <strong>{{ subjectTitle }}</strong> <span class="label label-primary pull-right">+{{pointsAwarded}} Points</span></a>
+            {{#if isTypeCustom}}
+              <a href="#" class="list-group-item">
+                <i class="{{ icon }}"></i> {{_ "reason"}}{{_ "colon"}} <strong>{{ subjectTitle }}</strong>
+                {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>{{_ "remove"}}</span>{{/if}}
+                <span class="label label-primary pull-right">+{{points}} {{_ "points"}}</span>
+              </a>
+            {{else}}
+              <a href="{{ subjectURL }}" class="list-group-item">
+                <i class="{{ icon }}"></i> {{ actionDescription }} <strong>{{ subjectTitle }}</strong>
+                {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>{{_ "remove"}}</span>{{/if}}
+                <span class="label label-primary pull-right">+{{pointsAwarded}} {{_ "points"}}</span>
+              </a>
+            {{/if}}
           {{/each}}
         </div>
         {{else}}
           <div class="alert alert-info">
             <p>
-              {{member.profile.name}} hasn't gained any activity points yet!
+              {{member.profile.name}} {{_ "no_activity_no_points"}}
             </p>
           </div>
        {{/if}}
@@ -44,7 +80,7 @@
 
       <div class="col-md-3">
         {{#with member}}
-          <h4 class="sub-header">About {{profile.name}}</h4>
+          <h4 class="sub-header">{{_ "about"}} {{profile.name}}</h4>
           {{#each profile.answers }}
             <p>
               <strong>{{question}}</strong>

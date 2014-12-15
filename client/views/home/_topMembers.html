@@ -1,11 +1,11 @@
 <template name="_topMembers">
 
-	<div class="top-members">
-		{{#each topMembers}}
-			<a href="{{ pathFor 'memberDetail' }}" data-toggle="tooltip" title="{{profile.name}}">
-				<img class="img-circle" src="{{profile.thumbnailUrl}}" width=100 height=100>
-			</a>
-		{{/each}}
-	</div>
+  <div class="top-members">
+    {{#each topMembers}}
+      <a href="{{ pathFor 'memberDetail' }}">
+        {{> _profilePhoto profile=profile size="100"}}
+      </a>
+    {{/each}}
+  </div>
 
 </template>

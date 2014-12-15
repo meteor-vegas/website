@@ -1,6 +1,6 @@
 Template._topic.helpers({
   alreadyVoted: function() {
-    return Meteor.user() && _(Meteor.user().profile.votedTopicIds).contains(this._id)
+    return Meteor.user() && _(Meteor.user().profile.votedTopicIds).contains(this._id);
   },
 
   hasComments: function() {
@@ -29,6 +29,7 @@ Template._topic.events({
     if(Roles.userIsInRole(Meteor.userId(), ['admin'])) {
       if (confirm('Are you sure you want to remove this topic?')) {
         Topics.remove({_id: this._id});
+        Router.go('/topics');
       }
     }
   }

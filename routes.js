@@ -1,21 +1,31 @@
+var subs = new SubsManager();
+
+Router.options.loadingTemplate = new Blaze.Template('loadingTemplate', function () {
+  return TAPi18n.__('loading_page');
+});
+
+Router.options.notFoundTemplate = new Blaze.Template('notFoundTemplate', function () {
+  return TAPi18n.__('data_not_found');
+});
+
 Router.map(function() {
   this.route('home', {
     path: '/',
     waitOn: function() {
-      return this.subscribe("meetups");
+      return subs.subscribe("meetups");
     },
     data: {
       upcomingMeetup: Meetups.find({dateTime : {$gt : new Date()} }, {sort: {dateTime: 1}, limit: 1}),
-      groupName : Meteor.settings.public.meetup.group_name,
-      groupInfo : Meteor.settings.public.meetup.group_info,
-      sponsors : Meteor.settings.public.sponsors
+      sponsors : Meteor.settings.public.sponsors,
+      projects: Meteor.settings.public.projects,
+      subcontractors: Meteor.settings.public.subcontractors
     }
   });
 
   this.route('meetups', {
     path: '/meetups',
     waitOn: function() {
-      return this.subscribe("meetups");
+      return subs.subscribe("meetups");
     },
     data: {
       groupName : Meteor.settings.public.meetup.group_name,
@@ -28,13 +38,14 @@ Router.map(function() {
       });
     }
   });
+
   this.route('meetupDetail', {
     path: '/meetups/:_id',
     waitOn: function() {
       return [
-        this.subscribe("meetup", this.params._id),
-        this.subscribe("suggestedTopics"),
-        this.subscribe("members")
+        subs.subscribe("meetup", this.params._id),
+        subs.subscribe("suggestedTopics"),
+        subs.subscribe("members")
       ];
     },
     data: function() {
@@ -58,8 +69,8 @@ Router.map(function() {
     path: '/topics',
     waitOn: function() {
       return [
-        this.subscribe("suggestedTopics"),
-        this.subscribe("presentedTopics")
+        subs.subscribe("suggestedTopics"),
+        subs.subscribe("presentedTopics")
       ];
     },
     data: {
@@ -68,9 +79,10 @@ Router.map(function() {
       presentedTopics: Topics.find({presented: true}, {sort: {points: -1}})
     },
     onBeforeAction: function() {
-      if (!this.params.tab) {
-        this.params.tab = 'suggested';
+      if (!this.params.query.tab) {
+        this.params.query.tab = 'suggested';
       }
+      this.next();
     },
     onAfterAction: function() {
       SEO.set({
@@ -78,10 +90,11 @@ Router.map(function() {
       });
     }
   });
+
   this.route('topicDetail', {
     path: '/topics/:_id',
     waitOn: function() {
-      return this.subscribe("topic", this.params._id);
+      return subs.subscribe("topic", this.params._id);
     },
     data: function() {
       return {
@@ -102,7 +115,7 @@ Router.map(function() {
   this.route('presentations', {
     path: '/presentations',
     waitOn: function() {
-      return [this.subscribe("presentations"), this.subscribe("members")];
+      return [subs.subscribe("presentations"), subs.subscribe("members")];
     },
     data: {
       groupName : Meteor.settings.public.meetup.group_name,
@@ -110,10 +123,11 @@ Router.map(function() {
     }
 
   });
+
   this.route('presentationDetail', {
     path: '/presentations/:_id',
     waitOn: function() {
-      return this.subscribe("presentation", this.params._id);
+      return subs.subscribe("presentation", this.params._id);
     },
     data: function() {
       return {
@@ -127,7 +141,7 @@ Router.map(function() {
   this.route('members', {
     path: '/members',
     waitOn: function() {
-      return this.subscribe("members");
+      return subs.subscribe("members");
     },
     data: {
       groupName : Meteor.settings.public.meetup.group_name,
@@ -139,10 +153,11 @@ Router.map(function() {
       });
     }
   });
+
   this.route('memberDetail', {
     path: '/members/:_id',
     waitOn: function() {
-      return this.subscribe("member", this.params._id);
+      return subs.subscribe("member", this.params._id);
     },
     data: function() {
       return {
@@ -159,6 +174,7 @@ Router.map(function() {
     }
   });
 
+  // XXX Should we remove this route?
   this.route('meteorday', {
     path: '/meteorday',
     where: 'server',
@@ -168,6 +184,29 @@ Router.map(function() {
     }
   });
 
+  this.route('coupons', {
+    path: '/coupons'
+  });
+
+  this.route('couponAdded', {
+    path: '/coupons/added'
+  });
+
+  this.route('couponAdd', {
+    path: '/coupons/:_id',
+    onRun: function () {
+      Meteor.call('useCoupon', this.params._id, function (err, result) {
+        if (err) {
+          Session.set('coupons-error', TAPi18n.__(err.error));
+          Router.go('/coupons');
+        } else {
+          Router.go('/coupons/added');
+        }
+      });
+    }
+  });
+
+  // XXX Not translated
   this.route('notFound', {
     path: '*',
     where: 'server',

@@ -6,14 +6,14 @@
       <div class="col-md-10 col-md-push-1">
         <div class="page-header">
           <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#new-topic-modal">
-            <i class="ion-plus"></i> Suggest a Topic
+            <i class="ion-plus"></i> {{_ "suggest_topic"}}
           </button>
-          <h1>Topics</h1>
+          <h1>{{_ "topics"}}</h1>
         </div>
 
         <ul class="nav nav-tabs">
-          <li class="{{ activeTabClass 'suggested' }}"><a href="{{ pathFor 'topics' query='tab=suggested'}}">Suggested</a></li>
-          <li class="{{ activeTabClass 'presented' }}"><a href="{{ pathFor 'topics' query='tab=presented'}}">Presented</a></li>
+          <li class="{{ activeTabClass 'suggested' }}"><a href="{{ pathFor 'topics' query='tab=suggested'}}">{{_ "suggested"}}</a></li>
+          <li class="{{ activeTabClass 'presented' }}"><a href="{{ pathFor 'topics' query='tab=presented'}}">{{_ "presented"}}</a></li>
         </ul>
 
         <br>
@@ -21,32 +21,26 @@
         <div class="tab-content">
           <div class="tab-pane {{ activeTabClass 'suggested' }}" id="suggested-topics">
             {{#if suggestedTopics.count}}
-              <div class="well">
-                Suggest a topic for an upcoming meetup and vote on your favorites
-              </div>
+              <div class="well"> {{_ "suggest_topic_upcoming"}}</div>
               {{#each suggestedTopics}}
                 {{> _topic}}
               {{/each}}
             {{else}}
               <div class="well">
-                There aren't any topics yet.
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-topic-modal">Suggest one?</button>
+                {{_ "no_topic"}}
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-topic-modal">{{_ "suggest_one"}}</button>
               </div>
             {{/if}}
           </div>
 
           <div class="tab-pane {{ activeTabClass 'presented' }}" id="presented-topics">
             {{#if presentedTopics.count}}
-              <div class="well">
-                The following topics were presented at previous meetups
-              </div>
+              <div class="well">{{_ "suggested_topics_last_meetup"}}</div>
               {{#each presentedTopics}}
                 {{> _topic}}
               {{/each}}
             {{else}}
-              <div class="well">
-                No one has presented any topics yet.
-              </div>
+              <div class="well">{{_ "no_one_presented_topic"}}</div>
             {{/if}}
           </div>
 
@@ -64,35 +58,33 @@
           <form>
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Suggest a Topic</h4>
+              <h4 class="modal-title">{{_ "suggest_topic"}}</h4>
             </div>
             <div class="modal-body">
               <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" placeholder="Enter a title for your topic">
+                <label for="title">{{_ "title"}}</label>
+                <input type="text" class="form-control" id="title" placeholder={{_ "topic_title"}}>
               </div>
               <div class="form-group">
-                <label for="description">Description</label>
-                <textarea rows="2" class="form-control" id="description" placeholder="Enter a description for your topic"></textarea>
+                <label for="description">{{_ "description"}}</label>
+                <textarea rows="2" class="form-control" id="description" placeholder={{_ "topic_description"}}></textarea>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="button" class="btn btn-link" data-dismiss="modal">{{_ "close"}}</button>
+              <button type="submit" class="btn btn-primary">{{_ "submit"}}</button>
             </div>
           </form>
         {{else}}
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Suggest a Topic</h4>
+            <h4 class="modal-title">{{_ "suggest_topic"}}</h4>
           </div>
           <div class="modal-body text-center">
-            <p>
-              Sign in with Meetup to suggest a topic!
-            </p>
+            <p>{{_ "suggest_require_signin"}}</p>
             <p>
               <button type="button" class="btn btn-primary" data-login-with="meetup">
-                <img src="/meetup.png" width=22 height=22> Sign In
+                <img src="/meetup.png" width=22 height=22> {{_ "sign_in"}}
               </button>
             </p>
           </div>

@@ -4,9 +4,9 @@
 
     <div class="page-header">
       <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#add-presentation-modal">
-        <i class="ion-plus"></i> Add a Presentation
+        <i class="ion-plus"></i> {{_ "add_presentation"}}
       </button>
-      <h1>Presentations</h1>
+      <h1>{{_ "presentations"}}</h1>
     </div>
 
     <div class="row">
@@ -19,8 +19,8 @@
         {{/each}}
       {{else}}
         <div class="well">
-          There aren't any presentations yet.
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-presentation-modal">Add one?</button>
+          {{_ "no_presentations"}}
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-presentation-modal">{{_ "add_one"}}</button>
         </div>
       {{/if}}
 
@@ -35,7 +35,7 @@
           <form>
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Add a Presentation</h4>
+              <h4 class="modal-title">{{_ "add_presentation"}}</h4>
             </div>
             <div class="modal-body">
               <div id="presentation-wrapper" class="embed-responsive embed-responsive-16by9">
@@ -43,37 +43,35 @@
               </div>
               <div id="url-wrapper">
                 <div class="form-group">
-                  <input type="text" class="form-control" id="url" placeholder="Paste URL to the presentation">
-                  <small>Supports Slides.com, Slideshare, Prezi, Youtube, Vimeo</small>
+                  <input type="text" class="form-control" id="url" placeholder={{_ "presentation_url"}}>
+                  <small>{{_ "supports"}} Slides.com, Slideshare, Prezi, Youtube, Vimeo</small>
                 </div>
               </div>
               <div id="error-wrapper" class="alert alert-warning">
-                Sorry - {{presentationURL}} could not be loaded.
+                {{_ "sorry"}} - {{presentationURL}} {{_ "could_not_loaded"}}.
               </div>
               <div id="title-wrapper">
                 <div class="form-group">
                   <label for="title">Title</label>
-                  <input type="text" class="form-control" id="title" name="customTitle" placeholder="Enter a title for this presentation">
+                  <input type="text" class="form-control" id="title" name="customTitle" placeholder={{_ "presentation_title"}}>
                 </div>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" id="btn-add-presentation">Next</button>
+              <button type="button" class="btn btn-link" data-dismiss="modal">{{_ "close"}}</button>
+              <button type="submit" class="btn btn-primary" id="btn-add-presentation">{{_ "next"}}</button>
             </div>
           </form>
         {{else}}
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Add a Presentation</h4>
+            <h4 class="modal-title">{{_ "add_presentation"}}</h4>
           </div>
           <div class="modal-body text-center">
-            <p>
-              Sign in with Meetup to add a presentation!
-            </p>
+            <p>{{_ "presentation_required_signin"}}</p>
             <p>
               <button type="button" class="btn btn-primary" data-login-with="meetup">
-                <img src="/meetup.png" width=22 height=22> Sign In
+                <img src="/meetup.png" width=22 height=22> {{_ "sign_in"}}
               </button>
             </p>
           </div>

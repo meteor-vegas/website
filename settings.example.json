@@ -5,7 +5,7 @@
       "oauth_key" : "<production_meetup_consumer_key>",
       "oauth_secret" : "<production_meetup_consumer_secret>",
       "api_key" : "<meetup_api_key>",
-      "group_urlname" : "Meteor-Las-Vegas"
+      "group_urlname" : "Meteor-Montreal"
     }
   },
   "development" : {
@@ -13,10 +13,23 @@
       "oauth_key" : "<development_meetup_consumer_key>",
       "oauth_secret" : "<development_meetup_consumer_secret>",
       "api_key" : "<meetup_api_key>",
-      "group_urlname" : "Meteor-Las-Vegas"
+      "group_urlname" : "Meteor-Montreal"
+    }
+  },
+  "coupons": {
+    "mdb": {
+      "state": true,
+      "title": "Participate to Meteor Day 2014",
+      "points": 200
+    },
+    "mda": {
+      "state": false,
+      "title": "Participate to Meteor Day 2013",
+      "points": 20
     }
   },
   "public" : {
+    "default_lang": "fr",
     "meetup" : {
       "group_name" : "Meteor Vegas",
       "group_urlname" : "Meteor-Las-Vegas",
@@ -24,26 +37,61 @@
       "meteorday": "http://www.meetup.com/Meteor-Las-Vegas/events/212820662/"
     },
     "links" : {
-      "meetup": "http://www.meetup.com/Meteor-Las-Vegas/",
-      "twitter": "https://twitter.com/MeteorVegas",
-      "github": "https://github.com/meteor-vegas"
+      "meetup": "http://www.meetup.com/Meteor-Montreal/",
+      "twitter": "https://twitter.com/MeteorMTL",
+      "github": "https://github.com/meteormtl"
     },
     "sponsors" : [
       {
-        "title" : "Differential",
-        "url" : "http://differential.io",
-        "image" : "/sponsors/differential.png"
+        "title" : "La Commune",
+        "url" : "http://www.lacommune.ca",
+        "image" : "/sponsors/lacommune.jpg"
       },
       {
-        "title" : "Modulus",
-        "url" : "http://modulus.io",
-        "image" : "/sponsors/modulus.png"
+        "title" : "Bitcoin Embassy",
+        "url" : "http://bitcoinembassy.ca",
+        "image" : "/sponsors/bitcoin_embassy.png"
       },
       {
-        "title" : "#VegasTech",
-        "url" : "http://vegastech.com",
-        "image" : "/sponsors/vegastech.png"
+        "title" : "Smashing Boxes",
+        "url" : "http://smashingboxes.com",
+        "image" : "/sponsors/smashingboxes.jpg"
+      }
+    ],
+    "projects" : [
+      {
+        "title" : "La Commune",
+        "url" : "http://www.lacommune.ca",
+        "image" : "/sponsors/lacommune.jpg"
+      },
+      {
+        "title" : "Bitcoin Embassy",
+        "url" : "http://bitcoinembassy.ca",
+        "image" : "/sponsors/bitcoin_embassy.png"
+      },
+      {
+        "title" : "Smashing Boxes",
+        "url" : "http://smashingboxes.com",
+        "image" : "/sponsors/smashingboxes.jpg"
+      }
+    ],
+    "subcontractors" : [
+      {
+        "title" : "Good dev guys",
+        "url" : "http://www.lacommune.ca",
+        "image" : "/sponsors/lacommune.jpg"
+      },
+      {
+        "title" : "The best dev",
+        "url" : "http://bitcoinembassy.ca",
+        "image" : "/sponsors/bitcoin_embassy.png"
+      },
+      {
+        "title" : "Someone who cares",
+        "url" : "http://smashingboxes.com",
+        "image" : "/sponsors/smashingboxes.jpg"
       }
     ]
+
   }
 }

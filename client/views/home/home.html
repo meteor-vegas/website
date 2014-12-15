@@ -2,14 +2,14 @@
 
   <div class="jumbotron jumbotron-home">
     <div class="container">
-      <img src="/meteor-large.png" width=425 height=100 class="home-logo img-responsive" alt="{{groupName}}" />
-      <h1>{{groupName}}</h1>
+      <img src="/meteor.svg" width=425 height=100 class="home-logo img-responsive" alt="{{groupName}}" />
+      <h1>Paris</h1>
       <p>
-        {{{groupInfo}}}
+        {{{_ "group_info"}}}
       </p>
       {{#unless currentUser}}
         <p>
-          <a href="{{ pathFor 'members'}}" class="btn btn-primary btn-lg" data-login-with="meetup"><img src="/meetup.png" width=26 height=26> Join Us!</a>
+          <a href="{{ pathFor 'members'}}" class="btn btn-primary btn-lg" data-login-with="meetup"><img src="/meetup.png" width=26 height=26> {{_ "join_us"}}</a>
         </p>
       {{/unless}}
     </div>
@@ -21,7 +21,7 @@
     {{#each upcomingMeetup}}
       <div class="homepage-section homepage-section-meetups">
         <div class="container">
-          <h3>Next Meetup</h3>
+          <h3>{{_ "next_meetup"}}</h3>
           <hr>
           <div class="row">
             <div class="col-sm-3">
@@ -47,7 +47,7 @@
                 {{ truncate description 140 }}
               </p>
               <p>
-                <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary btn-lg">View Details</a>
+                <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary btn-lg">{{_ "view_details"}}</a>
               </p>
             </div>
           </div>
@@ -58,14 +58,14 @@
 
   <div class="homepage-section homepage-section-members">
     <div class="container">
-      <h3>Who We Are</h3>
+      <h3>{{_ "who_are_we"}}</h3>
       <hr>
       <p>
-		  {{> _topMembers}}
+      {{> _topMembers}}
       </p>
       <hr>
       <p>
-        <a href="{{ pathFor 'members' }}" class="btn btn-default btn-lg">View All Members</a>
+        <a href="{{ pathFor 'members' }}" class="btn btn-default btn-lg">{{_ "view_all_members" count_members}}</a>
       </p>
     </div>
   </div>
@@ -73,9 +73,40 @@
   {{#if sponsors}}
     <div class="homepage-section homepage-section-sponsors">
       <div class="container">
-        <h3>Our Friends and Sponsors</h3>
+        <h3>{{_ "friends_and_sponsors"}}</h3>
         <div class="row">
           {{#each sponsors}}
+            <div class="col-sm-4">
+              <a href="{{ url }}" target="_blank"><img src="{{ image }}" class="img-responsive" alt="{{ title }}"></a>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+
+  {{#if projects}}
+    <div class="homepage-section homepage-section-projects">
+      <div class="container">
+        <h3>{{_ "our_projects"}}</h3>
+        <div class="row">
+          {{#each projects}}
+            <div class="col-sm-4">
+              <a href="{{ url }}" target="_blank"><img src="{{ image }}" class="img-responsive" alt="{{ title }}"></a>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if subcontractors}}
+    <div class="homepage-section homepage-section-subcontractors">
+      <div class="container">
+        <h3>{{_ "available_subcontractors"}}</h3>
+        <div class="row">
+          {{#each subcontractors}}
             <div class="col-sm-4">
               <a href="{{ url }}" target="_blank"><img src="{{ image }}" class="img-responsive" alt="{{ title }}"></a>
             </div>

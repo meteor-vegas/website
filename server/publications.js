@@ -3,30 +3,32 @@ Meteor.publish("meetups", function() {
 });
 
 Meteor.publishComposite("meetup", function(_id) {
+  check(_id, String);
+
   return {
     find: function() {
       return Meetups.find({_id: _id});
     },
     children: [
-     {
-       find: function(meetup) {
-         if (meetup.attendeeIds) {
-           return Meteor.users.find({_id: {$in: meetup.attendeeIds}});
-         }
-       }
-     },
-     {
-       find: function(meetup) {
-         return Topics.find({meetupId: meetup._id});
-       },
-       children: [
+    {
+      find: function(meetup) {
+        if (meetup.attendeeIds) {
+          return Meteor.users.find({_id: {$in: meetup.attendeeIds}});
+        }
+      }
+    },
+    {
+      find: function(meetup) {
+        return Topics.find({meetupId: meetup._id});
+      },
+      children: [
         {
           find: function(topic) {
             return Meteor.users.find({_id: topic.presenterId});
           }
         }
-       ]
-     }
+      ]
+    }
     ]
   };
 });
@@ -69,6 +71,8 @@ Meteor.publishComposite("presentedTopics", function() {
 });
 
 Meteor.publishComposite("topic", function(_id) {
+  check(_id, String);
+
   return {
     find: function() {
       return Topics.find({_id: _id});
@@ -103,18 +107,20 @@ Meteor.publishComposite("topic", function(_id) {
 });
 
 Meteor.publish("members", function () {
-  return Meteor.users.find({}, {fields: {'profile': 1}});
+  return Meteor.users.find({}, { fields: { 'profile.coupons': 0 } });
 });
 
 Meteor.publishComposite("member", function(_id) {
+  check(_id, String);
+
   return {
     find: function() {
-      return Meteor.users.find({_id: _id});
+      return Meteor.users.find(_id);
     },
     children: [
       {
         find: function(user) {
-          return Activities.find({userId: user._id});
+          return Activities.find({ userId: user._id });
         }
       }
     ]
@@ -122,10 +128,12 @@ Meteor.publishComposite("member", function(_id) {
 });
 
 Meteor.publish("presentations", function() {
-  return Presentations.find({});
+  return Presentations.find({}, {sort: {createdAt: -1}});
 });
 
 Meteor.publishComposite("presentation", function(_id) {
+  check(_id, String);
+
   return {
     find: function() {
       return Presentations.find({_id: _id});

@@ -19,7 +19,7 @@
               </div>
             </div>
             <div class="col-sm-9">
-              <h5 class="text-uppercase">Next Meetup:</h5>
+              <h5 class="text-uppercase">{{_ "next_meetup"}}</h5>
               <h2><a href="{{ pathFor 'meetupDetail' }}">{{ title }}</a></h2>
 
               <h5 class="text-muted">
@@ -29,13 +29,13 @@
                 {{ truncate description 140 }}
               </p>
               <p>
-                <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary btn-lg">View Details</a>
+                <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary btn-lg">{{_ "view_details"}}</a>
                 {{#unless meetup.isPast}}
                   {{#each truncatedAttendees}}
-                    <a href="{{ pathFor 'memberDetail' }}" title="{{ profile.name }}" data-toggle="tooltip"><img class="img-circle" width=30 height=30 src="{{profile.thumbnailUrl}}"></a>
+                    {{> _profilePhoto profile=profile size="30"}}
                   {{/each}}
                   {{#if displayOverflowAttendees}}
-                    <small>and {{ numberOfOverflowAttendees }} more are going</small>
+                    <small>{{_ "more_are_going" attendees=numberOfOverflowAttendees }}</small>
                   {{/if}}
                 {{/unless}}
               </p>
@@ -51,7 +51,7 @@
       {{#if isInRole 'admin'}}
         <button type="button" class="btn btn-primary pull-right" data-action="fetchMeetups">Fetch Meetups</button>
       {{/if}}
-      <h3>Previous Meetups</h3>
+      <h3>{{_ "previous_meetups"}}</h3>
     </div>
 
     <div class="row">
@@ -79,7 +79,7 @@
                 {{ truncate description 140 }}
               </p>
               <p>
-                <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary">View Details</a>
+                <a href="{{ pathFor 'meetupDetail' }}" class="btn btn-primary">{{_ "view_details"}}</a>
               </p>
             </div>
           </div>

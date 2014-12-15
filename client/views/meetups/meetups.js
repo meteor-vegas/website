@@ -20,7 +20,7 @@ Template.meetups.events({
       if (error) {
         alert(error);
       } else {
-        alert("Done!");
+        alert(TAPi18n.__("done"));
       }
     });
   }
