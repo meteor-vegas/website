@@ -1,9 +1,14 @@
-var list=["getCategories","getCheckins","postCheckin","getCities","getOpenEvents","getConcierge","getEvents","postEvent","getEventComments","postEventComment","postEventCommentFlag","getEventCommentLikes","getEventRatings","postEventRating","getEventAttendance","takeEventAttendance","getEverywhereComments","postEverywhereComment","getEverywhereCommunities","postEverywhereCommunity","getEverywhereFollows","getEverywhereFollowers","postEverywhereFollow","postEverywhereContainer","getEverywhereContainers","postEverywhereSeed","postEverywhereEvent","getEverywhereEvents","postEverywhereRsvp","getEverywhereRsvps","getEverywhereSeeds","getActivity","getGroups","getComments","getMembers","postMemberPhoto","postMessage","getOEMBed","getOEMBed","getPhotoComments","postPhotoComment","getPhotoAlbums","getPhoto","getPhotos","postPhotoAlbum","postPhoto","getProfiles","postProfiles","postRSVP","getRSVPs","getOpenVenues","getVenues","getTopics"],
-  MeetupMe = Meteor.npmRequire("meetup-api");
-  var api_key = Meteor.settings[Meteor.settings.environment].meetup.api_key;
-  var group_urlname = Meteor.settings[Meteor.settings.environment].meetup.group_urlname;
-  var meetup = new MeetupMe(api_key);
-  var AsyncMeetup = Async.wrap(meetup, list);
+var list = ["getCategories","getCheckins","postCheckin","getCities","getOpenEvents","getConcierge","getEvents","postEvent","getEventComments","postEventComment","postEventCommentFlag","getEventCommentLikes","getEventRatings","postEventRating","getEventAttendance","takeEventAttendance","getEverywhereComments","postEverywhereComment","getEverywhereCommunities","postEverywhereCommunity","getEverywhereFollows","getEverywhereFollowers","postEverywhereFollow","postEverywhereContainer","getEverywhereContainers","postEverywhereSeed","postEverywhereEvent","getEverywhereEvents","postEverywhereRsvp","getEverywhereRsvps","getEverywhereSeeds","getActivity","getGroups","getComments","getMembers","postMemberPhoto","postMessage","getOEMBed","getOEMBed","getPhotoComments","postPhotoComment","getPhotoAlbums","getPhoto","getPhotos","postPhotoAlbum","postPhoto","getProfiles","postProfiles","postRSVP","getRSVPs","getOpenVenues","getVenues","getTopics"];
+
+MeetupMe = Meteor.npmRequire("meetup-api");
+var api_key = Meteor.settings[Meteor.settings.environment].meetup.api_key;
+var group_urlname = Meteor.settings[Meteor.settings.environment].meetup.group_urlname;
+var meetup = new MeetupMe(api_key);
+var AsyncMeetup = Async.wrap(meetup, list);
+
+// XXX Since we are on the server, this file should probably switch to the Fiber/Sync version of
+// HTTP calls. This would be cleaner (no callback) and would throw fetch error automaticaly if
+// needed (currently the callback is called even if there is a fetch error).
 
 Meteor.methods({
   MeetupAPI: function(endpoint, param) {
@@ -11,16 +16,15 @@ Meteor.methods({
     check(param, Object);
 
     switch(endpoint){
-    case "getEvents":
-      return AsyncMeetup.getEvents(param);
-    case "getProfiles":
-      return AsyncMeetup.getProfiles(param);
-    case "getRSVPs":
-      return AsyncMeetup.getRSVPs(param);
-    case "postRSVP" :
-      AsyncMeetup.postRSVP(param); //Does not seem to be working, can't pass access token as headers
-      break;
-    default:
+      case "getEvents":
+        return AsyncMeetup.getEvents(param);
+      case "getProfiles":
+        return AsyncMeetup.getProfiles(param);
+      case "getRSVPs":
+        return AsyncMeetup.getRSVPs(param);
+      case "postRSVP" :
+        // XXX Does not seem to be working, can't pass access token as headers
+        return AsyncMeetup.postRSVP(param);
     }
   },
 
@@ -33,7 +37,12 @@ Meteor.methods({
 
     console.log ( "Fetching Meetup Member Profiles offset", offset);
 
-    Meteor.call('MeetupAPI', 'getProfiles', {"offset": offset, "page": 200, "group_urlname": group_urlname, "fields":"other_services"}, function(err, response) {
+    Meteor.call('MeetupAPI', 'getProfiles', {
+      "offset": offset,
+      "page": 200,
+      "group_urlname": group_urlname,
+      "fields":"other_services"
+    }, function(err, response) {
       if (err) {
         console.error("Fetch error");
         return ; // Silently ignore fetch errors
@@ -42,7 +51,7 @@ Meteor.methods({
         var node = response.results[i];
 
         var thumbnailUrl;
-        if(response.results[i].hasOwnProperty("photo") && response.results[i].photo.photo_link !== "") {
+        if(node && node.photo && node.photo.photo_link !== "") {
           thumbnailUrl = response.results[i].photo.photo_link;
         } else {
           thumbnailUrl = "/default-avatar.png";
@@ -95,7 +104,9 @@ Meteor.methods({
           });
         }
 
-        //If the meetup user is in leadership team, then the json response will have a "role" variable returned with values such as "Organizer", "Co-Organizer" etc.
+        //If the meetup user is in leadership team, then the json response will
+        //have a "role" variable returned with values such as "Organizer",
+        //"Co-Organizer" etc.
         if ( response.results[i].role ) {
           if (_(adminRoles).contains(response.results[i].role)) {
             Roles.addUsersToRoles(userId, ['admin']);
@@ -112,7 +123,11 @@ Meteor.methods({
   fetchEvents: function(status) {
     check(status, String);
     console.log ( "Fetching Meetup Events");
-    Meteor.call('MeetupAPI', 'getEvents', {"group_urlname": group_urlname, "status": status, "fields":"featured"}, function(err, response) {
+    Meteor.call('MeetupAPI', 'getEvents', {
+      "group_urlname": group_urlname,
+      "status": status,
+      "fields":"featured"
+    }, function(err, response) {
       if (err) {
         console.error("Fetch error");
         return ; // Silently ignore fetch errors

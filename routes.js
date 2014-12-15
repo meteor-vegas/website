@@ -38,6 +38,7 @@ Router.map(function() {
       });
     }
   });
+
   this.route('meetupDetail', {
     path: '/meetups/:_id',
     waitOn: function() {
@@ -89,6 +90,7 @@ Router.map(function() {
       });
     }
   });
+
   this.route('topicDetail', {
     path: '/topics/:_id',
     waitOn: function() {
@@ -121,6 +123,7 @@ Router.map(function() {
     }
 
   });
+
   this.route('presentationDetail', {
     path: '/presentations/:_id',
     waitOn: function() {
@@ -150,6 +153,7 @@ Router.map(function() {
       });
     }
   });
+
   this.route('memberDetail', {
     path: '/members/:_id',
     waitOn: function() {
@@ -170,6 +174,7 @@ Router.map(function() {
     }
   });
 
+  // XXX Should we remove this route?
   this.route('meteorday', {
     path: '/meteorday',
     where: 'server',
@@ -182,13 +187,14 @@ Router.map(function() {
   this.route('coupons', {
     path: '/coupons'
   });
+
   this.route('couponAdded', {
     path: '/coupons/added'
   });
+
   this.route('couponAdd', {
     path: '/coupons/:_id',
     onRun: function () {
-      console.log(this.params._id);
       Meteor.call('useCoupon', this.params._id, function (err, result) {
         if (err) {
           Session.set('coupons-error', TAPi18n.__(err.error));
@@ -200,6 +206,7 @@ Router.map(function() {
     }
   });
 
+  // XXX Not translated
   this.route('notFound', {
     path: '*',
     where: 'server',

@@ -3,6 +3,3 @@ Template.members.helpers({
     return Meteor.users.find().count();
   }
 });
-
-Template.members.rendered = function() {
-};

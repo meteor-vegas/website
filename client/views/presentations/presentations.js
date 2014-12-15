@@ -1,3 +1,6 @@
+// XXX This file needs some serious cleanup.
+// XXX Why do we do so many timeouts?
+
 //Global
 var presObj = {};
 var step = 1;
@@ -22,10 +25,6 @@ function ShakeIt (obj,margin,time,cycles,dir) {
 }
 
 ////////////////////
-
-Template.presentations.rendered = function() {
-};
-
 
 Template.presentations.helpers( {
   presentations: function(){
@@ -56,92 +55,92 @@ Template.presentations.events({
 
   'submit': function(event, template) {
     event.preventDefault();
-    if(step===1) {
-        Session.set("presentationURL", $("input#url").val());
+    if (step === 1) {
+      Session.set("presentationURL", $("input#url").val());
 
-        $("#url-wrapper").slideUp();
+      $("#url-wrapper").slideUp();
 
-        step=2;
-        Meteor.setTimeout(function(){
-           $("a#presentation-embed").oembed(null, {
-              embedMethod:"fill",
-              onError: function(externalUrl,provider) {
-                console.log("Error loading presentation at url: ", externalUrl, arguments);
-                $("#error-wrapper").show();
-                loaderror = true;
-                $("#btn-add-presentation").text(TAPi18n.__('cancel'));
-                return false;
-              },
-              onProviderNotFound: function(url) {
-                console.log("Error - provider not found for ", url);
-                $("#error-wrapper").show();
-                loaderror = true;
-                $("#btn-add-presentation").text(TAPi18n.__('cancel'));
-                return false;
-              },
-              beforeEmbed: function(data) {
-                if(loaderror) {
-                  $("#btn-add-presentation").text(TAPi18n.__('cancel'));
-                } else {
-                  $("#presentation-wrapper").slideDown();
-                  $("#btn-add-presentation").text(TAPi18n.__('add'));
-                }
-              },
-              afterEmbed: function(data) {
-                console.log("data", data);
-                if (Meteor.user()) {
-                      presObj={};
-                      if(data.title) {
-                          presObj.title = data.title;
-                      }
-                      if(data.thumbnail_url) {
-                          presObj.thumbnail = data.thumbnail_url;
-                      }
-                      if(data.thumbnail) {
-                          presObj.thumbnail = data.thumbnail;
-                      }
-                      presObj.oembed = data;
-                      presObj.url = $("input#url").val();
-                      presObj.userId = Meteor.userId();
-                      var presenter = {};
-                      presenter._id = Meteor.userId();
-                      presenter.name = Meteor.user().profile.name;
-                      presObj.presenter = presenter;
-                      if(!presObj.title) {
-                        $("#title-wrapper").show();
-                      }
-                  }
-            }
-        });
-        }, 500);
-    } else {
-        console.log ("presObj ", presObj);
-        if(loaderror) {
-          $('#add-presentation-modal').modal('hide');
-        } else {
-          if(presObj.title === "" && $("#title").val() === "") {
-            $("#title-wrapper").addClass("has-error");
-            ShakeIt ('#title-wrapper',20,2000,8,'horz');
-            setTimeout(function () { $("#title-wrapper").removeClass("has-error", 1000, "easeInBack" ); }, 3000);
+      step = 2;
+      Meteor.setTimeout(function() {
+        $("a#presentation-embed").oembed(null, {
+          embedMethod:"fill",
+          onError: function(externalUrl,provider) {
+            console.error("Error loading presentation at url: ", externalUrl, arguments);
+            $("#error-wrapper").show();
+            loaderror = true;
+            $("#btn-add-presentation").text(TAPi18n.__('cancel'));
             return false;
-          } else {
-            presObj.title = presObj.title || $("#title").val();
-            $('#add-presentation-modal').modal('hide');
-            var newPresentationID = Presentations.insert(presObj);
-            Meteor.setTimeout(function(){
-              if (newPresentationID) {
-                  console.log ( "Routing to ", newPresentationID);
-                  Router.go("presentationDetail",{_id: newPresentationID});
-              }
-            }, 500);
-          }
-        }
+          },
+          onProviderNotFound: function(url) {
+            console.error("Error - provider not found for ", url);
+            $("#error-wrapper").show();
+            loaderror = true;
+            $("#btn-add-presentation").text(TAPi18n.__('cancel'));
+            return false;
+          },
+          beforeEmbed: function(data) {
+            if (loaderror) {
+              $("#btn-add-presentation").text(TAPi18n.__('cancel'));
+            } else {
+              $("#presentation-wrapper").slideDown();
+              $("#btn-add-presentation").text(TAPi18n.__('add'));
+            }
+          },
+          afterEmbed: function(data) {
+            if (Meteor.user()) {
+              presObj = {
+                oembed: data,
+                url: $("input#url").val(),
+                userId: Meteor.userId()
+              };
 
+              if (data.title) {
+                presObj.title = data.title;
+              }
+              if (data.thumbnail_url) {
+                presObj.thumbnail = data.thumbnail_url;
+              }
+              else if (data.thumbnail) {
+                presObj.thumbnail = data.thumbnail;
+              }
+
+              var presenter = {
+                _id: Meteor.userId(),
+                name: Meteor.user().profile.name
+              };
+
+              presObj.presenter = presenter;
+              if (!presObj.title) {
+                $("#title-wrapper").show();
+              }
+            }
+          }
+        });
+      }, 500);
+    } else {
+      if (loaderror) {
+        $('#add-presentation-modal').modal('hide');
+      } else {
+        if (presObj.title === "" && $("#title").val() === "") {
+          $("#title-wrapper").addClass("has-error");
+          ShakeIt ('#title-wrapper',20,2000,8,'horz');
+          setTimeout(function () { $("#title-wrapper").removeClass("has-error", 1000, "easeInBack" ); }, 3000);
+          return false;
+        } else {
+          presObj.title = presObj.title || $("#title").val();
+          $('#add-presentation-modal').modal('hide');
+          var newPresentationID = Presentations.insert(presObj);
+          Meteor.setTimeout(function(){
+            if (newPresentationID) {
+              Router.go("presentationDetail", {_id: newPresentationID});
+            }
+          }, 500);
+        }
+      }
     }
   },
   'click [data-upload-presentation]': function(event, template) {
-      event.preventDefault();
-      alert("This feature is not implemented yet..");
+    event.preventDefault();
+    alert("This feature is not implemented yet..");
   }
-
 });

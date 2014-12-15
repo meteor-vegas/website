@@ -33,7 +33,9 @@
   "coupons": "Coupons",
   "data_not_found": "Data not found...",
   "description": "Description",
+  "done": "Done!",
   "enter_coupon": "Enter your coupon",
+  "enter_comment": "Please enter a comment!",
   "friends_and_sponsors" : "Our Friends and Sponsors",
   "group_info" : "We are a group of Meteor.js enthusiasts in Paris",
   "group_name" : "Meteor Paris",
@@ -92,5 +94,7 @@
   "view": "View",
   "view_all_members" : "View all %s members",
   "view_details" : "View Details",
-  "who_are_we" : "Who We Are"
+  "who_are_we" : "Who We Are",
+  "who_go": "Who's Going",
+  "who_went": "Who Went"
 }

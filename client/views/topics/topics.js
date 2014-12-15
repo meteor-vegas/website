@@ -1,6 +1,3 @@
-Template.topics.rendered = function() {
-};
-
 Template.topics.helpers({
   'activeTabClass': function(tab) {
     if (tab === Router.current().params.query.tab) {
@@ -41,6 +38,7 @@ Template.topics.events({
 
       window.setTimeout(function() {
         Router.go('topicDetail', {_id: params._id});
+      // XXX Why do we wait 0.5s?
       }, 500);
     });
 

@@ -79,16 +79,14 @@ Activities.helpers({
 // Only update points once, on the server
 if (Meteor.isServer) {
   Activities.after.insert(function(userId, doc) {
-    var points = ACTIVITY_POINTS[doc.type];
-    if(doc.type === 'custom') points = doc.points;
+    var points = doc.type !== 'custom' ? ACTIVITY_POINTS[doc.type] : doc.points;
     if (points) {
       Meteor.users.update(doc.userId, { $inc: { 'profile.points': points } });
     }
   });
 
   Activities.after.remove(function(userId, doc) {
-    var points = ACTIVITY_POINTS[doc.type];
-    if(doc.type === 'custom') points = doc.points;
+    var points = doc.type !== 'custom' ? ACTIVITY_POINTS[doc.type] : doc.points;
     if (points) {
       Meteor.users.update(doc.userId, { $inc: { 'profile.points': -points } });
     }

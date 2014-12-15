@@ -127,7 +127,7 @@
   </div>
 
   <div class="container text-center meetup-attendees">
-    <h3>{{ attendeesHeading }}</h3>
+    <h3>{{#if meetup.isPast}}{{_ 'who_went'}}{{else}}{{_ 'who_go'}}{{/if}}</h3>
     <hr>
     <p>
       {{#each meetup.attendeesWithPhoto}}

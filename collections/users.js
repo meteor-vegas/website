@@ -2,6 +2,7 @@ Meteor.users.helpers({
   activities: function() {
     return Activities.find({userId: this._id}, {sort: {createdAt: -1}});
   },
+
   social: function() {
     var ret = this.profile.socialLinks;
     var icon;

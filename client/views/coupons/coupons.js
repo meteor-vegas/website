@@ -10,7 +10,7 @@ Template.coupons.events({
   "submit form": function (event) {
     var couponCode = event.target.text.value;
 
-    Router.go('/coupons/'+couponCode);
+    Router.go('/coupons/' + couponCode);
 
     // Prevent default form submit
     return false;
