@@ -29,7 +29,7 @@ Meteor.methods({
 		var adminRoles = ["Organizer", "Co-Organizer"];
 
 		Meteor.call('MeetupAPI', 'getProfiles', {"group_urlname": group_urlname, "fields":"other_services"}, function(err, response) {
-
+			console.log('getProfiles.response', response);
 			for (var i = 0, l = response.meta.count; i < l; i++) {
 				var node = response.results[i];
 
