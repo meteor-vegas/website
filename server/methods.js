@@ -25,82 +25,82 @@ Meteor.methods({
 	},
 
 	fetchProfiles: function(offset) {
-		// var adminRoles = ["Organizer", "Co-Organizer"];
-		//
-		// offset = offset || 0;
-		//
-		// console.log ( "Fetching Meetup Member Profiles offset", offset);
-		//
-		// Meteor.call('MeetupAPI', 'getProfiles', {"offset": offset, "page": 200, "group_urlname": group_urlname, "fields":"other_services"}, function(err, response) {
-		// 	console.log ( "getProfiles.response", response);
-		// 	for (var i = 0, l = response.meta.count; i < l; i++) {
-		// 		var node = response.results[i];
-		//
-		// 		if(response.results[i].hasOwnProperty("photo") && response.results[i].photo.photo_link !== "") {
-		// 			var thumbnailUrl = response.results[i].photo.photo_link;
-		// 		} else {
-		// 			var thumbnailUrl = "/default-avatar.png";
-		// 		}
-		//
-		// 		var socialLinks = [];
-		// 		var userId;
-		// 		var meetupUid = response.results[i].member_id;
-		// 		for (service in response.results[i].other_services) {
-		// 			if(service === "twitter") {
-		// 				var username = response.results[i].other_services['twitter']['identifier'];
-		// 				socialLinks.push({'service': 'twitter', 'url': 'https://twitter.com/' + username});
-		// 			} else if(service) {
-		// 				var url = response.results[i].other_services[service]['identifier'];
-		// 				socialLinks.push({'service': service, 'url': url});
-		// 			}
-		// 		}
-		//
-		// 		var existingUser = Meteor.users.findOne({'profile.meetupId': meetupUid});
-		// 		if (existingUser) {
-		//
-		// 			userId = existingUser._id;
-		// 			Meteor.users.update({'profile.meetupId': meetupUid},
-		// 				{ $set :
-		// 					{
-		// 						'profile.name': response.results[i].name,
-		// 						'profile.bio': response.results[i].bio,
-		// 						'profile.meetupProfileUrl': response.results[i].profile_url,
-		// 						'profile.socialLinks': socialLinks,
-		// 						'profile.thumbnailUrl': thumbnailUrl,
-		// 						'profile.answers' : response.results[i].answers
-		// 					}
-		// 			});
-		// 		} else {
-		// 			userId = Meteor.users.insert({
-		// 				profile: {
-		// 					'meetupId': meetupUid,
-		// 					'name': response.results[i].name,
-		// 					'bio': response.results[i].bio,
-		// 					'meetupProfileUrl': response.results[i].profile_url,
-		// 					'socialLinks': socialLinks,
-		// 					'thumbnailUrl': thumbnailUrl,
-		// 					'answers' : response.results[i].answers
-		// 				},
-		// 				services: {
-		// 					meetup: {
-		// 						id: meetupUid
-		// 					}
-		// 				}
-		// 			});
-		// 		}
-		//
-		// 		//If the meetup user is in leadership team, then the json response will have a "role" variable returned with values such as "Organizer", "Co-Organizer" etc.
-		// 		if ( response.results[i].role ) {
-		// 			if (_(adminRoles).contains(response.results[i].role)) {
-		// 				Roles.addUsersToRoles(userId, ['admin']);
-		// 			}
-		// 		}
-		// 	}
-		// 	// we surely habe more than 200 profiles, get the next page
-		// 	if(response.meta.count == 200)
-		// 		Meteor.call("fetchProfiles", offset + 1);
-		//
-		// });
+		var adminRoles = ["Organizer", "Co-Organizer"];
+
+		offset = offset || 0;
+
+		console.log ( "Fetching Meetup Member Profiles offset", offset);
+
+		Meteor.call('MeetupAPI', 'getProfiles', {"offset": offset, "page": 200, "group_urlname": group_urlname, "fields":"other_services"}, function(err, response) {
+
+			for (var i = 0, l = response.meta.count; i < l; i++) {
+				var node = response.results[i];
+
+				if(response.results[i].hasOwnProperty("photo") && response.results[i].photo.photo_link !== "") {
+					var thumbnailUrl = response.results[i].photo.photo_link;
+				} else {
+					var thumbnailUrl = "/default-avatar.png";
+				}
+
+				var socialLinks = [];
+				var userId;
+				var meetupUid = response.results[i].member_id;
+				for (service in response.results[i].other_services) {
+					if(service === "twitter") {
+						var username = response.results[i].other_services['twitter']['identifier'];
+						socialLinks.push({'service': 'twitter', 'url': 'https://twitter.com/' + username});
+					} else if(service) {
+						var url = response.results[i].other_services[service]['identifier'];
+						socialLinks.push({'service': service, 'url': url});
+					}
+				}
+
+				var existingUser = Meteor.users.findOne({'profile.meetupId': meetupUid});
+				if (existingUser) {
+
+					userId = existingUser._id;
+					Meteor.users.update({'profile.meetupId': meetupUid},
+						{ $set :
+							{
+								'profile.name': response.results[i].name,
+								'profile.bio': response.results[i].bio,
+								'profile.meetupProfileUrl': response.results[i].profile_url,
+								'profile.socialLinks': socialLinks,
+								'profile.thumbnailUrl': thumbnailUrl,
+								'profile.answers' : response.results[i].answers
+							}
+					});
+				} else {
+					userId = Meteor.users.insert({
+						profile: {
+							'meetupId': meetupUid,
+							'name': response.results[i].name,
+							'bio': response.results[i].bio,
+							'meetupProfileUrl': response.results[i].profile_url,
+							'socialLinks': socialLinks,
+							'thumbnailUrl': thumbnailUrl,
+							'answers' : response.results[i].answers
+						},
+						services: {
+							meetup: {
+								id: meetupUid
+							}
+						}
+					});
+				}
+
+				//If the meetup user is in leadership team, then the json response will have a "role" variable returned with values such as "Organizer", "Co-Organizer" etc.
+				if ( response.results[i].role ) {
+					if (_(adminRoles).contains(response.results[i].role)) {
+						Roles.addUsersToRoles(userId, ['admin']);
+					}
+				}
+			}
+			// we surely habe more than 200 profiles, get the next page
+			if(response.meta.count == 200)
+				Meteor.call("fetchProfiles", offset + 1);
+
+		});
 	},
 
 	fetchEvents: function(status) {
