@@ -24,12 +24,15 @@ Meteor.methods({
 		}
 	},
 
-	fetchProfiles: function() {
-		console.log ( "Fetching Meetup Member Profiles ");
+	fetchProfiles: function(offset) {
 		var adminRoles = ["Organizer", "Co-Organizer"];
 
-		Meteor.call('MeetupAPI', 'getProfiles', {"group_urlname": group_urlname, "fields":"other_services"}, function(err, response) {
-			console.log('getProfiles.response', response);
+		offset = offset || 0;
+
+		console.log ( "Fetching Meetup Member Profiles offset", offset);
+
+		Meteor.call('MeetupAPI', 'getProfiles', {"offset": offset, "page": 200, "group_urlname": group_urlname, "fields":"other_services"}, function(err, response) {
+			console.log ( "getProfiles.response", response);
 			for (var i = 0, l = response.meta.count; i < l; i++) {
 				var node = response.results[i];
 
@@ -93,6 +96,10 @@ Meteor.methods({
 					}
 				}
 			}
+			// we surely habe more than 200 profiles, get the next page
+			if(response.meta.count == 200)
+				Meteor.call("fetchProfiles", offset + 1);
+
 		});
 	},
 
