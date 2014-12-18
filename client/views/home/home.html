@@ -2,10 +2,10 @@
 
   <div class="jumbotron jumbotron-home">
     <div class="container">
-      <img src="/meteor.svg" width=425 height=100 class="home-logo img-responsive" alt="{{groupName}}" />
-      <h1>Paris</h1>
+      <img src="/meteor.svg" width=425 height=100 class="home-logo img-responsive" alt="{{group.name}}" />
+      <h1>{{group.city}}</h1>
       <p>
-        {{{_ "group_info"}}}
+        {{group.info}}
       </p>
       {{#unless currentUser}}
         <p>

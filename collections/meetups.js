@@ -2,27 +2,31 @@ Meetups = new Mongo.Collection('meetups');
 
 Meetups.helpers({
   attendeesWithPhoto: function() {
-    if (this.attendeeIds) {
-      var query = {
-        _id: {
-          $in: this.attendeeIds
-        },
-        "profile.thumbnailUrl": {
-          $ne: "/default-avatar.png"
-        }
-      };
-      var options = {
-        sort: {
-          "profile.points": -1,
-          createdAt: 1
-        }
-      };
+    if (! this.attendeeIds)
+      return [];
 
-      return Meteor.users.find(query, options);
-    }
+    var query = {
+      _id: {
+        $in: this.attendeeIds
+      },
+      "profile.thumbnailUrl": {
+        $ne: "/default-avatar.png"
+      }
+    };
+    var options = {
+      sort: {
+        "profile.points": -1,
+        createdAt: 1
+      }
+    };
+
+    return Meteor.users.find(query, options);
   },
 
   attendeesWithoutPhoto: function() {
+    if (! this.attendeeIds)
+      return [];
+
     var query = {
       _id: {
         $in: this.attendeeIds

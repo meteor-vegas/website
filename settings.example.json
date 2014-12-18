@@ -5,7 +5,7 @@
       "oauth_key" : "<production_meetup_consumer_key>",
       "oauth_secret" : "<production_meetup_consumer_secret>",
       "api_key" : "<meetup_api_key>",
-      "group_urlname" : "Meteor-Montreal"
+      "group_urlname" : "Meteor-Las-Vegas"
     }
   },
   "development" : {
@@ -13,7 +13,7 @@
       "oauth_key" : "<development_meetup_consumer_key>",
       "oauth_secret" : "<development_meetup_consumer_secret>",
       "api_key" : "<meetup_api_key>",
-      "group_urlname" : "Meteor-Montreal"
+      "group_urlname" : "Meteor-Las-Vegas"
     }
   },
   "coupons": {
@@ -29,7 +29,7 @@
     }
   },
   "public" : {
-    "default_lang": "fr",
+    "default_lang": "en",
     "meetup" : {
       "group_name" : "Meteor Vegas",
       "group_urlname" : "Meteor-Las-Vegas",
@@ -37,25 +37,15 @@
       "meteorday": "http://www.meetup.com/Meteor-Las-Vegas/events/212820662/"
     },
     "links" : {
-      "meetup": "http://www.meetup.com/Meteor-Montreal/",
-      "twitter": "https://twitter.com/MeteorMTL",
-      "github": "https://github.com/meteormtl"
+      "meetup": "http://www.meetup.com/Meteor-Las-Vegas/",
+      "twitter": "https://twitter.com/MeteorVegas",
+      "github": "https://github.com/meteor-vegas"
     },
     "sponsors" : [
       {
-        "title" : "La Commune",
-        "url" : "http://www.lacommune.ca",
-        "image" : "/sponsors/lacommune.jpg"
-      },
-      {
-        "title" : "Bitcoin Embassy",
-        "url" : "http://bitcoinembassy.ca",
-        "image" : "/sponsors/bitcoin_embassy.png"
-      },
-      {
-        "title" : "Smashing Boxes",
-        "url" : "http://smashingboxes.com",
-        "image" : "/sponsors/smashingboxes.jpg"
+        "title" : "Differential",
+        "url" : "http://differential.io",
+        "image" : "/sponsors/differential.png"
       }
     ],
     "projects" : [
@@ -63,35 +53,14 @@
         "title" : "La Commune",
         "url" : "http://www.lacommune.ca",
         "image" : "/sponsors/lacommune.jpg"
-      },
-      {
-        "title" : "Bitcoin Embassy",
-        "url" : "http://bitcoinembassy.ca",
-        "image" : "/sponsors/bitcoin_embassy.png"
-      },
-      {
-        "title" : "Smashing Boxes",
-        "url" : "http://smashingboxes.com",
-        "image" : "/sponsors/smashingboxes.jpg"
       }
     ],
     "subcontractors" : [
       {
-        "title" : "Good dev guys",
-        "url" : "http://www.lacommune.ca",
-        "image" : "/sponsors/lacommune.jpg"
-      },
-      {
-        "title" : "The best dev",
-        "url" : "http://bitcoinembassy.ca",
-        "image" : "/sponsors/bitcoin_embassy.png"
-      },
-      {
-        "title" : "Someone who cares",
-        "url" : "http://smashingboxes.com",
-        "image" : "/sponsors/smashingboxes.jpg"
+        "title" : "Modulus",
+        "url" : "http://modulus.io",
+        "image" : "/sponsors/modulus.png"
       }
     ]
-
   }
 }
