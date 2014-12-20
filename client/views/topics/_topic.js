@@ -4,7 +4,7 @@ Template._topic.helpers({
   },
 
   isPresented: function() {
-    return !!this.presented ? 'disabled' : '';
+    return !!this.presented;
   },
 
   hasComments: function() {

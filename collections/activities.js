@@ -98,7 +98,7 @@ if (Meteor.isServer) {
         }
       });
     }
-    if (doc.type == 'voted_on_topic') {
+    if (doc.type === 'voted_on_topic') {
       Topics.update({
         _id: doc.subjectId
       }, {

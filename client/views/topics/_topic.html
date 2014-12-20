@@ -1,11 +1,11 @@
 <template name="_topic">
   <div class="media">
     {{#if alreadyVoted}}
-      <button type="button" class="btn btn-primary btn-lg pull-left btn-vote" data-unvote {{isPresented}}>
+      <button type="button" class="btn btn-primary btn-lg pull-left btn-vote" data-unvote disabled="{{isPresented}}">
         <i class="ion-checkmark"></i>
       </button>
     {{else}}
-      <button type="button" class="btn btn-default btn-lg pull-left btn-vote" data-vote {{isPresented}}>
+      <button type="button" class="btn btn-default btn-lg pull-left btn-vote" data-vote disabled="{{isPresented}}">
         <i class="ion-arrow-up-c"></i>
       </button>
     {{/if}}
