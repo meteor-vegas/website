@@ -375,6 +375,12 @@ Meteor.methods({
     if (!Meteor.userId())
       throw new Meteor.Error("logged-out");
 
+    var theTopic = Topics.findOne({
+      _id: topic._id
+    });
+    if (!!theTopic.presented)
+      throw new Meteor.Error("topic-presented");
+
     var points = topic.points + 1;
     Topics.update({
       _id: topic._id

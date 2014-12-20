@@ -3,6 +3,10 @@ Template._topic.helpers({
     return Meteor.user() && _(Meteor.user().profile.votedTopicIds).contains(this._id);
   },
 
+  isPresented: function() {
+    return !!this.presented ? 'disabled' : '';
+  },
+
   hasComments: function() {
     return this.numberOfComments > 0;
   }
