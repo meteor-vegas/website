@@ -23,12 +23,23 @@ Template._topic.events({
     }
   },
 
+  'click [data-unvote]': function(event, template) {
+    event.preventDefault();
+
+    var alreadyVoted = _(Meteor.user().profile.votedTopicIds).contains(this._id);
+    if (alreadyVoted) {
+      Meteor.call('unVoteOnTopic', this);
+    }
+  },
+
   'click [data-remove]': function(event, template) {
     event.preventDefault();
 
-    if(Roles.userIsInRole(Meteor.userId(), ['admin'])) {
+    if (Roles.userIsInRole(Meteor.userId(), ['admin'])) {
       if (confirm('Are you sure you want to remove this topic?')) {
-        Topics.remove({_id: this._id});
+        Topics.remove({
+          _id: this._id
+        });
         Router.go('/topics');
       }
     }

@@ -57,13 +57,13 @@
             {{#if isTypeCustom}}
               <a href="#" class="list-group-item">
                 <i class="{{ icon }}"></i> {{_ "reason"}}{{_ "colon"}} <strong>{{ subjectTitle }}</strong>
-                {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>{{_ "remove"}}</span>{{/if}}
+                {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right remove-activity" data-remove>{{_ "remove"}}</span>{{/if}}
                 <span class="label label-primary pull-right">+{{points}} {{_ "points"}}</span>
               </a>
             {{else}}
               <a href="{{ subjectURL }}" class="list-group-item">
                 <i class="{{ icon }}"></i> {{ actionDescription }} <strong>{{ subjectTitle }}</strong>
-                {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right" data-remove>{{_ "remove"}}</span>{{/if}}
+                {{#if isInRole 'admin'}}<span type="button" class="btn btn-default btn-xs pull-right remove-activity" data-remove>{{_ "remove"}}</span>{{/if}}
                 <span class="label label-primary pull-right">+{{pointsAwarded}} {{_ "points"}}</span>
               </a>
             {{/if}}

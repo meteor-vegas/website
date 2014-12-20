@@ -81,14 +81,38 @@ if (Meteor.isServer) {
   Activities.after.insert(function(userId, doc) {
     var points = doc.type !== 'custom' ? ACTIVITY_POINTS[doc.type] : doc.points;
     if (points) {
-      Meteor.users.update(doc.userId, { $inc: { 'profile.points': points } });
+      Meteor.users.update(doc.userId, {
+        $inc: {
+          'profile.points': points
+        }
+      });
     }
   });
 
   Activities.after.remove(function(userId, doc) {
     var points = doc.type !== 'custom' ? ACTIVITY_POINTS[doc.type] : doc.points;
     if (points) {
-      Meteor.users.update(doc.userId, { $inc: { 'profile.points': -points } });
+      Meteor.users.update(doc.userId, {
+        $inc: {
+          'profile.points': -points
+        }
+      });
+    }
+    if (doc.type == 'voted_on_topic') {
+      Topics.update({
+        _id: doc.subjectId
+      }, {
+        $inc: {
+          points: -1
+        }
+      });
+      Meteor.users.update({
+        _id: doc.userId
+      }, {
+        $pull: {
+          'profile.votedTopicIds': doc.subjectId
+        }
+      });
     }
   });
 }
