@@ -64,7 +64,7 @@ Activities.helpers({
   },
 
   isTypeCustom: function() {
-    return this.type == 'custom';
+    return this.type === 'custom';
   },
 
   pointsAwarded: function() {
@@ -76,47 +76,28 @@ Activities.helpers({
   }
 });
 
-// Only update points once, on the server
-if (Meteor.isServer) {
-  Activities.after.insert(function(userId, doc) {
-    var points = doc.type !== 'custom' ? ACTIVITY_POINTS[doc.type] : doc.points;
-    if (points) {
-      Meteor.users.update(doc.userId, {
-        $inc: {
-          'profile.points': points
-        }
-      });
-    }
-  });
-
-  Activities.after.remove(function(userId, doc) {
-    var points = doc.type !== 'custom' ? ACTIVITY_POINTS[doc.type] : doc.points;
-    if (points) {
-      Meteor.users.update(doc.userId, {
-        $inc: {
-          'profile.points': -points
-        }
-      });
-    }
-    if (doc.type === 'voted_on_topic') {
-      Topics.update({
-        _id: doc.subjectId
-      }, {
-        $inc: {
-          points: -1
-        }
-      });
-      Meteor.users.update({
-        _id: doc.userId
-      }, {
-        $pull: {
-          'profile.votedTopicIds': doc.subjectId
-        }
-      });
-    }
-  });
-}
-
 Activities.before.insert(function(userId, doc) {
   doc.createdAt = moment().toDate();
+});
+
+Activities.after.insert(function(userId, doc) {
+  var points = doc.type !== 'custom' ? ACTIVITY_POINTS[doc.type] : doc.points;
+  if (points) {
+    Meteor.users.update(doc.userId, {
+      $inc: {
+        'profile.points': points
+      }
+    });
+  }
+});
+
+Activities.after.remove(function(userId, doc) {
+  var points = doc.type !== 'custom' ? ACTIVITY_POINTS[doc.type] : doc.points;
+  if (points) {
+    Meteor.users.update(doc.userId, {
+      $inc: {
+        'profile.points': -points
+      }
+    });
+  }
 });

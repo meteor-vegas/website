@@ -8,7 +8,7 @@ Meteor.users.helpers({
     var icon;
 
     _.each(ret, function(link, index) {
-      if (link.service == 'flickr') {
+      if (link.service === 'flickr') {
         // Looks most like a photo, and Flickr is a photo publishing site.
         icon = 'image';
       } else {

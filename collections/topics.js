@@ -28,10 +28,8 @@ Topics.before.insert(function (userId, doc) {
   doc.createdAt = moment().toDate();
 });
 
-if (Meteor.isServer) {
-  Topics.after.remove(function (userId, doc) {
-    Activities.remove({
-      subjectId: doc._id
-    });
+Topics.after.remove(function (userId, doc) {
+  Activities.remove({
+    subjectId: doc._id
   });
-}
+});
