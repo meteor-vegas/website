@@ -26,7 +26,7 @@ Template.meetupDetail.helpers({
   },
 
   groupUrl: function() {
-    return 'http://www.meetup.com/' + Meteor.settings[Meteor.settings.environment].meetup.group_urlname;
+    return 'http://www.meetup.com/' + Meteor.settings.public.meetup.group_urlname;
   }
 });
 
