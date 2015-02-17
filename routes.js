@@ -71,6 +71,7 @@ Router.map(function() {
       if (!this.params.tab) {
         this.params.tab = 'suggested';
       }
+      this.next();
     },
     onAfterAction: function() {
       SEO.set({
