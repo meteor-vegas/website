@@ -1,3 +1,4 @@
+.idea
+settings.json
 .meteor/local
 .DS_Store
-settings.json
