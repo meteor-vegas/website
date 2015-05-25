@@ -21,9 +21,9 @@ mrt:underscore-string-latest
 meteor-vegas:likes-widget
 dburles:collection-helpers
 manuelschoebel:ms-seo
-mrt:iron-router-progress
 spiderable
 chfritz:easycron
 matb33:collection-hooks
 http
 
+multiply:iron-router-progress

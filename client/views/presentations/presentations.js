@@ -5,7 +5,7 @@ var loaderror = false;
 
 /////////////////
 /*
- * Shake It plugin - http://www.soslignes-ecrivain-public.fr/ 
+ * Shake It plugin - http://www.soslignes-ecrivain-public.fr/
  * v1.0
  * October 1st, 2012
  * Use and abuse!
@@ -18,21 +18,22 @@ function ShakeIt (obj,margin,time,cycles,dir) {
 		if (dir == 'vert') {$(obj).animate({marginTop: (i!=cycles)*j*margin}, {duration:speed, queue:true});}
 		else {$(obj).animate({marginLeft: (i!=cycles)*j*margin}, {duration:speed, queue:true});}
 		margin/=margRat;
-	};
-};
+	}
+}
 
 ////////////////////
 
 Template.presentations.rendered = function() {
 };
 
-Template.presentations.presentations = function() {
-  return Presentations.find({});
-}
-
-Template.presentations.presentationURL = function() {
+Template.presentations.helpers({
+  presentations: function () {
+    return Presentations.find({});
+  },
+  presentationURL: function () {
     return Session.get("presentationURL");
-}
+  }
+});
 
 Template.presentations.events({
 
@@ -55,7 +56,7 @@ Template.presentations.events({
         Session.set("presentationURL", $("input#url").val());
 
         $("#url-wrapper").slideUp();
-        
+
         step=2;
         Meteor.setTimeout(function(){
            $("a#presentation-embed").oembed(null, {
@@ -107,17 +108,17 @@ Template.presentations.events({
                       }
                   }
             }
-        })
+        });
         }, 500);
     } else {
         console.log ("presObj ", presObj);
         if(loaderror) {
           $('#add-presentation-modal').modal('hide');
         } else {
-          if($("#title").val()=="") {
+          if($("#title").val() === "") {
             $("#title-wrapper").addClass("has-error");
             ShakeIt ('#title-wrapper',20,2000,8,'horz');
-            setTimeout(function() {$("#title-wrapper").removeClass("has-error", 1000, "easeInBack" )}, 3000);
+            setTimeout(function() {$("#title-wrapper").removeClass("has-error", 1000, "easeInBack" );}, 3000);
             return false;
           } else {
             presObj.title = $("#title").val();
@@ -128,10 +129,9 @@ Template.presentations.events({
                   console.log ( "Routing to ", newPresentationID);
                   Router.go("presentationDetail",{_id: newPresentationID});
               }
-            }, 500)
+            }, 500);
           }
         }
-        
     }
   },
   'click [data-upload-presentation]': function(event, template) {
@@ -139,4 +139,4 @@ Template.presentations.events({
       alert("This feature is not implemented yet..");
   }
 
-})
+});
