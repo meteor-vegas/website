@@ -141,7 +141,7 @@ Meteor.methods({
 						dateTime: moment(meetupData['time']).toDate()};
 
 					if (meetupData['venue']) {
-						_.extends(meetupToInsert, {
+						_.extend(meetupToInsert, {
 							location: {
 								name: meetupData['venue']['name'],
 								address: meetupData['venue']['address_1'],
