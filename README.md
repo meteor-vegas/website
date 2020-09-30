@@ -54,7 +54,7 @@ Members are granted activity points when performing certain activities. These po
 Your group's name, description, Meetup URL, Twitter and Github links and even sponsors can all be customized via the `settings.json` file.
 
 ### Design / Branding
-
+## <p>i can some changes and improve your website  </br> you need to some changes on package.json file</p>
 This app uses Less and Bootstrap for easy customization. Simply change or add Less variables in `client/stylesheets/variables.import.less` to change your brand colors or modify the theme.
 
 Additionally, we make use of [CSS blend modes](http://css-tricks.com/basics-css-blend-modes/) to dynamically change the color of background images based on your `$brand-primary` color. As an example:
