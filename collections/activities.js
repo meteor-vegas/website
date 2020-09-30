@@ -19,7 +19,7 @@ ACTIVITY_ICONS = {
   'commented_on_topic': 'ion-ios7-chatbubble',
   'created_topic': 'ion-plus',
   'presented_topic': 'ion-mic-a',
-  'rsvp': 'ion-checkmark'
+  'rsvp_section': 'ion-checkmark'
 };
 
 Activities.helpers({
