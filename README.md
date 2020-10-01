@@ -1,4 +1,4 @@
-# Meteor Meetup Website
+# Meteor Meetup Website that is amazing
 
 This is a Meteor App that can be used to organize, manage, and market your Meetup group. It was built by the [Meteor Vegas Meetup Group](http://vegas.meteor.com).
 
