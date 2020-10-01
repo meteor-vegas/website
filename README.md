@@ -38,7 +38,7 @@ Members are granted activity points when performing certain activities. These po
 * RSVP'd to a Meetup: 10 points
 * Presented a Topic at a Meetup: 50 points
 
-## <a name="how-to-install"></a> How To Install
+## <a name="how-to-install"></a> How To do Installation
 
 1. Clone the repo `git clone git@github.com:meteor-vegas/website.git`
 2. Copy the contents of `settings.example.json` into a new `settings.json` file
@@ -69,7 +69,7 @@ Additionally, we make use of [CSS blend modes](http://css-tricks.com/basics-css-
 2. `meteor deploy <your-city>.meteor.com --settings settings.json`
 3. Open `<your-city>.meteor.com` in your browser
 
-## <a name="how-to-contribute"></a> How To Contribute
+## <a name="how-to-contribute"></a> How To Contribute here
 
 1. [Fork the rep](https://help.github.com/articles/fork-a-repo/)
 2. [Submit a Pull Request](https://help.github.com/articles/using-pull-requests/)
