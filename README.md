@@ -12,10 +12,10 @@ This is a Meteor App that can be used to organize, manage, and market your Meetu
 
 ### Meetup.com Integration
 
-* One-click sign in with Meetup.com OAuth integration
-* Pulls new meetup events from Meetup.com every 30 minutes
-* Displays members who have RSVP'd on Meetup.com
-* Allows members to RSVP to meetups directly from your site
+* One-click sign in with Meetup.com OAuth integration.
+* Pulls new meetup events from Meetup.com every 30 minutes.
+* Displays members who have RSVP'd on Meetup.com.
+* Allows members to RSVP to meetups directly from your site.
 
 ### Meetups
 Create your meetup on Meetup.com as usual, and the event will be added to your site within 30 minutes (or manually via the button on the `/meetups` page). Once it is on your site, you can add topics and presenters, and even feature it on your homepage.
